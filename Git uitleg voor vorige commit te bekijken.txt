@@ -1,0 +1,3 @@
+voor naar de vorige versie van een commit te gaan doe je git 
+checkout (commit hash) 
+u commit hash is de id van de commit zelf. 
