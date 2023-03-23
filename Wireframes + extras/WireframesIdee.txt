@@ -1,0 +1,3 @@
+bij het pokemon vangen heb je drie kansen om een pokemon te vangen
+dit word visueel aangeduid door op de knop zelf het aantal nummers (soort van counter te zetten).
+
