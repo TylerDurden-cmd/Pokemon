@@ -1,0 +1,14 @@
+<h1>pokeComparer</h1>
+
+
+<select name="pokemonLeft" id="pokemonLeft">
+    <% for(let i=0; i < pokeNames.length ;i++) { %>
+        <option value="<%= pokeNames[i] %>"> <%= pokemonNames[i] %> </option>
+    <% }; %>
+</select>
+
+<select name="pokemonRight" id="pokemonRight">
+    <% for(let i=0; i < pokeNames.length ;i++) { %>
+        <option value="<%= pokeNames[i] %>"> <%= pokemonNames[i] %> </option>
+    <% }; %>
+</select>
