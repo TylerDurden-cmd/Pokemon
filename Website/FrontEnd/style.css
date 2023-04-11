@@ -1,0 +1,159 @@
+
+ /*--- body ---*/
+
+ html, body{
+
+    color: black;
+    
+}
+
+body {
+    display: grid;
+    grid-template-areas: 
+    "nav    nav     nav     nav "
+    "header header  header  header "
+    "main   main    main    aside "
+    "footer footer  footer  footer";
+    
+    max-width: 100rem;
+    margin: auto;
+    background-color: white;
+  }
+  /*--- nav ---*/
+
+nav {
+    grid-area: nav;
+    justify-content: space-between;
+    border-bottom: 	0.4rem solid black;
+   
+  }
+
+  nav ul {
+    display: flex;
+
+}
+nav ul li {
+    list-style: none;
+   
+}
+
+nav ul li a {
+    float: left;
+    color: #CD2026;
+    text-align: center;
+    padding: 8px 6px;
+    text-decoration: none;
+    font-size: 14px;
+    margin: 0.5rem;
+    margin-left: 2.9rem;
+    
+  }
+  nav ul li a:hover {
+      color:  #FFDA0C;
+  }
+
+   /*--- main ---*/
+  main{
+    grid-area: main;
+    padding-left: 5rem;
+    
+  }
+
+  header{
+    grid-area: header;
+    color: black;
+    font-size: 2rem;
+    font-weight: bold;
+    letter-spacing: 0.2rem;
+    padding: 3rem;
+    padding-top: 1rem;
+    text-align: center;
+  }
+
+  
+  /*--- contact ---*/
+
+  .contactform input, .contactform textarea, select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #CD2026;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: 6px;
+    margin-bottom: 16px;
+    resize: vertical;
+  }
+  
+  .contactform input[type=submit]  {
+    background-color: #FFDA0C;
+    color: white;
+    padding: 6px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  input[type=submit]:hover {
+    background-color: #CD2026;
+  }
+
+ /*--- footer ---*/
+
+  footer {
+    grid-area: footer;
+  }
+  
+  footer p {
+    color:black ; 
+    font-size: 0.8rem;
+    padding: 1rem 0 1rem 0;
+    text-align: center;
+  }
+
+
+  aside{
+    grid-area: aside; 
+   
+  }
+
+
+  
+
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid black ;
+  box-sizing: border-box;
+}
+
+button {
+  background-color: #CD2026;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+.cancelbtn {
+  width: auto;
+  padding: 10px 18px;
+  background-color: #CD2026 ;
+}
+
+
+.containerlogin {
+  padding: 16px;
+}
+
+span.psw {
+  float: right;
+  padding-top: 16px;
+}

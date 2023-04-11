@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>Home</title>
+    <title>Contact</title>
 </head>
 <body>
 <nav>
@@ -24,14 +24,35 @@
 </nav>
 
 
-<header>
-   
-  </header>
+<header></header>
 
-  <main></main>
+  <main>
+    <h2>Formulier</h2>
+    <div class="contactform">
+      <form action="/action_page.php">
+        <label for="fname">Voornaam</label>
+        <input type="text" id="fname" name="firstname" placeholder="">
+    
+        <label for="lname">Achternaam</label>
+        <input type="text" id="lname" name="lastname" placeholder="">
+    
+        <label for="subject">Vraag ?</label>
+        <textarea id="subject" name="subject" placeholder="Write something.." style="height:200px"></textarea>
+  
+        <label for="contact">Wie wil je contacteren ?</label>
+        <select id="contact" name="kies">
+          <option value="Developer">Developer</option>
+          <option value="Owner">Owner</option>
+        </select>
+        
+        <input type="submit" value="verzenden">
+      </form>
+    </div>
+</main>
   <aside></aside>
   <footer><p>&copy; 2022-2023 G_1 PRO PichuPartners </p></footer>
 
 
 </body>
 </html>
+
