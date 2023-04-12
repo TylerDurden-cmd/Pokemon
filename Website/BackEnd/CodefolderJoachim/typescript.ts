@@ -25,6 +25,11 @@ const pokemonSetter = async () => {
   return PokemonNameArray;
 };
 
+const pokemonelength = async () => {
+  const pokemonawait = await PokemonFetcher();
+  return pokemonawait.pokemon_entries.length;
+};
+
 /* dit mag weg */
 pokemonSetter();
 
@@ -37,16 +42,16 @@ app.set("view engine", "ejs");
 //hier werd aysync gebruikt voor de waarde opte wachten want de functie is asynchronis.
 app.get("/", async (req, res) => {
   const pokemonArray = await pokemonSetter();
+  const pokemonlength = await pokemonelength();
   res.render("index", {
     pokemonarray: pokemonArray,
+    pokemonlength: pokemonlength,
   });
 });
 
 app.listen(app.get("port"), () => {
   console.log("[server]http://localhost:" + app.get("port"));
 });
-
-//
 
 //Allepokemon functie deze werd gebruikt als referentie.
 
