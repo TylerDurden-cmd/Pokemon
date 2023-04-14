@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="nl_BE">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comparer</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <nav>
+        <%-include("partials/Navigation")-%>
+    </nav>
+    <main>
+        <section class="vergelijker">
+            <section class="dropdown">
+                <select name="pokeleft" id="pokeleft">    
+                    <% for(let i = 0; i < pokemonlength; i++){ %>
+                      <option value="<%=pokemonarray[i]%>"><%=pokemonarray[i]%></option>
+                    <% } %>
+                  </select>               
+            </section>
+            <section class="pokemon">
+             <img class="imgvergelijk" src="/assets/images/magic_0.jpg" alt="" srcset="">
+             <h3>naam pokemon</h3>
+            <p>type</p>
+            <p>attack</p>
+            <p>defense</p>
+            <p>hp</p>
+           </section>
+           <section class="dropdown">
+            <select name="pokeright" id="pokeright">    
+                <% for(let i = 0; i < pokemonlength; i++){ %>
+                  <option value="<%=pokemonarray[i]%>"><%=pokemonarray[i]%></option>
+                <% } %>
+              </select>   
+        </section>
+                <section class="pokemon">
+                <img class="imgvergelijk" src="/assets/images/lotr.jpg" alt="" srcset="">
+                <h3>naam pokemon</h3>
+                <p>type</p>
+                <p>attack</p>
+                <p>defense</p>
+                <p>hp</p>
+               </section>
+        </section>
+    </main>
+    <footer>
+        <%-include("partials/footer")-%>
+    </footer>
+</body>
+</html>

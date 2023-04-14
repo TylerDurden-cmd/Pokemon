@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="nl_BE">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><img src="/assets/images/PichuPartnersLogo.png"></li>
+        </ul>
+    </nav>
+    <main>
+        <h2>Login Form</h2>
+    
+    <form action="/action_page.php" method="post">
+      
+      <section class="container">
+        <label for="uname"><b>Username</b></label>
+        <input type="text" placeholder="Enter Username" name="uname" required>
+    
+        <label for="psw"><b>Password</b></label>
+        <input type="password" placeholder="Enter Password" name="psw" required>
+            
+        <button class="loginbtn"type="submit">Login</button>
+        <label>
+          <input type="checkbox" checked="checked" name="remember"> Remember me
+        </label>
+      </section>
+    
+        <button type="button" class="cancelbtn">Cancel</button>
+        <span class="psw">Forgot <a href="#">password?</a></span>
+    </form>
+      </main>
+</body>
+</html>
