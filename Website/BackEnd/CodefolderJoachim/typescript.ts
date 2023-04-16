@@ -1,4 +1,4 @@
-//ALS ALLES IS TOEGEVOEGD VAN CODE GELIEVE DEZE FOLDER OP TE KUISEN EN TE VERWIJDEREN!
+//fOLDER NIET VERWIJDEREN.
 //hehe sorry voor zo veel folders te maken ik vond het makkelijker om met een lege folder te werke tehee (*/ω＼*).
 import express from "express";
 const app = express();
@@ -25,6 +25,7 @@ const pokemonSetter = async () => {
   return PokemonNameArray;
 };
 
+//returns de length of pokemon.
 const pokemonelength = async () => {
   const pokemonawait = await PokemonFetcher();
   return pokemonawait.pokemon_entries.length;

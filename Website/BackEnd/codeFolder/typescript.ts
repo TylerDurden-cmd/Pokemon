@@ -1,4 +1,4 @@
-import fetch from 'node-fetch';
+import fetch from "node-fetch";
 import express from "express";
 
 const input = require("readline-sync");
@@ -61,64 +61,75 @@ const app = express();
   console.log(pokemontotalstats.stats[0].stat.name); 
 */
 
-const PokemonAll = async () =>{
+const PokemonAll = async () => {
   let response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=150");
   let data = await response.json();
   return data;
 };
 
 const PokemonNames = async () => {
-let pokemonall = await PokemonAll();
-let data = await PokemonAll();
-let PokemonNameArray: string[] = [];
+  let pokemonall = await PokemonAll();
+  let data = await PokemonAll();
+  let PokemonNameArray: string[] = [];
 
-for (let i = 1; i < data.length; i++) {
-  PokemonNameArray[i] = data.pokemon_entries[i].pokemon_species.name;
-}
-return PokemonNameArray;
+  for (let i = 1; i < data.length; i++) {
+    PokemonNameArray[i] = data.pokemon_entries[i].pokemon_species.name;
+  }
+  return PokemonNameArray;
 };
 
-const PokemonStatsNames = async () =>{
+const PokemonStatsNames = async () => {
   let data = await PokemonAll();
   let PokemonNameArray = await PokemonNames();
   let PokemonStats: string[] = [];
 
   for (let i = 1; i < PokemonNameArray.length; i++) {
-    let pokemonUrl = await (await fetch(`https://pokeapi.co/api/v2/pokemon/${data.pokemon_entries[i].pokemon_species.name}`)).json();
-    for (let index = 0; index < pokemonUrl.stats.length; index++) {   
+    let pokemonUrl = await (
+      await fetch(
+        `https://pokeapi.co/api/v2/pokemon/${data.pokemon_entries[i].pokemon_species.name}`
+      )
+    ).json();
+    for (let index = 0; index < pokemonUrl.stats.length; index++) {
       PokemonStats[index] = pokemonUrl.stats[index].stat.name;
-     
     }
   }
   return PokemonStats;
 };
 
-const PokemonStatsNumbers = async () =>{
+const PokemonStatsNumbers = async () => {
   let data = await PokemonAll();
   let PokemonNameArray = await PokemonNames();
   let PokemonStatsNum: number[] = [];
   for (let i = 1; i < PokemonNameArray.length; i++) {
-    let pokemonUrl = await (await fetch(`https://pokeapi.co/api/v2/pokemon/${data.pokemon_entries[i].pokemon_species.name}`)).json();
-    for (let index = 0; index < pokemonUrl.stats.length; index++) {   
+    let pokemonUrl = await (
+      await fetch(
+        `https://pokeapi.co/api/v2/pokemon/${data.pokemon_entries[i].pokemon_species.name}`
+      )
+    ).json();
+    for (let index = 0; index < pokemonUrl.stats.length; index++) {
       PokemonStatsNum[index] = pokemonUrl.stats[index].base_stat;
     }
   }
   return PokemonStatsNum;
 };
 
-app.set("port",3000);
+app.set("port", 3000);
 app.set("view engine", "ejs");
 
 app.get("/", (req, res) => {
   res.render("index");
 });
 
-app.get("/comparer", async(req, res) => {
-  res.render("pokeComparer", {pokeNames: await PokemonNames(), pokeStatsNames: await PokemonStatsNames(), pokeStatsNumbers: await PokemonStatsNumbers()});
+app.get("/comparer", async (req, res) => {
+  res.render("pokeComparer", {
+    pokeNames: await PokemonNames(),
+    pokeStatsNames: await PokemonStatsNames(),
+    pokeStatsNumbers: await PokemonStatsNumbers(),
+  });
 });
 
 app.listen(app.get("port"), () =>
   console.log("[server] http://localhost:" + app.get("port"))
 );
 
-export{};
+export {};
