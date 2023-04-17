@@ -1,4 +1,4 @@
-//fOLDER NIET VERWIJDEREN.
+//FOLDER NIET VERWIJDEREN.
 //hehe sorry voor zo veel folders te maken ik vond het makkelijker om met een lege folder te werke tehee (*/ω＼*).
 import express from "express";
 const app = express();
@@ -31,17 +31,38 @@ const pokemonelength = async () => {
   return pokemonawait.pokemon_entries.length;
 };
 
+//pokemonsetter word gebruikt om alle namen random te genereren.
+
+const RandomPicture = async () => {
+  const url = await fetch("https://pokeapi.co/api/v2/pokemon");
+  const pokemonsprite: string[] = [];
+  const PokemonNameArray: string[] = [];
+  let data = await PokemonFetcher();
+  for (let i = 0; i < data.pokemon_entries.length; i++) {
+    PokemonNameArray[i] = data.pokemon_entries[i].pokemon_species.name;
+  }
+  for (let i = 0; i < data.pokemon_entries.length; i++) {
+    pokemonsprite[
+      i
+    ] = `${url}/${data.pokemon_entries[i].pokemon_species.name.sprites.front_default}`;
+  }
+  return pokemonsprite[1];
+};
+
+RandomPicture();
 /* dit mag weg */
 pokemonSetter();
 
 //WEBSITE
 
 /* spreekt voor zichzelf start op poort 3000 */
-app.set("port", 3000);
-app.set("view engine", "ejs");
+
+/* app.set("port", 3000);
+app.set("view engine", "ejs"); */
 
 //hier werd aysync gebruikt voor de waarde opte wachten want de functie is asynchronis.
-app.get("/", async (req, res) => {
+
+/* app.get("/", async (req, res) => {
   const pokemonArray = await pokemonSetter();
   const pokemonlength = await pokemonelength();
   res.render("index", {
@@ -53,7 +74,7 @@ app.get("/", async (req, res) => {
 app.listen(app.get("port"), () => {
   console.log("[server]http://localhost:" + app.get("port"));
 });
-
+ */
 //Allepokemon functie deze werd gebruikt als referentie.
 
 /* Allepokemon(); */
