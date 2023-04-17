@@ -5,12 +5,24 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PokeDex</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
     <nav>
         <%-include("partials/Navigation")-%>
     </nav>
-    
+    <main>
+        <div class="container">
+            <h1>Pokedex</h1>
+            <div class="search-container">
+            <label for="search-input">Zoeken:</label>
+            <input type="text" id="search-input" list="pokemon-list" />
+            <datalist id="pokemon-list"></datalist>
+            </div>
+            <div id="pokemon-info"></div>
+            </div>
+            <script src="/assets/code/pokedex.js"></script>
+    </main>
     <footer>
         <%-include("partials/footer")-%>
     </footer>

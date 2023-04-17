@@ -67,6 +67,11 @@ app.get("/views/pokedex.ejs", (req, res) => {
   res.render("pokedex")
 })
 
+/*------Who's That Pokemon?------*/
+app.get("/views/raadpokemon.ejs", (req, res) => {
+  res.render("raadpokemon")
+})
+
 app.use(express.static("public"));
 app.use("/images", express.static("images"));
 
