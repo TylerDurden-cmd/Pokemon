@@ -1,2 +1,1 @@
-het bestand is nog niet voledig af gemaakt de 
-wireframes moeten nog aangepast worden.
+De Wireframes Zijn op 23/03 afgemaakt.

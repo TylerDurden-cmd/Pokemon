@@ -3,6 +3,8 @@ import express from "express";
 const app = express();
 
 app.set("port", 3000);
+app.set
+
 
 app.get("/", (req, res) => {
   res.type("text/html");
@@ -13,6 +15,7 @@ app.get("/compare", (req, res) => {
   res.type("text/html");
   res.send("compare pokemon");
 });
+
 
 app.get("/catch", (req, res) => {
   res.type("text/html");

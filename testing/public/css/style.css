@@ -5,6 +5,16 @@
     --bg-color: #FFDA0C;
 }
 
+@font-face {
+  font-family:"Pokemon Hollow";
+  src: url("../assets/fonts/Pokemon Hollow.ttf");
+}
+
+@font-face {
+  font-family: "Pokemon Solid";
+  src: url("../assets/fonts/Pokemon\ Solid.ttf");
+}
+
 body {
     background-color: var(--bg-color);
     font-family: sans-serif;
@@ -24,10 +34,15 @@ main {
 
 footer {
     grid-area: footer;
+    text-align: center;
 }
 
 img {
     height: 325px; width: 390px;
+}
+
+button {
+  text-decoration: none;
 }
 
 .PichuPartners {
@@ -39,9 +54,15 @@ img {
     text-align: center;
     width: 90%;
     max-width: 1200px;
-    margin-left: 150px;
+    margin: auto;
     padding: 20px;
     font-size: 24px;
+}
+
+#title {
+  font-family: "Pokemon Hollow";
+  font-size: 65px;
+  margin: 0px;
 }
 
 .Menu {
@@ -54,15 +75,21 @@ img {
     max-width: 1200px;
     text-align: center;
     padding: 20px;
-    margin-left: 150px;
+    margin: auto;
 }
 
 .links{
     border-radius: 12px;
     font-size: 14px;
-    margin: 15px;
+    margin: auto;
     transition: 0.2s;
-    text-decoration: none;
+    width: 150px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.links > a {
+  text-decoration: none;
 }
 
 /*---Nav---*/
@@ -103,7 +130,7 @@ nav ul li a {
   }
 
   /*---Login---*/
-  input[type=text], input[type=password] {
+  input[name=uname], input[name=psw] {
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
@@ -158,7 +185,8 @@ nav ul li a {
     display: flex;
     width: 75%;
     margin-top: 100px;
-    margin-left: 50px;
+    margin-left: auto;
+    margin-right: auto;
   }
   .pokemon{
     display: inline-block;
@@ -378,7 +406,7 @@ body {
 
   /*--- Who's That Pokemon? --- */
   .container {
-    max-width: 500p;
+    max-width: 500px;
     margin: 50px auto; 
     text-align: center;
     }
@@ -386,26 +414,49 @@ body {
     h1 {
     color: #d13939;
     }
-    
+
     .shadow {
-    width: 300px;height: 300px;background-color: #f2f2f2;margin: 0 auto 20px auto;box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+    width: 400px;
+    height: 350px;
+    background-color: #f2f2f2;
+    margin: 0 auto 0 auto;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
     }
     
-    input[type="text"], button {
-    display: block;margin: 0 auto 20px auto;padding: 10px;font-size: 18px;border: none;border-radius: 5px;box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+    .shadow > img {
+      filter: brightness(0);
+    }
+
+    .name {
+      font-family: "Pokemon Solid";
+      font-size: xx-large;
+      letter-spacing: 3px;
+      color: var(--color-wit);
+      text-shadow: 2px 4px 3px var(--color-zwart);
+      margin-top: 0px;
+    }
+
+    #guess, button {
+    display: block;
+    margin: 0 auto 20px auto;
+    padding: 10px;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
     }
     
-    button {
-    background-color: #d13939;color: #fff;cursor: pointer;
-    }
+
     
-    button:hover {
+    #submit:hover {
     background-color: #ff5555;
     }
     
     .correct {
-    color: green;
+    background-color: green;
+    color: var(--bg-color);
     }
     .incorrect {
-    color: red;
+    background-color: red;
+    color: var(--color-wit);
     }

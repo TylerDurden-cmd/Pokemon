@@ -1,0 +1,12 @@
+<h1>hello world</h1>
+<select name="pokeleft" id="pokeleft">    
+<% for(let i = 0; i < pokemonlength; i++){ %>
+    <option value="< <%=pokemonarray[i]%> >"><%=pokemonarray[i]%></option>
+<% } %>
+</select>
+
+<select name="pokeright" id="pokeright">    
+    <% for(let i = 0; i < pokemonlength; i++){ %>
+        <option value="< <%=pokemonarray[i]%> >"><%=pokemonarray[i]%></option>
+    <% } %>
+    </select>
