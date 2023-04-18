@@ -12,25 +12,25 @@
         <%-include("partials/Navigation")-%>
     </nav>
     <main>
-        <h4>Formulier</h4>
+        <h4>Contact Form</h4>
         <section class="contactform">
           <form action="/action_page.php">
-            <label for="fname">Voornaam</label>
-            <input type="text" id="fname" name="firstname" placeholder="">
+            <label for="fname">First name</label>
+            <input type="text" id="fname" name="firstname" placeholder="..." required>
         
-            <label for="lname">Achternaam</label>
-            <input type="text" id="lname" name="lastname" placeholder="">
+            <label for="lname">Last name</label>
+            <input type="text" id="lname" name="lastname" placeholder="..." required>
         
-            <label for="subject">Vraag ?</label>
-            <textarea id="subject" name="subject" placeholder="Write something.." style="height:200px"></textarea>
+            <label for="subject">Question ?</label>
+            <textarea id="subject" name="subject" placeholder="Write something..." style="height:200px" required></textarea>
       
-            <label for="contact">Wie wil je contacteren ?</label>
-            <select id="contact" name="kies">
+            <label for="contact">Who do you want to contact ?</label>
+            <select id="contact">
               <option value="Developer">Developer</option>
               <option value="Owner">Owner</option>
             </select>
             
-            <input type="submit" value="verzenden">
+            <input type="submit" value="Send">
           <form>
         </section>
     </main>
