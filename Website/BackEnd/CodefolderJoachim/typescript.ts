@@ -12,6 +12,13 @@ const PokemonFetcher = async () => {
   return data;
 };
 
+//prints data from the pokemon url.
+const PokemonAssetsFetcher = async () => {
+  const pokemonAssetUrl = await fetch("https://pokeapi.co/api/v2/pokemon");
+  const data = await pokemonAssetUrl.json();
+  return data;
+};
+
 /* pokemonsetter is een functie voor het uitprinten van pokemonnamen je mag de naam origineler maken geen console.log omdat er niets word afgeprint in de terminal alleen return 
 waarde voor deze mee te geven aan de website.
  */
@@ -33,23 +40,87 @@ const pokemonelength = async () => {
 
 //pokemonsetter word gebruikt om alle namen random te genereren.
 
-const RandomPicture = async () => {
-  const url = await fetch("https://pokeapi.co/api/v2/pokemon");
-  const pokemonsprite: string[] = [];
-  const PokemonNameArray: string[] = [];
-  let data = await PokemonFetcher();
-  for (let i = 0; i < data.pokemon_entries.length; i++) {
-    PokemonNameArray[i] = data.pokemon_entries[i].pokemon_species.name;
-  }
-  for (let i = 0; i < data.pokemon_entries.length; i++) {
-    pokemonsprite[
-      i
-    ] = `${url}/${data.pokemon_entries[i].pokemon_species.name.sprites.front_default}`;
-  }
-  return pokemonsprite[1];
+//pokemonpicture test for ditto is een functie voor het uittesten van de url sprite ditto.
+const PokemonPictureFunctionDitto = async () => {
+  const url = await fetch("https://pokeapi.co/api/v2/pokemon/ditto");
+  const urlJson = await url.json();
+  console.log(urlJson.sprites.back_default);
 };
 
-RandomPicture();
+/* PokemonPictureFunction(); */
+
+//pokemonPictureforanypokemon
+
+const PokemonPictureFunction = async (Pokemonvariable: string) => {
+  const url = await fetch(
+    `https://pokeapi.co/api/v2/pokemon/${Pokemonvariable}`
+  );
+  const urlJson = await url.json();
+  /* console.log(urlJson.sprites.back_default); */
+  return urlJson.sprites.front_default;
+};
+/* 
+  PokemonPictureFunction("pikachu");
+  */
+
+//functie voor random pokemon te kiezen.
+const RandomPokemonGenerator = async () => {
+  let data = await PokemonFetcher();
+  const pokemonArray: string[] = [];
+  for (let i = 0; i < data.pokemon_entries.length; i++) {
+    pokemonArray[i] = data.pokemon_entries[i].pokemon_species.name;
+  }
+  const RandomPokemonindex = Math.floor(
+    Math.random() * data.pokemon_entries.length
+  );
+  /* console.log(pokemonArray[RandomPokemonindex]); */
+  return pokemonArray[RandomPokemonindex];
+};
+
+const Sixpicturesreturner = async () => {
+  for (let i = 0; i < 6; i++) {
+    RandomPokemonGenerator()
+      .then((randomPokemon) => {
+        PokemonPictureFunction(randomPokemon);
+      })
+      .catch((error) => {
+        console.log("Error: de pokemon functie werkt niet!");
+      });
+  }
+};
+
+/* Sixpicturesreturner(); */
+
+app.set("port", 3000);
+app.set("view engine", "ejs");
+
+app.get("/", async (req, res) => {
+  try {
+    let RandomPokemon: string[] = [];
+    for (let i = 0; i < 6; i++) {
+      RandomPokemon[i] = await RandomPokemonGenerator();
+    }
+    let PokemonImg: string[] = [];
+    for (let i = 0; i < 6; i++) {
+      PokemonImg[i] = await PokemonPictureFunction(RandomPokemon[i]);
+    }
+    res.render("keuzepagina", {
+      PokemonImg1: PokemonImg[0],
+      PokemonImg2: PokemonImg[1],
+      PokemonImg3: PokemonImg[2],
+      PokemonImg4: PokemonImg[3],
+      PokemonImg5: PokemonImg[4],
+      PokemonImg6: PokemonImg[5],
+    });
+  } catch (error) {
+    console.log("error");
+  }
+});
+
+app.listen(app.get("port"), () => {
+  console.log("[server]http://localhost:" + app.get("port"));
+});
+
 /* dit mag weg */
 pokemonSetter();
 
