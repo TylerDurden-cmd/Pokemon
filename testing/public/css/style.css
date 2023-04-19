@@ -318,17 +318,16 @@ span.psw {
 body {
   font-family: Arial, sans-serif;
   }
-  
+
   /* Stijl voor de container van de pokedex */
   .pokedex-container {
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
   }
-  
+
   /* Stijl voor de zoekbalk */
   .search-container {
-  display: flex;
   align-items: center;
   margin-bottom: 20px;
   }
@@ -347,8 +346,7 @@ body {
   
   /* Stijl voor de informatie over de pokemon */
   #pokemon-info {
-  display: flex;
-  flex-wrap: wrap;
+    
   }
   
   .pokemon-details {
@@ -375,12 +373,25 @@ body {
   }
   
   /* Stijl voor de evolutielijn */
+.evolutions {
+  display: flex;
+  flex-direction: row;
+  margin-left: -350px;
+}
+
+#h3evo {
+  margin-left: -500px;
+  text-align: left;
+}
+
   .evolutions-container {
   margin-top: 20px;
+  
   }
   
   .evolution-stage {
   display: flex;
+  flex-direction: row;
   align-items: center;
   margin-bottom: 10px;
   }
