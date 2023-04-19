@@ -71,14 +71,5 @@ app.get("/views/pokedex.ejs", (req, res) => {
   res.render("pokedex")
 })
 
-/*------Who's That Pokemon?------*/
-app.get("/views/raadpokemon.ejs", (req, res) => {
-  res.render("raadpokemon")
-})
-
 app.use(express.static("public"));
 app.use("/images", express.static("images"));
-
-app.listen(app.get("port"), () =>
-  console.log("[Pichu Partners] http://localhost:" + app.get("port"))
-);

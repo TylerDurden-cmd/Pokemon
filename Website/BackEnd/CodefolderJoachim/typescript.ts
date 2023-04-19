@@ -1,18 +1,27 @@
-//ALS ALLES IS TOEGEVOEGD VAN CODE GELIEVE DEZE FOLDER OP TE KUISEN EN TE VERWIJDEREN!
+//FOLDER NIET VERWIJDEREN.
 //hehe sorry voor zo veel folders te maken ik vond het makkelijker om met een lege folder te werke tehee (*/ω＼*).
 import express from "express";
 const app = express();
 
 //FUNCTIES
 
-//functie voor het vragen van de url zodat je de functie maar hoeft op te roepen en direct aan de slag kan gaan met het toevoegen van volgende data.
+/* functie voor het vragen van de url zodat je de functie maar hoeft op te roepen en 
+direct aan de slag kan gaan met het toevoegen van volgende data.*/
 const PokemonFetcher = async () => {
   const pokemonurl = await fetch("https://pokeapi.co/api/v2/pokedex/1");
   const data = await pokemonurl.json();
   return data;
 };
 
-/* pokemonsetter is een functie voor het uitprinten van pokemonnamen je mag de naam origineler maken geen console.log omdat er niets word afgeprint in de terminal alleen return 
+//prints data from the pokemon url.
+const PokemonAssetsFetcher = async () => {
+  const pokemonAssetUrl = await fetch("https://pokeapi.co/api/v2/pokemon");
+  const data = await pokemonAssetUrl.json();
+  return data;
+};
+
+/* pokemonsetter is een functie voor het uitprinten van pokemonnamen je mag de naam 
+origineler maken geen console.log omdat er niets word afgeprint in de terminal alleen return 
 waarde voor deze mee te geven aan de website.
  */
 const pokemonSetter = async () => {
@@ -25,10 +34,107 @@ const pokemonSetter = async () => {
   return PokemonNameArray;
 };
 
+//returns de length of pokemon.
 const pokemonelength = async () => {
   const pokemonawait = await PokemonFetcher();
   return pokemonawait.pokemon_entries.length;
 };
+
+//pokemonsetter word gebruikt om alle namen random te genereren.
+
+//pokemonpicture test for ditto is een functie voor het uittesten van de url sprite ditto.
+const PokemonPictureFunctionDitto = async () => {
+  const url = await fetch("https://pokeapi.co/api/v2/pokemon/ditto");
+  const urlJson = await url.json();
+  console.log(urlJson.sprites.back_default);
+};
+
+/* PokemonPictureFunction(); */
+
+//pokemonPictureforanypokemon
+/* functie voor het uittesten van de sprite die word meegegeven de pokemon word gekozen doormiddel van de parameter
+in de functie de url word gepakt en de parameter die een pokemon naam zal bevatten word hier samen mee gefetcht 
+deze word dan terug gereturned met de functie en de voledige url van deze pokemon zijn sprite. */
+const PokemonPictureFunction = async (Pokemonvariable: string) => {
+  const url = await fetch(
+    `https://pokeapi.co/api/v2/pokemon/${Pokemonvariable}`
+  );
+  const urlJson = await url.json();
+  /* de functie werkt met console.log(urlJson.sprites.back_default); */
+  return urlJson.sprites.front_default;
+};
+/* 
+  PokemonPictureFunction("pikachu");
+  */
+
+/* functie voor random pokemon te kiezen. werkt door de pokemonnamen in een array 
+te steken en deze dan door de lengte van de pokemon array zelf met math random te berekenen hier word dan een variable 
+gemaakt met een random getal die dan word gevraagd en returnd bij de array. */
+
+const RandomPokemonGenerator = async () => {
+  let data = await PokemonFetcher();
+  const pokemonArray: string[] = [];
+  for (let i = 0; i < data.pokemon_entries.length; i++) {
+    pokemonArray[i] = data.pokemon_entries[i].pokemon_species.name;
+  }
+  const RandomPokemonindex = Math.floor(
+    Math.random() * data.pokemon_entries.length
+  );
+  /* console.log(pokemonArray[RandomPokemonindex]); */
+  return pokemonArray[RandomPokemonindex];
+};
+
+/* Functie voor het returnen van zes fotos Deze moet behandeld worden met .then omdat bijde functies async zijn.
+deze moet dan opgevangen worden in een catch als het missgaat */
+const Sixpicturesreturner = async () => {
+  for (let i = 0; i < 6; i++) {
+    RandomPokemonGenerator()
+      .then((randomPokemon) => {
+        PokemonPictureFunction(randomPokemon);
+      })
+      .catch((error) => {
+        console.log("Error: de pokemon functie werkt niet!");
+      });
+  }
+};
+
+/* Sixpicturesreturner(); */
+
+app.set("port", 3000);
+app.set("view engine", "ejs");
+
+app.get("/", async (req, res) => {
+  /* try word hier toegepast  */
+  try {
+    /* RandomPokemonstring word aangemaakt als array. */
+    let RandomPokemon: string[] = [];
+    for (let i = 0; i < 6; i++) {
+      /* for loop word gemaakt waar de array met het i de ellement de value krijgt van de functie met de randompokemon */
+      RandomPokemon[i] = await RandomPokemonGenerator();
+    }
+    /* PokemonImg word aangemaakt als array voor de 2 functies  */
+    let PokemonImg: string[] = [];
+    for (let i = 0; i < 6; i++) {
+      /* for loop word gemaakt tot 6 de functie pokemonPicture met zijn parameter randompokemon en het i de element word gemaakt
+      deze word in de parameter gestoken pokemonImg met zijn ide element zodat die kan toegepast worden in ejs. */
+      PokemonImg[i] = await PokemonPictureFunction(RandomPokemon[i]);
+    }
+    res.render("keuzepagina", {
+      PokemonImg1: PokemonImg[0],
+      PokemonImg2: PokemonImg[1],
+      PokemonImg3: PokemonImg[2],
+      PokemonImg4: PokemonImg[3],
+      PokemonImg5: PokemonImg[4],
+      PokemonImg6: PokemonImg[5],
+    });
+  } catch (error) {
+    console.log("error");
+  }
+});
+
+app.listen(app.get("port"), () => {
+  console.log("[server]http://localhost:" + app.get("port"));
+});
 
 /* dit mag weg */
 pokemonSetter();
@@ -36,11 +142,13 @@ pokemonSetter();
 //WEBSITE
 
 /* spreekt voor zichzelf start op poort 3000 */
-app.set("port", 3000);
-app.set("view engine", "ejs");
+
+/* app.set("port", 3000);
+app.set("view engine", "ejs"); */
 
 //hier werd aysync gebruikt voor de waarde opte wachten want de functie is asynchronis.
-app.get("/", async (req, res) => {
+
+/* app.get("/", async (req, res) => {
   const pokemonArray = await pokemonSetter();
   const pokemonlength = await pokemonelength();
   res.render("index", {
@@ -52,7 +160,7 @@ app.get("/", async (req, res) => {
 app.listen(app.get("port"), () => {
   console.log("[server]http://localhost:" + app.get("port"));
 });
-
+ */
 //Allepokemon functie deze werd gebruikt als referentie.
 
 /* Allepokemon(); */

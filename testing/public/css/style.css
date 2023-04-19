@@ -129,42 +129,42 @@ nav ul li a {
     width: 100px;    height: 100px;
   }
 
-  /*---Login---*/
-  input[name=uname], input[name=psw] {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid black ;
-    box-sizing: border-box;
-    border-radius: 4px;
-    
-  }
+/*---Login---*/
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid black ;
+  box-sizing: border-box;
+  border-radius: 4px;
   
-  .loginbtn {
-    background-color: #CD2026;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    width: 100%;
-  }
-  
-  .cancelbtn {
-    width: auto;
-    padding: 10px 18px;
-    background-color: #CD2026 ;
-    margin-top: 15px;
-    margin-left: 30px;
-  }
-  
-  span.psw {
-    float: right;
-    padding-top: 25px;
-    margin-right: 750px;
-  }
+}
+
+.loginbtn {
+  background-color: #CD2026;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.cancelbtn {
+  width: auto;
+  padding: 10px 18px;
+  background-color: #CD2026 ;
+  margin-top: 15px;
+  margin-left: 30px;
+}
+
+span.psw {
+  float: right;
+  padding-top: 25px;
+  margin-right: 750px;
+}
 
   Button:hover {
     opacity: 0.8;
@@ -182,33 +182,32 @@ nav ul li a {
   /*--- compare ---*/
 
 .vergelijker{
-    display: flex;
-    width: 75%;
-    margin-top: 100px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  .pokemon{
-    display: inline-block;
-    width: 40%;
-    margin: 2%;
-    padding: 2%;
-    background-color: var(--links);
-    border-radius: 70px;
-  }
-  
-  
-  .pokemon, h3, p{
-    text-align: center;
-  }
-  
-  #pokeleft, #pokeright, option {
-    width: 150px; height: 35px;
-    border-radius: 70px;
-    margin-left: 50px;
-    margin-top: 50px;
-    border-color: red;
-  }
+  display: flex;
+  width: 75%;
+  margin-top: 100px;
+  margin-left: 50px;
+}
+.pokemon{
+  display: inline-block;
+  width: 40%;
+  margin: 2%;
+  padding: 2%;
+  background-color: var(--links);
+  border-radius: 70px;
+}
+
+
+.pokemon, h3, p{
+  text-align: center;
+}
+
+#pokeleft, #pokeright, option {
+  width: 150px; height: 35px;
+  border-radius: 70px;
+  margin-left: 50px;
+  margin-top: 50px;
+  border-color: red;
+}
 
   .imgvergelijk {
     border-radius: 70%;
@@ -273,36 +272,36 @@ nav ul li a {
   /*--- catch ---*/
 
 .pokebalcontainer{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    margin-bottom: 13rem;
-    margin-left: 15rem;
-  }
-  
-  .pokebal{
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    background-color: var(--color-wit);
-    position: relative;
-    overflow: hidden;
-    margin-top: -550px;
-    margin-left: -275px;
-  }
-  
-  .buttoncatch{
-    width: 50%;
-    height: 50%;
-    border-radius: 50%;
-    background-color: var(--color-zwart);
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 1;
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  margin-bottom: 13rem;
+  margin-left: 15rem;
+}
+
+.pokebal{
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background-color: var(--color-wit);
+  position: relative;
+  overflow: hidden;
+  margin-top: -550px;
+  margin-left: -275px;
+}
+
+.buttoncatch{
+  width: 50%;
+  height: 50%;
+  border-radius: 50%;
+  background-color: var(--color-zwart);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
 
   h5 {
     font-size: xx-large;
