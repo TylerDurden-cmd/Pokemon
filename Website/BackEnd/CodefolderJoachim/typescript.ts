@@ -5,7 +5,8 @@ const app = express();
 
 //FUNCTIES
 
-//functie voor het vragen van de url zodat je de functie maar hoeft op te roepen en direct aan de slag kan gaan met het toevoegen van volgende data.
+/* functie voor het vragen van de url zodat je de functie maar hoeft op te roepen en 
+direct aan de slag kan gaan met het toevoegen van volgende data.*/
 const PokemonFetcher = async () => {
   const pokemonurl = await fetch("https://pokeapi.co/api/v2/pokedex/1");
   const data = await pokemonurl.json();
@@ -19,7 +20,8 @@ const PokemonAssetsFetcher = async () => {
   return data;
 };
 
-/* pokemonsetter is een functie voor het uitprinten van pokemonnamen je mag de naam origineler maken geen console.log omdat er niets word afgeprint in de terminal alleen return 
+/* pokemonsetter is een functie voor het uitprinten van pokemonnamen je mag de naam 
+origineler maken geen console.log omdat er niets word afgeprint in de terminal alleen return 
 waarde voor deze mee te geven aan de website.
  */
 const pokemonSetter = async () => {
@@ -50,20 +52,25 @@ const PokemonPictureFunctionDitto = async () => {
 /* PokemonPictureFunction(); */
 
 //pokemonPictureforanypokemon
-
+/* functie voor het uittesten van de sprite die word meegegeven de pokemon word gekozen doormiddel van de parameter
+in de functie de url word gepakt en de parameter die een pokemon naam zal bevatten word hier samen mee gefetcht 
+deze word dan terug gereturned met de functie en de voledige url van deze pokemon zijn sprite. */
 const PokemonPictureFunction = async (Pokemonvariable: string) => {
   const url = await fetch(
     `https://pokeapi.co/api/v2/pokemon/${Pokemonvariable}`
   );
   const urlJson = await url.json();
-  /* console.log(urlJson.sprites.back_default); */
+  /* de functie werkt met console.log(urlJson.sprites.back_default); */
   return urlJson.sprites.front_default;
 };
 /* 
   PokemonPictureFunction("pikachu");
   */
 
-//functie voor random pokemon te kiezen.
+/* functie voor random pokemon te kiezen. werkt door de pokemonnamen in een array 
+te steken en deze dan door de lengte van de pokemon array zelf met math random te berekenen hier word dan een variable 
+gemaakt met een random getal die dan word gevraagd en returnd bij de array. */
+
 const RandomPokemonGenerator = async () => {
   let data = await PokemonFetcher();
   const pokemonArray: string[] = [];
@@ -77,6 +84,8 @@ const RandomPokemonGenerator = async () => {
   return pokemonArray[RandomPokemonindex];
 };
 
+/* Functie voor het returnen van zes fotos Deze moet behandeld worden met .then omdat bijde functies async zijn.
+deze moet dan opgevangen worden in een catch als het missgaat */
 const Sixpicturesreturner = async () => {
   for (let i = 0; i < 6; i++) {
     RandomPokemonGenerator()
@@ -95,13 +104,19 @@ app.set("port", 3000);
 app.set("view engine", "ejs");
 
 app.get("/", async (req, res) => {
+  /* try word hier toegepast  */
   try {
+    /* RandomPokemonstring word aangemaakt als array. */
     let RandomPokemon: string[] = [];
     for (let i = 0; i < 6; i++) {
+      /* for loop word gemaakt waar de array met het i de ellement de value krijgt van de functie met de randompokemon */
       RandomPokemon[i] = await RandomPokemonGenerator();
     }
+    /* PokemonImg word aangemaakt als array voor de 2 functies  */
     let PokemonImg: string[] = [];
     for (let i = 0; i < 6; i++) {
+      /* for loop word gemaakt tot 6 de functie pokemonPicture met zijn parameter randompokemon en het i de element word gemaakt
+      deze word in de parameter gestoken pokemonImg met zijn ide element zodat die kan toegepast worden in ejs. */
       PokemonImg[i] = await PokemonPictureFunction(RandomPokemon[i]);
     }
     res.render("keuzepagina", {
