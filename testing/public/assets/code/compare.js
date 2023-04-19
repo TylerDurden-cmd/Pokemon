@@ -27,10 +27,10 @@ const PokemonStatsNames = async () =>{
 const OnChange = async () => {
     //geeft de op dit moment geselecteerde pokemon in de dropdowns
     let currentPokemonLeft = document.getElementById("pokeLeft").value;    
-    let currentPokemonRight = document.getElementById("pokeRight").value;
+    //let currentPokemonRight = document.getElementById("pokeRight").value;
     //arrays van de stats van de huidige pokemon en de namen van de stats
     let leftStatsNum = await PokemonStatsNumbers(currentPokemonLeft);
-    let rightStatsNum = await PokemonStatsNumbers(currentPokemonRight);
+    //let rightStatsNum = await PokemonStatsNumbers(currentPokemonRight);
     let statNames =  await PokemonStatsNames();
     
     //linkse pokemon stats inlezen in section
@@ -40,8 +40,8 @@ const OnChange = async () => {
     }
 
     //rechtse pokemon stats inlezen in section
-    for (let index = 0; index < statNames.length; index++) {
-        let stat = `$<span>${statNames[index]} ${rightStatsNum[i]}</span><br>`;
-        document.getElementById("right").insertAdjacentHTML("afterbegin", stat)        
-    }
+    //for (let index = 0; index < statNames.length; index++) {
+    //    let stat = `$<span>${statNames[index]} ${rightStatsNum[i]}</span><br>`;
+    //    document.getElementById("right").insertAdjacentHTML("afterbegin", stat)        
+    //}
 }
