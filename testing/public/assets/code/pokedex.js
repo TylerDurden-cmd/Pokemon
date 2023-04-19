@@ -35,9 +35,12 @@ fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`)
 .then(data => {
 pokemonInfo.innerHTML = `
 <h2>${data.name}</h2>
-<img src="${data.sprites.front_default}" alt="${data.name}">
-<p>Type: ${data.types.map(type => type.type.name).join(', ')} </p>
+<img src="${data.sprites.front_default}" alt="${data.name}"> 
+
+<p id="ik">Type: ${data.types.map(type => type.type.name).join(', ')} </p>
+
 <p>Height: ${data.height / 10} m </p>
+
 <p>Weight: ${data.weight / 10} kg </p>
 `;
 
@@ -56,7 +59,7 @@ const evolutionsHtml = evolutions.map(evolution => `
 `).join('');
 
 pokemonInfo.innerHTML += `
-<h3>Evolutielijn</h3>
+<h3 id="h3evo">Evolutielijn</h3>
 <div class="evolutions">${evolutionsHtml}</div>
 `;
 });

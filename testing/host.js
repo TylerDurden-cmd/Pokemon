@@ -11,6 +11,10 @@ app.get("/", (req, res) => {
   res.render("landingpage");
 });
 
+app.get("/landingpage", (req, res) => {
+  res.render("landingpage")
+})
+
 /*------Catcher------*/
 const PokemonFetcher = async () => {
   const pokemonurl = await fetch("https://pokeapi.co/api/v2/pokedex/1");
