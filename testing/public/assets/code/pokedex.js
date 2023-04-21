@@ -20,69 +20,65 @@ searchInput.addEventListener('input', () => {
     });
 });
 
-
 searchInput.addEventListener('change', () => {
-const pokemonName = searchInput.value.toLowerCase();
+  const pokemonName = searchInput.value.toLowerCase();
 
-fetchPokemonData(pokemonName);
+  fetchPokemonData(pokemonName);
 });
 
 function fetchPokemonData(pokemonName) {
-pokemonInfo.innerHTML = 'Laden...';
+  pokemonInfo.innerHTML = 'Laden...';
 
-fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`)
-.then(response => response.json())
-.then(data => {
-pokemonInfo.innerHTML = `
-<h2>${data.name}</h2>
-<img src="${data.sprites.front_default}" alt="${data.name}"> 
+  fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`)
+    .then(response => response.json())
+    .then(data => {
+      pokemonInfo.innerHTML = `
+        <h2>${data.name}</h2>
+        <img src="${data.sprites.front_default}" alt="${data.name}"> 
+        <p id="ik">Type: ${data.types.map(type => type.type.name).join(', ')} </p>
+        <p>Height: ${data.height / 10} m </p>
+        <p>Weight: ${data.weight / 10} kg </p>
+      `;
 
-<p id="ik">Type: ${data.types.map(type => type.type.name).join(', ')} </p>
+      fetch(data.species.url)
+        .then(response => response.json())
+        .then(speciesData => {
+          fetch(speciesData.evolution_chain.url)
+            .then(response => response.json())
+            .then(evolutionData => {
+              const evolutions = getEvolutions(evolutionData.chain);
+              const evolutionsHtml = evolutions.map(evolution => `
+                <article>
+                  <h3>${evolution.name}</h3>
+                  <img src="${evolution.image}" alt="${evolution.name}">
+                </article>
+              `).join('');
 
-<p>Height: ${data.height / 10} m </p>
-
-<p>Weight: ${data.weight / 10} kg </p>
-`;
-
-fetch(data.species.url)
-.then(response => response.json())
-.then(speciesData => {
-fetch(speciesData.evolution_chain.url)
-.then(response => response.json())
-.then(evolutionData => {
-const evolutions = getEvolutions(evolutionData.chain);
-const evolutionsHtml = evolutions.map(evolution => `
-<div>
-<h3>${evolution.name}</h3>
-<img src="${evolution.image}" alt="${evolution.name}">
-</div>
-`).join('');
-
-pokemonInfo.innerHTML += `
-<h3 id="h3evo">Evolutielijn</h3>
-<div class="evolutions">${evolutionsHtml}</div>
-`;
-});
-});
-})
-.catch(error => {
-pokemonInfo.innerHTML = `<p>Pokemon niet gevonden</p>`;
-});
+              pokemonInfo.innerHTML += `
+                <h3 id="h3evo">Evolutielijn</h3>
+                <article class="evolutions">${evolutionsHtml}</article>
+              `;
+            });
+        });
+    })
+    .catch(error => {
+      pokemonInfo.innerHTML = `<p>Pokemon niet gevonden</p>`;
+    });
 }
 
 function getEvolutions(chain) {
-const evolutions = [];
+  const evolutions = [];
 
-if (chain.species) {
-evolutions.push({
-name: chain.species.name,
-image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${chain.species.url.split('/').slice(-2, -1)}.png`
-});
+  if (chain.species) {
+    evolutions.push({
+      name: chain.species.name,
+      image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${chain.species.url.split('/').slice(-2, -1)}.png`
+    });
 
-if (chain.evolves_to.length > 0) {
-evolutions.push(...getEvolutions(chain.evolves_to[0]));
-}
-}
+    if (chain.evolves_to.length > 0) {
+      evolutions.push(...getEvolutions(chain.evolves_to[0]));
+    }
+  }
 
-return evolutions;
+  return evolutions;
 }
