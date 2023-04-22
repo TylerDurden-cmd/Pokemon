@@ -156,6 +156,11 @@ app.get("/views/pokedex.ejs", (req, res) => {
   res.render("pokedex")
 })
 
+/*------Raadpokemon------*/
+
+app.get("/views/raadpokemon.ejs", (req, res) => {
+  res.render("raadpokemon")
+})
 
 app.listen(app.get("port"), () =>
   console.log("[Pichu Partners] http://localhost:" + app.get("port"))
