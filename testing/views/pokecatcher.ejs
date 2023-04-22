@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
     <title>PokeCatcher</title>
 </head>
 <body>
@@ -11,13 +12,19 @@
         <%-include("partials/Navigation")-%>
     </nav>
     <main>
-        <img src="<%=PokemonGeneratorImg%>" alt=""></img>
+    <section class='containerPokemonCatcher'>
+        <img class="PokemonGeneratorImg" src="<%=PokemonGeneratorImg%>" alt=""></img>
         <h1 class="RandomPokemon"><%=PokemonRandom%></h1>
+    </section>
         <br>
         <section class="pokebalcontainer">
             <section class="pokebal">
                 <button class="buttoncatch"></button>
             </section>
+
+            <section class="countcontainer"></section>
+            <section class="PokemonCaughtContainer"></section>
+
         </section>
       </main>
     <footer>
