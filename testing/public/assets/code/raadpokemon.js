@@ -47,3 +47,4 @@ submitBtn.addEventListener("click", {once:true}, checkGuess);
 nextBtn.addEventListener("click", generatePokemon);
 
 generatePokemon();
+  

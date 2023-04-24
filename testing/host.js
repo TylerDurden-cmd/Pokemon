@@ -72,6 +72,7 @@ const Sixpicturesreturner = async () => {
   }
 };
 
+
 //webhosting
 
 
@@ -144,8 +145,6 @@ app.get("/views/mypartner.ejs", async(req, res) => {
 
 
 /*------PokeCatcher------*/
-
-
 app.get("/views/pokecatcher.ejs", async (req, res) => {
   const PokemonRandom = await RandomPokemonGenerator();
   const PokemonGeneratorImg = await PokemonPictureFunction(PokemonRandom);
@@ -158,9 +157,15 @@ app.get("/views/pokedex.ejs", (req, res) => {
   res.render("pokedex")
 })
 
-app.use(express.static("public"));
-app.use("/images", express.static("images"));
+/*------Raadpokemon------*/
+
+app.get("/views/raadpokemon.ejs", (req, res) => {
+  res.render("raadpokemon")
+})
 
 app.listen(app.get("port"), () =>
   console.log("[Pichu Partners] http://localhost:" + app.get("port"))
 );
+
+app.use(express.static("public"));
+app.use("/images", express.static("images"));

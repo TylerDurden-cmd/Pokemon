@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
     <title>PokeCatcher</title>
 </head>
 <body>
@@ -11,17 +12,28 @@
         <%-include("partials/Navigation")-%>
     </nav>
     <main>
-        <h5>Pichu</h5>
-        <img src="<%=PokemonGeneratorImg%>" alt=""><%=PokemonRandom%></img>
+    <section class='containerPokemonCatcher'>
+        <img class="PokemonGeneratorImg" src="<%=PokemonGeneratorImg%>" alt=""></img>
+        <h1 class="RandomPokemon"><%=PokemonRandom%></h1>
+    </section>
+        <br>
         <section class="pokebalcontainer">
             <section class="pokebal">
-                <img src="" alt="" srcset="">
-                <section class="buttoncatch"></section>
+                <button class="buttoncatch"></button>
             </section>
+
+            <section class="countcontainer"></section>
+                <section class="ContainerKeepThisPokemon">
+                    <section class="PokemonCaughtContainer"></section>
+                    <h3>Do you want to keep this Pokemon?</h3>
+                    <button class="yesButtonCatcher">Yes?</button> <h4>or</h4> <button class="noButtonCatcher">No?</button>
+            </section>
+            <!-- <button" class="buttonRefreshPage">Click button</button> -->
         </section>
       </main>
     <footer>
         <%-include("partials/footer")-%>
     </footer>
+    <script src="/assets/code/catcher.js"></script>
 </body>
 </html>
