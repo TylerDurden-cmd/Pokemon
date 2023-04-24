@@ -283,6 +283,19 @@ h4 {
 
 /*--- catch ---*/
 
+.ContainerKeepThisPokemon{
+  background-color: var(--color-wit);
+  border-color: black;
+  border-width: 6px;
+  border-style: solid;
+  visibility: collapse ;
+}
+
+.PokemonCaughtContainer{
+  font-size: 3rem;
+  
+}
+
 .pokebalcontainer{
   display: flex;
   justify-content: center;
@@ -297,7 +310,7 @@ h4 {
 }
 
 .containerPokemonCatcher{
-  background-color: #ccc;
+  background-color: var(--color-wit);
   width: 20%;
   border-style: solid;
   border-color: black;
