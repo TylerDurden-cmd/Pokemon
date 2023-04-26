@@ -283,12 +283,13 @@ h4 {
 
 /*--- catch ---*/
 
-.ContainerKeepThisPokemon{
+
+#ContainerKeepThisPokemon{
   background-color: var(--color-wit);
   border-color: black;
   border-width: 6px;
   border-style: solid;
-  visibility: collapse ;
+  visibility: visible;
 }
 
 .PokemonCaughtContainer{

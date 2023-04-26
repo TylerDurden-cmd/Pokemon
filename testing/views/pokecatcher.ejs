@@ -12,28 +12,32 @@
         <%-include("partials/Navigation")-%>
     </nav>
     <main>
-    <section class='containerPokemonCatcher'>
-        <img class="PokemonGeneratorImg" src="<%=PokemonGeneratorImg%>" alt=""></img>
-        <h1 class="RandomPokemon"><%=PokemonRandom%></h1>
+    <section id='containerPokemonCatcher'>
+        <section id="PokemonGeneratorImg"></section>
+        <h1 id="RandomPokemon"></h1>
     </section>
         <br>
         <section class="pokebalcontainer">
             <section class="pokebal">
                 <button class="buttoncatch"></button>
             </section>
-
-            <section class="countcontainer"></section>
-                <section class="ContainerKeepThisPokemon">
-                    <section class="PokemonCaughtContainer"></section>
-                    <h3>Do you want to keep this Pokemon?</h3>
-                    <button class="yesButtonCatcher">Yes?</button> <h4>or</h4> <button class="noButtonCatcher">No?</button>
+            <section id="ContainerKeepThisPokemon">
+                <section id="CaughtText"></section>
+                <section><h1>Do You want to keep this Pokemon?</h1></section>
+                <button id="Yesbtn">Yes</button><button id="Nobtn">no</button>
             </section>
-            <!-- <button" class="buttonRefreshPage">Click button</button> -->
+            <section class="countcontainer"></section>
+            <button id="BtnNext">Click Next Pokemon</button>
         </section>
+        <script src="/assets/code/catcher.js"></script>
       </main>
     <footer>
         <%-include("partials/footer")-%>
     </footer>
-    <script src="/assets/code/catcher.js"></script>
 </body>
 </html>
+<!-- Readme -->
+<!-- Als je een pokemon vangt kan je deze bijhouden dan moet je op 
+    yes drukken anders no en dan krijg je een nieuwe pokemon te zien
+    als je op yes drukt word de no knop ui 
+    gezet en moet je op click next Pokemon drukken.  -->
