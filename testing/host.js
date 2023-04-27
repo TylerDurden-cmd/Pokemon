@@ -113,33 +113,7 @@ app.get("/views/contact.ejs", (req, res) => {
 /*------MyPartner------*/
 
 app.get("/views/mypartner.ejs", async(req, res) => {
-
-  try {
-    /* RandomPokemonstring word aangemaakt als array. */
-    let RandomPokemon = [];
-    for (let i = 0; i < 6; i++) {
-      /* for loop word gemaakt waar de array met het i de ellement de value krijgt van de functie met de randompokemon */
-      RandomPokemon[i] = await RandomPokemonGenerator();
-    }
-    /* PokemonImg word aangemaakt als array voor de 2 functies  */
-    let PokemonImg = [];
-    for (let i = 0; i < 6; i++) {
-      /* for loop word gemaakt tot 6 de functie pokemonPicture met zijn parameter randompokemon en het i de element word gemaakt
-      deze word in de parameter gestoken pokemonImg met zijn ide element zodat die kan toegepast worden in ejs. */
-      PokemonImg[i] = await PokemonPictureFunction(RandomPokemon[i]);
-    }
-
-    res.render("mypartner", {
-      PokemonImg1: PokemonImg[0],
-      PokemonImg2: PokemonImg[1],
-      PokemonImg3: PokemonImg[2],
-      PokemonImg4: PokemonImg[3],
-      PokemonImg5: PokemonImg[4],
-      PokemonImg6: PokemonImg[5],
-    });
-  } catch (error) {
-    console.log("error");
-  }
+    res.render("mypartner");
 })
 
 

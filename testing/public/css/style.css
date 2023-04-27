@@ -224,7 +224,7 @@ h1
 }
 
 .imgvergelijk {
-  border-radius: 70%;
+  border-radius: 20%
 }
 
 /*--- contact ---*/
@@ -285,12 +285,13 @@ h4 {
 
 /*--- catch ---*/
 
-.ContainerKeepThisPokemon{
+
+#ContainerKeepThisPokemon{
   background-color: var(--color-wit);
   border-color: black;
   border-width: 6px;
   border-style: solid;
-  visibility: collapse ;
+  visibility: visible;
 }
 
 .PokemonCaughtContainer{
