@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Comparer</title>
     <link rel="stylesheet" href="/css/style.css">
-    <script src="/assets/code/compare.js"></script>
 </head>
 <body>
     <nav>
@@ -21,33 +20,53 @@
                     <% } %>
                   </select>               
             </section>
+
             <section class="pokemon">
              <img class="imgvergelijk" src="/assets/images/magic_0.jpg" alt="" srcset="">
-             <h3>naam pokemon</h3>
-            <p>type</p>
-            <p>attack</p>
-            <p>defense</p>
-            <p>hp</p>
+             
+            <section class="Left">
+                <h3 id="PokemonNaamLeft">naam</h3>
+                <p id="PokemonTypeLeft">type</p>
+                <section class="LeftStats">
+                    <p>hp</p>
+                    <p>attack</p>
+                    <p>defense</p>
+                    <p>special-attack</p>
+                    <p>special-defense</p>
+                    <p>speed</p>
+                </section>                
+            </section>
            </section>
-           <section class="dropdown">
+        <section class="dropdown">
             <select name="pokeright" id="pokeright">    
                 <% for(let i = 0; i < pokemonlength; i++){ %>
                   <option value="<%=pokemonarray[i]%>"><%=pokemonarray[i]%></option>
                 <% } %>
-              </select>   
+            </select>   
         </section>
+        
                 <section class="pokemon">
                 <img class="imgvergelijk" src="/assets/images/lotr.jpg" alt="" srcset="">
-                <h3>naam pokemon</h3>
-                <p>type</p>
-                <p>attack</p>
-                <p>defense</p>
-                <p>hp</p>
-               </section>
+
+                 <section class="Right">
+                    <h3 id="PokemonNaamRight">naam</h3>
+                    <p id="PokemonTypeRight">type</p>
+                    <section class="RightStats">
+                        <p>hp</p>
+                        <p>attack</p>
+                        <p>defense</p>
+                        <p>special-attack</p>
+                        <p>special-defense</p>
+                        <p>speed</p>
+                    </section>                
+                 </section>
+                </section>
         </section>
+        <button class="comparebtn" type="submit">compare</button>
     </main>
     <footer>
         <%-include("partials/footer")-%>
     </footer>
+    <script src="/assets/code/compare.js"></script>
 </body>
 </html>

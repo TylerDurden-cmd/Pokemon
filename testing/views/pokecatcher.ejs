@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
     <title>PokeCatcher</title>
 </head>
 <body>
@@ -11,18 +12,32 @@
         <%-include("partials/Navigation")-%>
     </nav>
     <main>
-        <h5>Pichu</h5>
-        <img class="catch" src="/assets/images/PichuPartnersLogo.png" alt="">
-
+    <section id='containerPokemonCatcher'>
+        <section id="PokemonGeneratorImg"></section>
+        <h1 id="RandomPokemon"></h1>
+    </section>
+        <br>
         <section class="pokebalcontainer">
             <section class="pokebal">
-                <img src="" alt="" srcset="">
-                <section class="buttoncatch"></section>
+                <button class="buttoncatch"></button>
             </section>
+            <section id="ContainerKeepThisPokemon">
+                <section id="CaughtText"></section>
+                <section><h1>Do You want to keep this Pokemon?</h1></section>
+                <button id="Yesbtn">Yes</button><button id="Nobtn">no</button>
+            </section>
+            <section class="countcontainer"></section>
+            <button id="BtnNext">Click Next Pokemon</button>
         </section>
+        <script src="/assets/code/catcher.js"></script>
       </main>
     <footer>
         <%-include("partials/footer")-%>
     </footer>
 </body>
 </html>
+<!-- Readme -->
+<!-- Als je een pokemon vangt kan je deze bijhouden dan moet je op 
+    yes drukken anders no en dan krijg je een nieuwe pokemon te zien
+    als je op yes drukt word de no knop ui 
+    gezet en moet je op click next Pokemon drukken.  -->
