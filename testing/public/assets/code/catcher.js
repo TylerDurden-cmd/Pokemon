@@ -41,8 +41,8 @@ btn.addEventListener('click',async(e)=>{
 
     try{
   const take = await(await fetch(`https://pokeapi.co/api/v2/pokemon/${Pokemon.textContent}`)).json()
-  let EigenPokemnoAttack = 30;
-  const PokemonDefenceStats = take.stats[3].base_stat
+  let EigenPokemnoAttack = 1;
+  const PokemonDefenceStats = take.stats[2].base_stat
   const PercentageVoorPokemonCatcher = 100 - EigenPokemnoAttack + PokemonDefenceStats;
   const PercentageVoorPokemonCatcherBerekend = Math.floor(Math.random() * PercentageVoorPokemonCatcher)
   if(EigenPokemnoAttack > PercentageVoorPokemonCatcherBerekend){
