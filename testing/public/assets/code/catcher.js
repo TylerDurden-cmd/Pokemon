@@ -133,13 +133,15 @@ btn.addEventListener("click",async()=>{
   /* counter start met aftellen bij een click van de button */
   counter.textContent--;
   /* Moet vervangen worden met eigen pokemon uit databank */
-  let EigenPokemonAttack = 90;
+  let EigenPokemonAttack = 45;
+  let EigenPokemonDefence = 50;
   /* fetch van pokemon met naam van pokemon die word aangemaakt in Src functie */
   const take = await(await fetch(`https://pokeapi.co/api/v2/pokemon/${Pokemon.textContent}`)).json()
   const PokemonDefenceStats = take.stats[2].base_stat
+  const PokemonAttackStats = take.stats[1].base_stat
   /* heir word stat van defence van pokemon gepakt */
   console.log(PokemonDefenceStats)
-  const Formule = ((EigenPokemonAttack - PokemonDefenceStats)/EigenPokemonAttack)*100;
+  const Formule = (((EigenPokemonAttack + EigenPokemonDefence ) - ( PokemonDefenceStats))/EigenPokemonAttack)*100;
   const Getal1tot100 = Math.floor(Math.random() * 100)
   /* formule is eigenlijk de kans dat jij die vangt op 100% bij de if statement word dan bekeken of je kans groter is dan
   het random getal dat word gegenereed op 100*/
