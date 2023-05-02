@@ -15,6 +15,7 @@
         <section class="vergelijker">
             <section class="dropdown">
                 <select name="pokeleft" id="pokeleft">    
+                    <option value="Default">Select Pokemon</option>
                     <% for(let i = 0; i < pokemonlength; i++){ %>
                       <option value="<%=pokemonarray[i]%>"><%=pokemonarray[i]%></option>
                     <% } %>
@@ -22,7 +23,7 @@
             </section>
 
             <section class="pokemon">
-             <img class="imgvergelijk" src="/assets/images/magic_0.jpg" alt="" srcset="">
+             <img class="imgvergelijk" src="" alt="" srcset="">
              
             <section class="Left">
                 <h3 id="PokemonNaamLeft">naam</h3>
@@ -38,7 +39,8 @@
             </section>
            </section>
         <section class="dropdown">
-            <select name="pokeright" id="pokeright">    
+            <select name="pokeright" id="pokeright">
+                <option value="Default">Select Pokemon</option>
                 <% for(let i = 0; i < pokemonlength; i++){ %>
                   <option value="<%=pokemonarray[i]%>"><%=pokemonarray[i]%></option>
                 <% } %>
@@ -46,7 +48,7 @@
         </section>
         
                 <section class="pokemon">
-                <img class="imgvergelijk" src="/assets/images/lotr.jpg" alt="" srcset="">
+                <img class="imgvergelijk" src="" alt="" srcset="">
 
                  <section class="Right">
                     <h3 id="PokemonNaamRight">naam</h3>
