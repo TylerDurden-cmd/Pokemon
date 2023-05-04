@@ -1,6 +1,5 @@
 import express from "express";
 import ejs from "ejs";
-import fetch from "node-fetch";
 
 /* Het plekje voor alle functies */
 const PokemonFetcher = async () => {
