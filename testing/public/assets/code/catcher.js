@@ -10,6 +10,14 @@ let CaughtText = document.getElementById("CaughtText")
 let btnNext = document.getElementById("BtnNext")
 let btnyes = document.getElementById("Yesbtn")
 let btnno = document.getElementById("Nobtn")
+let Procent = document.getElementById("procent")
+let RandomGetalVan0tot100 = document.getElementById("RandomGetalVan0tot100")
+let EigenPokemonDefenceStat = document.getElementById("EigenPokemonDefenceStat")
+let EigenPokemonAttackStat = document.getElementById("EigenPokemonAttackStat")
+let PokemonDefenceStat = document.getElementById("PokemonDefenceStats")
+let PokemonAttackStat = document.getElementById("PokemonAttackstat")
+
+
 
 /* ---Variable + Values Toepassen--- */
 
@@ -139,14 +147,32 @@ btn.addEventListener("click",async()=>{
   const take = await(await fetch(`https://pokeapi.co/api/v2/pokemon/${Pokemon.textContent}`)).json()
   const PokemonDefenceStats = take.stats[2].base_stat
   const PokemonAttackStats = take.stats[1].base_stat
+  /* const PokemonAttackStats = take.stats[1].base_stat */
   /* heir word stat van defence van pokemon gepakt */
   console.log(PokemonDefenceStats)
   const Formule = (((EigenPokemonAttack + EigenPokemonDefence ) - ( PokemonDefenceStats))/EigenPokemonAttack)*100;
   const Getal1tot100 = Math.floor(Math.random() * 100)
   /* formule is eigenlijk de kans dat jij die vangt op 100% bij de if statement word dan bekeken of je kans groter is dan
   het random getal dat word gegenereed op 100*/
+
   console.log(Formule)
   console.log(Getal1tot100)
+  Procent.innerHTML = ``
+  Procent.innerHTML = `${Formule}`
+  RandomGetalVan0tot100.innerHTML = ``
+  RandomGetalVan0tot100.innerHTML = `${Getal1tot100}`
+  EigenPokemonDefenceStat.innerHTML = ``
+  EigenPokemonDefenceStat.innerHTML = `${PokemonDefenceStats}`
+  EigenPokemonAttackStat.innerHTML = ``
+  EigenPokemonAttackStat.innerHTML = `${EigenPokemonAttack}`
+  PokemonDefenceStat.innerHTML = ``
+  PokemonDefenceStat.innerHTML = `${PokemonDefenceStats}`
+  PokemonAttackStat.innerHTML = ``
+  PokemonAttackStat.innerHTML = `${PokemonAttackStats}`
+
+
+
+
   if(Formule >= Getal1tot100){
     ColorGreen();
     btn.disabled = true
