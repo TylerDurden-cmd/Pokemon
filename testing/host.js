@@ -112,17 +112,20 @@ app.get("/views/contact.ejs", (req, res) => {
 
 /*------MyPartner------*/
 
-app.get("/views/mypartner.ejs", async(req, res) => {
+app.get("/views/mypartner.ejs", (req, res) => {
     res.render("mypartner");
 })
 
+/* ------Battler------- */
+app.get("/views/battler.ejs" ,(req,res) => {
+  res.render("Battler")
+})
 
 /*------PokeCatcher------*/
 app.get("/views/pokecatcher.ejs", async (req, res) => {
-  const PokemonRandom = await RandomPokemonGenerator();
-  const PokemonGeneratorImg = await PokemonPictureFunction(PokemonRandom);
-  res.render("pokecatcher",{PokemonRandom:PokemonRandom,
-  PokemonGeneratorImg:PokemonGeneratorImg})
+  /* verwijderd laat dit leeg bij conflict oplossen aub. */
+  /* mvg joachim */
+  res.render("pokecatcher")
 })
 
 /*------PokeDex------*/

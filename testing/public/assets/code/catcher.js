@@ -1,7 +1,7 @@
 //Joachim
 //Takes data from the ejs.
 let Img = document.getElementById("PokemonGeneratorImg")
-let Pokemon = document.getElementById("RandomPokemon")
+let Pokemon = document.getElementById("name")
 let btn = document.querySelector(".buttoncatch")
 let pokebal = document.querySelector(".pokebal")
 let counter = document.querySelector(".countcontainer")
@@ -108,8 +108,8 @@ const PokemonPictureFunction = async (Pokemonvariable) => {
 /* Nieuwe Functie Herlaad de Pagina met een niewe foto door de functies PokemonPicture te gebruiken */
 const SrcPictureFunction = async () =>{
   try{
-    let RandomPokemon = await RandomPokemonGenerator();
-    let SpecialArray = await PokemonPictureFunction(RandomPokemon)
+    let RandomPokemonGen = await RandomPokemonGenerator();
+    let SpecialArray = await PokemonPictureFunction(RandomPokemonGen)
     /* imgPokemon word aangemaakt als nieuw element van type img */
       let imgPokemon = document.createElement("img")
       /* dan word er een value in gestoken de speciale url  */
@@ -121,7 +121,7 @@ const SrcPictureFunction = async () =>{
       bron = StackOverFlow */
       Img.appendChild(imgPokemon);
       Pokemon.innerHTML = ""
-      Pokemon.innerHTML = `${RandomPokemon}`
+      Pokemon.innerHTML = `${RandomPokemonGen}`
       pokebal.style.backgroundColor = ""
       btn.disabled = false
       counter.textContent = 3;
@@ -162,7 +162,7 @@ btn.addEventListener("click",async()=>{
   RandomGetalVan0tot100.innerHTML = ``
   RandomGetalVan0tot100.innerHTML = `${Getal1tot100}`
   EigenPokemonDefenceStat.innerHTML = ``
-  EigenPokemonDefenceStat.innerHTML = `${PokemonDefenceStats}`
+  EigenPokemonDefenceStat.innerHTML = `${EigenPokemonDefence}` /* kleine aanpassing */
   EigenPokemonAttackStat.innerHTML = ``
   EigenPokemonAttackStat.innerHTML = `${EigenPokemonAttack}`
   PokemonDefenceStat.innerHTML = ``
