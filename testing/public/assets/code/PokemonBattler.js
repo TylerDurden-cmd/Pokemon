@@ -1,7 +1,13 @@
 let btn = document.getElementById("btn");
+let BtnAttack = document.getElementById("btnAttack")
 let RandomPokemonPicture = document.getElementById("PokemonRandomPicture")
+let EigenPokemonBack = document.getElementById("EigenPokemonBack")
 
 let pokemonArray = [];
+let EigenPokemon = "pichu";
+ /* Moet vervangen worden met eigen pokemon uit databank */
+ let EigenPokemonAttack = 45;
+ let EigenPokemonDefence = 50;
 
 /* --Functies-- */
 
@@ -31,7 +37,7 @@ const PokemonPictureFunction = async (Pokemonvariable) => {
     const urlJson = await url.json();
 
     /* de functie werkt met console.log(urlJson.sprites.back_default); */
-    return urlJson.sprites.other['official-artwork'].front_default;
+    return urlJson.sprites.front_default;
     }catch(error){console.log(error)}
     
   };
@@ -57,21 +63,68 @@ const PokemonPictureFunction = async (Pokemonvariable) => {
 
 
 
-  const GroteFunctieZonderGoeieNaam = async() => {
+  const PokemonSprite = async() => {
     let RandomGen = await RandomPokemonGenerator()
     let RandomPicturePokemon = await PokemonPictureFunction(RandomGen)
     let pic = document.createElement("img")
     pic.setAttribute("src",RandomPicturePokemon);
     RandomPokemonPicture.innerHTML = "";
     RandomPokemonPicture.appendChild(pic)
+    console.log(RandomGen)
+    return RandomGen;
 
   }
-
+  const EigenPokemonSprite = async(PokemonVar) =>{
+    let PokemonSprite = await fetch(`https://pokeapi.co/api/v2/pokemon/${PokemonVar}`)
+    let url = await PokemonSprite.json()
+    let PokemonPicBack = url.sprites.back_default;
   /* Maak Een sprite van je eigen pokemon zijn back */
+  return PokemonPicBack
+}
 
+const PokemonBackimg = async() =>{
+  let PokemonSprite = await EigenPokemonSprite(EigenPokemon);
+  let pic = document.createElement("img");
+  pic.setAttribute("src",PokemonSprite);
+  EigenPokemonBack.innerHTML = "";
+  EigenPokemonBack.appendChild(pic)
+}
 
-  GroteFunctieZonderGoeieNaam();
+const PokemonStatsFetcherDef = async() => {
+  let RandomGen = await RandomPokemonGenerator()
+  let Pokemonurl = await fetch(`https://pokeapi.co/api/v2/pokemon/${RandomGen}`)
+  let url = await Pokemonurl.json()
+  let PokemonDefence = url.stats[2].base_stat; 
+  return PokemonDefence;
+}
+
+const PokemonStatsFetcherAtt = async() =>{
+  let RandomGen = await RandomPokemonGenerator()
+  let Pokemonurl = await fetch(`https://pokeapi.co/api/v2/pokemon/${RandomGen}`)
+  let url = await Pokemonurl.json()
+  let PokemonAttack = url.stats[1].base_stat;
+  return PokemonAttack; 
+}
+
+const Attack = async(pokemon) =>{
+  let Defence = await PokemonStatsFetcherDef();
+  let Attack = await PokemonStatsFetcherAtt();
+
+  let AttackSum = Defence - EigenPokemonAttack;
+
+  console.log(Defence)
+  console.log(EigenPokemonAttack)
+  console.log(AttackSum)
+}
 
 btn.addEventListener("click" , ()=> {
-
+  PokemonSprite();
 })
+
+BtnAttack.addEventListener("click", ()=> {
+  Attack();
+})
+
+Attack();
+PokemonSprite();
+PokemonBackimg();
