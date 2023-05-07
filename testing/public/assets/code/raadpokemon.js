@@ -7,7 +7,7 @@ const pokename = document.querySelector(".name");
 const imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/";
 let pokemonName;
 
-function generatePokemon() {
+const generatePokemon = () => {
   fetch("https://pokeapi.co/api/v2/pokemon?limit=1118")
     .then(response => response.json())
     .then(data => {
@@ -28,7 +28,7 @@ function generatePokemon() {
     });
 }
 
-function checkGuess() {
+const checkGuess = ()=> {
   const guess = guessInput.value.toLowerCase().trim();
   if (guess === pokemonName) {
     guessInput.classList.add("correct");

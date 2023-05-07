@@ -2,6 +2,8 @@ let btn = document.getElementById("btn");
 let BtnAttack = document.getElementById("btnAttack")
 let RandomPokemonPicture = document.getElementById("PokemonRandomPicture")
 let EigenPokemonBack = document.getElementById("EigenPokemonBack")
+let PokemonNameBattler = document.getElementById('PokemonNameBattler');
+
 
 let pokemonArray = [];
 let EigenPokemon = "pichu";
@@ -61,8 +63,6 @@ const PokemonPictureFunction = async (Pokemonvariable) => {
 }
   };
 
-
-
   const PokemonSprite = async() => {
     let RandomGen = await RandomPokemonGenerator()
     let RandomPicturePokemon = await PokemonPictureFunction(RandomGen)
@@ -70,10 +70,14 @@ const PokemonPictureFunction = async (Pokemonvariable) => {
     pic.setAttribute("src",RandomPicturePokemon);
     RandomPokemonPicture.innerHTML = "";
     RandomPokemonPicture.appendChild(pic)
+    PokemonNameBattler.innerHTML = RandomGen;
+    
     console.log(RandomGen)
+
     return RandomGen;
 
   }
+
   const EigenPokemonSprite = async(PokemonVar) =>{
     let PokemonSprite = await fetch(`https://pokeapi.co/api/v2/pokemon/${PokemonVar}`)
     let url = await PokemonSprite.json()
@@ -91,27 +95,35 @@ const PokemonBackimg = async() =>{
 }
 
 const PokemonStatsFetcherDef = async() => {
-  let RandomGen = await RandomPokemonGenerator()
-  let Pokemonurl = await fetch(`https://pokeapi.co/api/v2/pokemon/${RandomGen}`)
+  try{  
+  const Pokemon = PokemonNameBattler.textContent
+  console.log(Pokemon)
+  let Pokemonurl = await fetch(`https://pokeapi.co/api/v2/pokemon/${Pokemon}`)
   let url = await Pokemonurl.json()
-  let PokemonDefence = url.stats[2].base_stat; 
+  let PokemonDefence = await url.stats[2].base_stat; 
   return PokemonDefence;
+}catch(error){
+  console.log(error)
+}
 }
 
 const PokemonStatsFetcherAtt = async() =>{
-  let RandomGen = await RandomPokemonGenerator()
-  let Pokemonurl = await fetch(`https://pokeapi.co/api/v2/pokemon/${RandomGen}`)
+  try{
+  const Pokemon = PokemonNameBattler.textContent
+  let Pokemonurl = await fetch(`https://pokeapi.co/api/v2/pokemon/${Pokemon}`)
   let url = await Pokemonurl.json()
-  let PokemonAttack = url.stats[1].base_stat;
+  let PokemonAttack = await url.stats[1].base_stat;
   return PokemonAttack; 
+}catch(error){
+  console.log(error)
+}
 }
 
-const Attack = async(pokemon) =>{
+const Attack = async() =>{
   let Defence = await PokemonStatsFetcherDef();
   let Attack = await PokemonStatsFetcherAtt();
-
   let AttackSum = Defence - EigenPokemonAttack;
-
+  console.log(Attack)
   console.log(Defence)
   console.log(EigenPokemonAttack)
   console.log(AttackSum)
@@ -125,6 +137,7 @@ BtnAttack.addEventListener("click", ()=> {
   Attack();
 })
 
-Attack();
+
 PokemonSprite();
 PokemonBackimg();
+Attack();
