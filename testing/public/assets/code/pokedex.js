@@ -5,7 +5,8 @@ const pokemonList = document.getElementById('pokemon-list');
 searchInput.addEventListener('input', () => {
   const pokemonName = searchInput.value.toLowerCase();
 
-  fetch(`https://pokeapi.co/api/v2/pokemon?limit=1000`)
+  if (pokemonName.length >= 3) {
+  fetch(`https://pokeapi.co/api/v2/pokemon?limit=1118`)
     .then(response => response.json())
     .then(data => {
       const filteredPokemon = data.results.filter(pokemon => pokemon.name.startsWith(pokemonName));
@@ -18,6 +19,7 @@ searchInput.addEventListener('input', () => {
 
       pokemonList.innerHTML = options;
     });
+  }
 });
 
 searchInput.addEventListener('change', () => {
@@ -48,6 +50,7 @@ function fetchPokemonData(pokemonName) {
             .then(evolutionData => {
               const evolutions = getEvolutions(evolutionData.chain);
               const evolutionsHtml = evolutions.map(evolution => `
+                <p>${evolution.method} ${""}</p>
                 <article>
                   <h3>${evolution.name}</h3>
                   <img src="${evolution.image}" alt="${evolution.name}">
@@ -70,15 +73,18 @@ function getEvolutions(chain) {
   const evolutions = [];
 
   if (chain.species) {
+    
     evolutions.push({
       name: chain.species.name,
-      image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${chain.species.url.split('/').slice(-2, -1)}.png`
+      image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${chain.species.url.split('/').slice(-2, -1)}.png`,
+      method: chain.evolution_details.map(detail => detail.trigger.name)
     });
 
     if (chain.evolves_to.length > 0) {
-      evolutions.push(...getEvolutions(chain.evolves_to[0]));
+      chain.evolves_to.forEach(evolution => {
+        evolutions.push(...getEvolutions(evolution));
+      });
     }
   }
-
   return evolutions;
 }
