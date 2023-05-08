@@ -1,5 +1,6 @@
 import express from "express";
 import ejs from "ejs";
+import fetch from "node-fetch";
 
 /* Het plekje voor alle functies */
 const PokemonFetcher = async () => {
@@ -18,7 +19,7 @@ const pokemonSetter = async () => {
   return PokemonNameArray;
 };
 
-const pokemonelength = async () => {
+const PokemonLength = async () => {
   const pokemonawait = await PokemonFetcher();
   return pokemonawait.pokemon_entries.length;
 };
@@ -93,10 +94,10 @@ app.get("/landingpage", (req, res) => {
 /*------Compare------*/
 app.get("/views/compare.ejs", async (req, res) => {
   const pokemonArray = await pokemonSetter();
-  const pokemonlength = await pokemonelength();
+  const pokemonlength = await PokemonLength();
   res.render("compare", {
     pokemonarray: pokemonArray,
-    pokemonlength: pokemonlength,
+    pokemonlength: pokemonlength
   });
 })
 
