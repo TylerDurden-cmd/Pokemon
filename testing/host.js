@@ -1,5 +1,6 @@
 import express from "express";
 import ejs from "ejs";
+import fetch from "node-fetch";
 
 /* Het plekje voor alle functies */
 const PokemonFetcher = async () => {
@@ -18,7 +19,7 @@ const pokemonSetter = async () => {
   return PokemonNameArray;
 };
 
-const pokemonelength = async () => {
+const PokemonLength = async () => {
   const pokemonawait = await PokemonFetcher();
   return pokemonawait.pokemon_entries.length;
 };
@@ -93,10 +94,10 @@ app.get("/landingpage", (req, res) => {
 /*------Compare------*/
 app.get("/views/compare.ejs", async (req, res) => {
   const pokemonArray = await pokemonSetter();
-  const pokemonlength = await pokemonelength();
+  const pokemonlength = await PokemonLength();
   res.render("compare", {
     pokemonarray: pokemonArray,
-    pokemonlength: pokemonlength,
+    pokemonlength: pokemonlength
   });
 })
 
@@ -112,17 +113,20 @@ app.get("/views/contact.ejs", (req, res) => {
 
 /*------MyPartner------*/
 
-app.get("/views/mypartner.ejs", async(req, res) => {
+app.get("/views/mypartner.ejs", (req, res) => {
     res.render("mypartner");
 })
 
+/* ------Battler------- */
+app.get("/views/battler.ejs" ,(req,res) => {
+  res.render("Battler")
+})
 
 /*------PokeCatcher------*/
 app.get("/views/pokecatcher.ejs", async (req, res) => {
-  const PokemonRandom = await RandomPokemonGenerator();
-  const PokemonGeneratorImg = await PokemonPictureFunction(PokemonRandom);
-  res.render("pokecatcher",{PokemonRandom:PokemonRandom,
-  PokemonGeneratorImg:PokemonGeneratorImg})
+  /* verwijderd laat dit leeg bij conflict oplossen aub. */
+  /* mvg joachim */
+  res.render("pokecatcher")
 })
 
 /*------PokeDex------*/
