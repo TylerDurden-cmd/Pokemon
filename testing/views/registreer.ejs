@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="nl_BE">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Registreer</title>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><img src="/assets/images/PichuPartnersLogo.png"></li>
+        </ul>
+    </nav>
+    <main>
+        <h2>Register Form</h2>
+    
+    <form action="/register" method="post">
+      
+      <section class="container">
+        <label for="fname"><b>Firstname</b></label>
+        <input type="text" placeholder="Enter Firstname" name="fname" required>
+
+        <label for="lname"><b>Lastname</b></label>
+        <input type="text" placeholder="Enter Lastname" name="lname" required>
+
+        <label for="uname"><b>Username</b></label>
+        <input type="text" min="3" placeholder="Enter Username" name="name" required>
+
+        <label for="email"><b>Email</b></label>
+        <input type="email" placeholder="Enter Email" name="mail" required>
+    
+        <label for="psw"><b>Password</b></label>
+        <input type="password" minlength="8" placeholder="Enter Password" name="psw" required>
+            
+        <button class="loginbtn"type="submit">Register</button>
+      </section>
+        <button type="button" class="cancelbtn">Cancel</button>
+    </form>
+      </main>
+      <footer>
+        <%-include("partials/footer")-%>
+      </footer>
+</body>
+</html>

@@ -28,8 +28,6 @@ guessInput.addEventListener('input', () => {
 const imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/";
 let pokemonName;
 
-const generatePokemon = () => {
-  fetch("https://pokeapi.co/api/v2/pokemon?limit=1118")
 function generatePokemon() {
   fetch("https://pokeapi.co/api/v2/pokemon?limit=1008")
     .then(response => response.json())
