@@ -328,6 +328,7 @@ h4 {
   border-width: 6px;
   border-style: solid;
   visibility: visible;
+
 }
 
 .PokemonCaughtContainer{
@@ -341,7 +342,8 @@ h4 {
   align-items: center;
   height: 100%;
   margin-bottom: 13rem;
-  margin-left: 15rem;
+  margin-left: 45rem;
+  
 }
 
 .RandomPokemon{
@@ -366,11 +368,13 @@ h4 {
   position: relative;
   overflow: hidden;
   margin-top: -700px;
-  margin-left: -275px;
+  margin-right: -3000px;
+
 }
 
-.PokemonGeneratorImg{
-  margin-left: 5%;
+.PokemonGeneratorImg, img{
+  margin-right: 1000px;
+  
 }
 
 .countcontainer{
@@ -394,7 +398,7 @@ h4 {
 
 h5 {
   font-size: xx-large;
-  margin-left: 700px;
+  
 }
 
 .catch{
@@ -404,6 +408,18 @@ h5 {
 
 /*--- Pokedex ---*/
 /* Basisstijl voor de hele pagina */
+body {
+font-family: Arial, sans-serif;
+}
+
+.article, .evolutions{
+  display: flex;
+  flex-wrap: wrap;
+  background-color: #CD2026;
+  padding-right: 1300px;
+  border-radius: 50px;
+}
+
 .container > h1 {
   font-size: x-large;
 }
@@ -414,6 +430,8 @@ max-width: 800px;
 margin: 0 auto;
 padding: 20px;
 }
+
+
 
 /* Stijl voor de zoekbalk */
 .search-container {
