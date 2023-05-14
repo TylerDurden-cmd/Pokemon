@@ -1,6 +1,9 @@
 import express from "express";
 import ejs from "ejs";
 import fetch from "node-fetch";
+import {MongoClient} from "mongodb"
+import crypto from "crypto";
+
 
 /* Het plekje voor alle functies */
 const PokemonFetcher = async () => {
@@ -72,15 +75,42 @@ const Sixpicturesreturner = async () => {
   }
 };
 
+//Pichu Partners Database
+const uri = "mongodb+srv://s145053:nkeI6RQVBJYBgg41@pichupartners.ah3odo1.mongodb.net/?retryWrites=true&w=majority";
+const client = new MongoClient(uri);
+
+const exit = async () => {
+  try {
+    await client.close();
+    console.log("Succesfully disconnected from Pichu Partners Database!");
+  } catch (error) {
+    console.error(error)
+  }
+  process.exit(0);
+}
+
+const connect = async () => {
+  try {
+    await client.connect();
+    console.log("Succesfully connected to Pichu Partners Database!");
+    process.on("SIGINT", exit);
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+connect();
 
 //webhosting
-
 
 
 const app = express();
 
 app.set("port", 3000);
 app.set("view engine", "ejs");
+
+app.use(express.json({limit: `1mb`}));
+app.use(express.urlencoded({extended: true}))
 
 /*------Landingpage------*/
 app.get("/", (req, res) => {
@@ -105,6 +135,41 @@ app.get("/views/compare.ejs", async (req, res) => {
 app.get("/views/login.ejs", (req, res) => {
   res.render("login");
 })
+
+/*------Registreer------*/
+app.get("/views/registreer.ejs", (req,res) => {
+  res.render("registreer")
+})
+app.post('/register', (req, res) => {
+  const firstname = req.body.fname;
+  const lastname = req.body.lname;
+  const username = req.body.name;
+  const mail = req.body.mail;
+  const password = req.body.psw;
+
+  const salt = crypto.randomBytes(16).toString('hex');
+
+  crypto.pbkdf2(password, salt, 10000, 64, 'sha512', (err, derivedKey) => {
+    if (err) {
+      console.error(err);
+      return res.sendStatus(500);
+    }
+
+    const hashedPassword = derivedKey.toString('hex');
+
+    client.db("Pichu").collection('Users').insertOne({ firstname, lastname, username, mail, password: hashedPassword, salt }, (err, result) => {
+      if (err) {
+        console.error(err);
+        return res.sendStatus(500);
+      }
+      console.log(`User ${username} registered with hashed password ${hashedPassword} and salt ${salt}`);
+      res.sendStatus(200);
+    });
+  });
+  res.render("Landingpage")
+});
+
+
 
 /*------Contact------*/
 app.get("/views/contact.ejs", (req, res) => {

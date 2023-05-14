@@ -20,19 +20,20 @@
       
       <section class="container">
         <label for="uname"><b>Username</b></label>
-        <input type="text" placeholder="Enter Username" name="uname" required>
+        <input type="text" placeholder="Enter Username" name="name" required>
     
         <label for="psw"><b>Password</b></label>
         <input type="password" placeholder="Enter Password" name="psw" required>
             
         <button class="loginbtn"type="submit">Login</button>
         <label>
-          <input type="checkbox" checked="checked" name="remember"> Remember me
+          <span name="recoverpsw"> Forgot <a href="#">password?</a></span> <br>
+          <br>
+          <span>Not a member? <a href="/views/registreer.ejs">Register now!</a></span>
         </label>
       </section>
     
         <button type="button" class="cancelbtn">Cancel</button>
-        <span class="psw">Forgot <a href="#">password?</a></span>
     </form>
       </main>
 </body>
