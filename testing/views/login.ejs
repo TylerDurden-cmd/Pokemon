@@ -16,11 +16,11 @@
     <main>
         <h2>Login Form</h2>
     
-    <form action="/action_page.php" method="post">
+    <form action="/login" method="post">
       
       <section class="container">
         <label for="uname"><b>Username</b></label>
-        <input type="text" placeholder="Enter Username" name="name" required>
+        <input type="text" placeholder="Enter Username" name="username" required>
     
         <label for="psw"><b>Password</b></label>
         <input type="password" placeholder="Enter Password" name="psw" required>
@@ -33,8 +33,9 @@
         </label>
       </section>
     
-        <button type="button" class="cancelbtn">Cancel</button>
+        <button type="button" class="cancelbtn" onclick="CancelBtnRedirect()">Cancel</button>
     </form>
       </main>
+      <script src="/assets/code/login.js" defer></script>
 </body>
 </html>
