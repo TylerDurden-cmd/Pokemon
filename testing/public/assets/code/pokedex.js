@@ -53,7 +53,7 @@ function fetchPokemonData(pokemonName) {
                 <p>${evolution.method} ${""}</p>
                 <article>
                   <h3>${evolution.name}</h3>
-                  <img src="${evolution.image}" alt="${evolution.name}">
+                  <img class="evoimg" src="${evolution.image}" alt="${evolution.name}">
                 </article>
               `).join('');
 
