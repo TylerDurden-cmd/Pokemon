@@ -163,8 +163,8 @@ app.post("/login", async (req, res) =>{
 });
 
 /*------Registreer------*/
-app.get("/registreer", (req,res) => {
-  res.render("registreer")
+app.get("/register", (req,res) => {
+  res.render("register")
 });
 app.post('/register', (req, res) => {
   const firstname = req.body.fname;
