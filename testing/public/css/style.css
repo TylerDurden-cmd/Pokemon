@@ -231,7 +231,7 @@ Button:hover {
   margin-left: 30px;
 }
 
-h2 {
+#loginh2 {
   margin-left: 30px;
 }
 
@@ -470,9 +470,8 @@ margin-top: 5px;
 }
 
 /* Stijl voor de informatie over de pokemon */
-#pokemon-info > p {
-  font-size: large;
-  font-family: 'Times New Roman', Times, serif;
+#pokemon-info > h2 {
+  text-align: center;
 }
 
 .pokemon-details {
