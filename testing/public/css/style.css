@@ -414,13 +414,25 @@ body {
 font-family: Arial, sans-serif;
 }
 
-.article, .evolutions{
+
+.evoimg{
   display: flex;
-  flex-wrap: wrap;
-  background-color: #CD2026;
-  padding-right: 1300px;
+  flex-direction: row;
+  justify-content: flex-start;
+  text-align: center;
   border-radius: 50px;
+  border-style: solid;
+  border-color: #000000;
+ 
 }
+
+#pokemon-info > p{
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 16pt;
+  font-style: oblique;
+  font-weight: bold;
+}
+
 
 .container > h1 {
   font-size: xx-large;
