@@ -107,7 +107,7 @@ text-decoration: none;
   background-color: rgba(0, 0, 0, 0.4);
 }
 .popup-content {
-  background-color: white;
+  background-image: url(/assets/images/bgpopup.png);
   margin: 10% auto;
   padding: 20px;
   border: 1px solid #888;
@@ -127,6 +127,16 @@ text-decoration: none;
 }
 .close:hover {
   color: black;
+}
+
+#Error {
+  height: 100px; width: 100px;
+  margin-bottom: 85px;
+  margin-right: -100px;
+}
+
+#Oak {
+  height: 175px; width: 175px;
 }
 
 /*---Nav---*/
@@ -168,7 +178,7 @@ nav > ul > li > img {
 }
 
 /*---Login---*/
-input[name=fname], input[name=lname], input[name=name], input[name=mail], input[name=psw] {
+input[name=fname], input[name=lname], input[name=name], input[name=mail], input[name=psw], input[name=username] {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -234,14 +244,9 @@ h2 {
   margin-left: auto;
   margin-right: auto;
 }
-
-h1 
+ 
 .pokemon{
   display: inline-block;
-  width: 40%;
-  margin: 2%;
-  padding: 2%;
-  background-color: var(--links);
   border-radius: 70px;
 }
 
@@ -253,8 +258,7 @@ h1
 #pokeleft, #pokeright, option {
   width: 150px; height: 35px;
   border-radius: 70px;
-  margin-left: 50px;
-  margin-top: 50px;
+  margin: 25px;
   border-color: red;
 }
 
@@ -419,6 +423,10 @@ font-family: Arial, sans-serif;
 }
 
 .container > h1 {
+  font-size: xx-large;
+}
+
+.search-container > p {
   font-size: x-large;
 }
 
@@ -450,9 +458,10 @@ margin-top: 5px;
 }
 
 /* Stijl voor de informatie over de pokemon */
-/* #pokemon-info {
-  
-} */
+#pokemon-info > p {
+  font-size: large;
+  font-family: 'Times New Roman', Times, serif;
+}
 
 .pokemon-details {
 flex-basis: calc(50% - 10px);
@@ -574,4 +583,123 @@ margin: 0 10px;
   .incorrect {
   background-color: red;
   color: var(--color-wit);
+  }
+
+  @media screen and (max-width: 768px) {
+    body {
+      font-size: 14px;
+    }
+  }
+  
+  main {
+    grid-area: main;
+  }
+  
+  footer {
+    grid-area: footer;
+    text-align: center;
+  }
+  
+  img {
+    height: 325px;
+    width: 390px;
+  }
+  
+  @media screen and (max-width: 768px) {
+    img {
+      height: auto;
+      width: 100%;
+    }
+  }
+  
+  button {
+    text-decoration: none;
+  }
+  
+  .PichuPartners {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    text-align: center;
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+    padding: 1.25rem;
+    font-size: 1.5rem;
+  }
+  
+  #title {
+    font-family: "Pokemon Hollow";
+    font-size: 4.0625rem;
+    margin: 0;
+  }
+  
+  .Menu {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-content: space-evenly;
+    width: 90%;
+    max-width: 1200px;
+    text-align: center;
+    padding: 1.25rem;
+    margin: auto;
+  }
+  
+  .links {
+    border-radius: 12px;
+    font-size: 1rem;
+    margin: auto;
+    transition: 0.2s;
+    width: 9.375rem;
+    margin-top: 1.25rem;
+    margin-bottom: 1.25rem;
+  }
+  
+  .links > a {
+    text-decoration: none;
+  }
+  
+  .popup {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+  
+  .popup-content {
+    background-image: url(/assets/images/bgpopup.png);
+    margin: 10% auto;
+    padding: 1.25rem;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+    text-align: center;
+    position: relative;
+  }
+  
+  .close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 28px;
+    font-weight: bold;
+    color: #888;
+    cursor: pointer;
+  }
+  
+  .close:hover {
+    color: black;
+  }
+  
+  #Error {
+    height: 100px;
   }

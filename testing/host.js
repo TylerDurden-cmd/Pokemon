@@ -83,10 +83,11 @@ const exit = async () => {
   try {
     await client.close();
     console.log("Succesfully disconnected from Pichu Partners Database!");
+    process.exit(0);
   } catch (error) {
     console.error(error)
   }
-  process.exit(0);
+
 }
 
 const connect = async () => {
