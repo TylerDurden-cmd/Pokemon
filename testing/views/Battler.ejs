@@ -1,29 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/style.css">
-    <title>PokeBattler</title>
+    <title>Battler</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
-<nav>
-    <%- include('partials/navigation') %>
-</nav>
-    <section>
-        <section id="PokemonNameBattler"></section>
-        <section id="PokemonRandomPicture"><!-- voorlopig random pokemon --></section>
 
-        <section id="EigenPokemonBack"></section>
+    <section id="PokemonArea">
+        <progress id="healthWild" value="100" max="100"></progress>
+        <section id="WildPokemonBattler"></section>
+        <p id="PokemonName-Battler"></p>
+        <section id="PokemonBattler"></section>
+        <p id="PokemonNameMyPartnerBattler"></p>
+        <progress id="health" value="100" max="100"></progress>
+        <input type="button" id="btnNext-Battler" value="Next Pokemon">
 
-        <button id="btnAttack">Attack</button>
-
-        <button id="btn">Next Pokemon</button>
     </section>
-    <script src="/assets/code/PokemonBattler.js"></script>
+
+    <aside id="AsideStats">
+        <section id="OakBox">
+            <h3 id="won">
+            </h3>
+            <h3 id="lost">
+            </h3>
+            <h3 id="draw">
+            </h3>
+        </section>
+        <img src="Assets/images/ProfOak.png" alt="">
+    </aside>
+
+    <section id="container-box-Battler">
+        <h3 id="textBattler">pick your next move:</h3>
+        <section id="boxbuttons-Battler">
+            <input type="button" id="Attack" value="Attack" width="20px"></input>
+        </section>
+
+    </section>
+
+
+
+    <script src="assets/code/PokemonBattler.js"></script>
 </body>
-<footer>
-    <%- include('partials/footer') %>
-</footer>
+
 </html>
