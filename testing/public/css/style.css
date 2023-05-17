@@ -30,17 +30,26 @@ body {
 }
 
 main {
-  grid-area: main;
+  grid-area: main; 
 }
 
 footer {
   grid-area: footer;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: var(--links);
+  color: var(--color-zwart);
   text-align: center;
+  
+  padding:30px;
 }
 
 img {
-  height: 325px; width: 390px;
-  /* margin-right: 150px; */
+  height: 325px; 
+  /*width: 390px;
+   margin-right: 150px; */
 }
 
 button {
@@ -133,6 +142,7 @@ text-decoration: none;
   height: 100px; width: 100px;
   margin-bottom: 85px;
   margin-right: -100px;
+  
 }
 
 #Oak {
@@ -239,17 +249,26 @@ Button:hover {
 
 .vergelijker{
   display: flex;
+  flex-direction: row;
+  justify-content: center;
   width: 90%;
   margin-top: 100px;
   margin-left: auto;
   margin-right: auto;
 }
- 
-.pokemon{
-  display: inline-block;
-  border-radius: 70px;
-}
 
+.Pokemon{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-right: 4rem;
+  padding-left: 4rem;
+  margin-right: 1rem;
+  margin-left: 1rem;
+}
+.RightStats, .LeftStats{
+  text-align: center;
+}
 
 .pokemon, h3, p{
   text-align: center;
@@ -353,12 +372,12 @@ h4 {
   text-align: center;
 }
 
-.containerPokemonCatcher{
+#containerPokemonCatcher{
   background-color: var(--color-wit);
   width: 20%;
   border-style: solid;
   border-color: black;
-  border-width: 30px;
+  border-width: 10px;
   margin-left: 38%;
   margin-top: 5%;
 }
@@ -377,7 +396,9 @@ h4 {
 
 .PokemonGeneratorImg{
   margin-left: 5%;
+ 
 }
+
 
 .countcontainer{
   background-color: grey;
@@ -606,15 +627,8 @@ margin: 0 10px;
     grid-area: main;
   }
   
-  footer {
-    grid-area: footer;
-    text-align: center;
-  }
+
   
-  img {
-    height: 325px;
-    width: 390px;
-  }
   
   @media screen and (max-width: 768px) {
     img {
