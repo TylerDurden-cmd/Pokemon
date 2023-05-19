@@ -1,13 +1,16 @@
-/* Element */
+/* Element 
 let container1 = document.getElementById("container-item-1")
 let container2 = document.getElementById("container-item-2")
 let container3 = document.getElementById("container-item-3")
 let container4 = document.getElementById("container-item-4")
 let container5 = document.getElementById("container-item-5")
 let container6 = document.getElementById("container-item-6")
-
+*/
+let NameOutputHidden = document.querySelectorAll("#NameOutputHidden");
+let Pokemon = document.querySelectorAll("#Pokemon");
+let Imgs = document.querySelectorAll("#PokemonImg");
 /* Variable */
-let pokemonArray = [];
+//let pokemonArray = [];
 
 /* Het plekje voor alle functies */
 /* Fetched de pokemon url voor de pokemon name  */
@@ -58,45 +61,24 @@ const PokemonPictureFunction = async (Pokemonvariable) => {
 const SrcPictureFunction = async() =>{
     try{
 
-        let RandomPokemon = [];
-    for (let i = 0; i < 6; i++) {
-        /* for loop word gemaakt waar de array met het i de ellement de value krijgt van de functie met de randompokemon */
-        RandomPokemon[i] = await RandomPokemonGenerator();
+      const SpecialUrlArray =[]
+      for(let i = 0; i < 6; i++){
+          SpecialUrlArray[i] = await PokemonPictureFunction(Pokemon[index].textContent)
       }
 
-    const SpecialUrlArray =[]
-    for(let i = 0; i < 6; i++){
-        SpecialUrlArray[i] = await PokemonPictureFunction(RandomPokemon[i])
+      for (let index = 0; index < Imgs.length; index++) {
+        Imgs[index].src = SpecialUrlArray[index];        
+      }
+
+      //set de value input met type='hidden' naar de naam vn de pokemon
+      for (let index = 0; index < NameOutputHidden.length; index++) {
+        NameOutputHidden[index].value = Pokemon[index].textContent;
+      }
+
+    }catch(error){
+      console.log(error)
     }
-
-    /* Uitleg hierover kan je vinden bij het catcher.js bestand */
-    let img1 = document.createElement("img")
-    img1.setAttribute("src",SpecialUrlArray[0]);
-    container1.appendChild(img1);
-
-    let img2 = document.createElement("img")
-    img2.setAttribute("src",SpecialUrlArray[1]);
-    container2.appendChild(img2);
-
-    let img3 = document.createElement("img")
-    img3.setAttribute("src",SpecialUrlArray[2]);
-    container3.appendChild(img3);
-
-    let img4 = document.createElement("img")
-    img4.setAttribute("src",SpecialUrlArray[3]);
-    container4.appendChild(img4);
-
-    let img5 = document.createElement("img")
-    img5.setAttribute("src",SpecialUrlArray[4]);
-    container5.appendChild(img5);
-
-    let img6 = document.createElement("img")
-    img6.setAttribute("src",SpecialUrlArray[5]);
-    container6.appendChild(img6);
-}catch(error){
-    console.log(error)
-}
 }
 
-//SrcPictureFunction();
+SrcPictureFunction();
 

@@ -1,56 +1,61 @@
 <%-include("partials/header")-%>
 <%-include("partials/navigation")-%>
     <main>
-    <section id='containerPokemonCatcher'>
-        <section id="PokemonGeneratorImg"></section>
-        <h1 id="name"></h1>
-    </section>
-        <br>
+
+        <section id='containerPokemonCatcher'>
+            <section id="PokemonGeneratorImg"></section>
+            <h1 id="name"></h1>
+        </section>
+    
         <section class="pokebalcontainer">
             <section class="pokebal">
                 <button class="buttoncatch"></button>
             </section>
-            <section id="ContainerKeepThisPokemon">
-                <section id="CaughtText"></section>
-                <section><h1>Do You want to keep this Pokemon?</h1></section>
-                <button id="Yesbtn">Yes</button><button id="Nobtn">no</button>
-            </section>
-            <section>
-                <h1>procent voor Pokemon te vangen.</h1>
-                <h1 id="procent"></h1>
-            </section>
-            <br>
-            <section>
-                <h1>Random Getal:</h1>
-                <h1 id="RandomGetalVan0tot100"></h1>
-            </section>
-            <br>
-            <section>
-                <h1>Eigen Pokemon Defence Stats</h1>
-                <h1 id="EigenPokemonDefenceStat"></h1>
-            </section>
-            <br>
-            <section>
-                <h1>Eigen Pokemon Attack Stats</h1>
-                <h1 id="EigenPokemonAttackStat"></h1>
-            </section>
-            <br>
-            <section>
-                <h1>Pokemon Attack Stats</h1>
-                <h1 id="PokemonDefenceStats"></h1>
-            </section>
-            <br>
-            <section>
-                <h1>Pokemon Attack Stat</h1>
-                <h1 id="PokemonAttackstat"></h1>
-            </section>
-            <br>
             <section class="countcontainer"></section>
-            <button id="BtnNext">Click Next Pokemon</button>
         </section>
-        <script src="/assets/code/catcher.js"></script>
+
+        <button id="BtnNext">Click Next Pokemon</button>
+
+        <section id="ContainerKeepThisPokemon">
+            <section id="CaughtText"></section>
+            <section><h1>Do You want to keep this Pokemon?</h1></section>
+            <form action="/catcher" method="post">
+                <input type="hidden" id="NameOutputHidden" name="NameOutputHidden" value="">                
+                <input type="submit" name="Yesbtn" id="Yesbtn" value="Yes">
+            </form>
+            <button id="Nobtn">No</button>
+        </section>
+       
       </main>
 
+      <aside class="CatchingStats">
+        <section>
+            <h1>procent voor Pokemon te vangen.</h1>
+            <h1 id="procent"></h1>
+        </section>
+        <section>
+            <h1>Random Getal:</h1>
+            <h1 id="RandomGetalVan0tot100"></h1>
+        </section>
+        <section>
+            <h1>Eigen Pokemon Defence Stats</h1>
+            <h1 id="EigenPokemonDefenceStat"></h1>
+        </section>
+        <section>
+            <h1>Eigen Pokemon Attack Stats</h1>
+            <h1 id="EigenPokemonAttackStat"></h1>
+        </section>
+        <section>
+            <h1>Pokemon Attack Stats</h1>
+            <h1 id="PokemonDefenceStats"></h1>
+        </section>
+        <section>
+            <h1>Pokemon Attack Stat</h1>
+            <h1 id="PokemonAttackstat"></h1>
+        </section>
+       </aside>
+
+       <script src="/assets/code/catcher.js" defer></script>
         <%-include("partials/footer")-%>
 
 <!-- Readme -->

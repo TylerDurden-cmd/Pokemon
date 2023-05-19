@@ -25,25 +25,27 @@ body {
   grid-template-areas:
     "nav    nav     nav     nav  "
     "header header  header  header "
-    "main   main    main    main "
+    "main   main    main    aside "
     "footer footer  footer  footer ";
   margin: auto;
 }
 
 main {
-  grid-area: main; 
+  grid-area: main;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
 }
 
 footer {
   grid-area: footer;
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
+
   background-color: var(--links);
   color: var(--color-zwart);
   text-align: center;
-  
   padding:30px;
 }
 
@@ -361,10 +363,8 @@ h4 {
 
 /*--- catch ---*/
 
-
 #ContainerKeepThisPokemon {
   background-color: var(--color-wit);
-  border-color: black;
   border-width: 6px;
   border-style: solid;
   visibility: visible;
@@ -381,8 +381,8 @@ h4 {
   justify-content: center;
   align-items: center;
   height: 100%;
-  margin-bottom: 13rem;
-  margin-left: 45rem;
+  /*margin-bottom: 13rem;
+  margin-left: 45rem;*/
 
 }
 
@@ -392,11 +392,15 @@ h4 {
 
 #containerPokemonCatcher{
   background-color: var(--color-wit);
-  width: 20%;
-  border-style: solid;
-  border-color: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  width: 20rem;
+  border-style:outset;
   border-width: 10px;
-  margin-left: 38%;
+  padding: 4rem;
+ 
   margin-top: 5%;
 }
 
@@ -407,22 +411,27 @@ h4 {
   background-color: var(--color-wit);
   position: relative;
   overflow: hidden;
-  margin-top: -700px;
-  margin-right: -3000px;
-
 }
 
 .PokemonGeneratorImg {
-  margin-left: 5%;
- 
+  
+  display: flex;
+  justify-content: center;
 }
 
-
+.CatchingStats{
+  grid-area: aside;
+  display: flex;
+  flex-direction:column;
+  flex-wrap: wrap;
+  padding: 10px;
+}
 .countcontainer{
   background-color: grey;
   padding: 20px;
   font-size: xx-large;
-  margin-top: -750px;
+  text-align: center;
+  max-width: 1rem;
 }
 
 .buttoncatch {
@@ -436,7 +445,19 @@ h4 {
   transform: translate(-50%, -50%);
   z-index: 1;
 }
-
+#Yesbtn{
+  text-decoration: none;
+  display: block;
+  margin: 0 auto 20px auto;
+  padding: 10px;
+  font-size: 18px;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+}
+#Yesbtn:hover{
+  opacity: 0.8;
+}
 h5 {
   font-size: xx-large;
 

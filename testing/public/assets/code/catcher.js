@@ -1,4 +1,4 @@
-//Joachim
+import {connect, getPartner} from "../db.js";
 //Takes data from the ejs.
 let Img = document.getElementById("PokemonGeneratorImg")
 let Pokemon = document.getElementById("name")
@@ -16,15 +16,14 @@ let EigenPokemonDefenceStat = document.getElementById("EigenPokemonDefenceStat")
 let EigenPokemonAttackStat = document.getElementById("EigenPokemonAttackStat")
 let PokemonDefenceStat = document.getElementById("PokemonDefenceStats")
 let PokemonAttackStat = document.getElementById("PokemonAttackstat")
-
-
-
+let NameOutputHidden = document.getElementById("NameOutputHidden");
 /* ---Variable + Values Toepassen--- */
 
 counter.textContent = 3;
 let pokemonArray = [];
 
 /* -------Alle functies------- */
+connect();
 
 /* Functie Kleur button groen */
 const ColorGreen = () =>{
@@ -129,7 +128,8 @@ const SrcPictureFunction = async () =>{
       CaughtText.textContent = "";
       btnno.disabled = false
       /* de rest is eigenlijk code die dan word gereset omdat deze veranderd word */
-
+      //set de value input met type='hidden' naar de naam vn de pokemon
+      NameOutputHidden.value = Pokemon.textContent;
 
   }catch(error){
     console.log(error)
@@ -140,17 +140,23 @@ const SrcPictureFunction = async () =>{
 btn.addEventListener("click",async()=>{
   /* counter start met aftellen bij een click van de button */
   counter.textContent--;
+getPartner();
   /* Moet vervangen worden met eigen pokemon uit databank */
-  let EigenPokemonAttack = 45;
-  let EigenPokemonDefence = 50;
+  const partner = await(await fetch(`https://pokeapi.co/api/v2/pokemon/${getPartner()}`)).json()
+  let EigenPokemonAttack = partner.stats[1].base_stat;
+  let EigenPokemonSpAttack = partner.stats[2].base_stat;;
+  //let EigenPokemonDefense = 50;
+  //let EigenPokemonSpDefense =50;
+
   /* fetch van pokemon met naam van pokemon die word aangemaakt in Src functie */
   const take = await(await fetch(`https://pokeapi.co/api/v2/pokemon/${Pokemon.textContent}`)).json()
-  const PokemonDefenceStats = take.stats[2].base_stat
-  const PokemonAttackStats = take.stats[1].base_stat
-  /* const PokemonAttackStats = take.stats[1].base_stat */
+  const PokemonDefenseStats = take.stats[2].base_stat;
+  const PokemonSpDefenseStats = take.stats[4].base_stat;
+  const PokemonAttackStats = take.stats[1].base_stat;
+
   /* heir word stat van defence van pokemon gepakt */
   console.log(PokemonDefenceStats)
-  const Formule = (((EigenPokemonAttack + EigenPokemonDefence ) - ( PokemonDefenceStats))/EigenPokemonAttack)*100;
+  const Formule = ((EigenPokemonAttack + EigenPokemonSpAttack) - (PokemonDefenseStats + PokemonSpDefenseStats))/100;
   const Getal1tot100 = Math.floor(Math.random() * 100)
   /* formule is eigenlijk de kans dat jij die vangt op 100% bij de if statement word dan bekeken of je kans groter is dan
   het random getal dat word gegenereed op 100*/
@@ -190,7 +196,6 @@ btn.addEventListener("click",async()=>{
     ColorRed();
   }
 })
-
 
 btnNext.addEventListener("click",SrcPictureFunction)
 SrcPictureFunction();

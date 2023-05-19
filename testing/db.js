@@ -34,5 +34,52 @@ const AddUser = async (firstname, lastname, username, mail, hashedPassword, salt
 const FindUserbyUsername = async (username) =>{
     return await client.db("Pichu").collection('Users').findOne({username: username}); 
 }
+const FindUserInMyPartner = async (username) =>{
+  return await client.db("Pichu").collection('MyPartner').findOne({username: username}); 
+}
+const AddPokemonToUser = async (username, pokemon) =>{
+  try {
+    if (await FindUserInMyPartner(username) != null) {
+      client.db("Pichu").collection('MyPartner').updateOne({username: username}, {$push:{ pokemon: pokemon}});
+    }
+    else{
+      client.db("Pichu").collection('MyPartner').insertOne({username: username, pokemon: [pokemon], partner: ""});
+    }
+  } catch (error) {
+    console.error(error);
+  }
+}
+const getAllPokemonFromUser = async (username) =>{
+  let user = await client.db("Pichu").collection('MyPartner').findOne({username: username}); 
+  if (user.pokemon == null) {
+    return null;
+  }
+  else{
+    return user.pokemon; 
+  }
+}
+const setPartner = async (username, pokemon) =>{
+  try {
+    client.db("Pichu").collection('MyPartner').updateOne({username: username}, {$set:{ partner: pokemon}});
+  } catch (error) {
+    console.error(error);
+  }
+}
+const getPartner = async (username) =>{
+  let user = await client.db("Pichu").collection('MyPartner').findOne({username: username}); 
+  if (user.partner == null) {
+    return null;
+  }
+  else{
+    return user.partner;
+  }
+}
+const removePokemon = async (username, pokemon) =>{
+  try {
+    client.db("Pichu").collection('MyPartner').updateOne({username: username} ,{ $pull: {pokemon:{ $in: pokemon}}});
+  } catch (error) {
+    console.error(error);
+  }
+}
 
-export{connect, AddUser, FindUserbyUsername};
+export{connect, AddUser, FindUserbyUsername, AddPokemonToUser, getAllPokemonFromUser, setPartner, getPartner, removePokemon};

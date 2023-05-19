@@ -2,7 +2,9 @@ import express from "express";
 import ejs from "ejs";
 import fetch from "node-fetch";
 import crypto from "crypto";
-import {connect, AddUser, FindUserbyUsername} from "./db.js";
+import {connect, AddUser, FindUserbyUsername, AddPokemonToUser, getAllPokemonFromUser, setPartner, getPartner, removePokemon} from "./db.js";
+
+let loggedInUser = " ";
 
 //Het plekje voor alle functies
 const PokemonFetcher = async () => {
@@ -82,7 +84,8 @@ app.post("/login", async (req, res) =>{
     const hashFromLogin = derivedKey.toString('hex');
     //als beide hashes gelijk zijn dan is het wachtwoord correct
     if (hashFromDB == hashFromLogin) {
-     res.redirect('/index');
+      loggedInUser = username;
+      res.redirect('/index');
     }
     else{
          return res.sendStatus(500);
@@ -121,10 +124,21 @@ app.get("/contact", (req, res) => {
 });
 
 /*------MyPartner------*/
-app.get("/mypartner", (req, res) => {
-    res.render("mypartner");
+app.get("/mypartner", async (req, res) => {
+  let pokemon = await getAllPokemonFromUser(loggedInUser);
+  let partner = await getPartner(loggedInUser);
+  res.render("mypartner", {pokemon: pokemon, partner: partner} );
 });
-
+app.post('/partner', async (req,res) =>{
+  let pkmnName = req.body.NameOutputHidden;
+  setPartner(loggedInUser,pkmnName);
+  res.render('mypartner');
+});
+app.post('/release', async (req,res) =>{
+  let pkmnName = req.body.NameOutputHidden;
+  removePokemon(loggedInUser,pkmnName);
+  res.render('mypartner');
+});
 /* ------Battler------- */
 app.get("/battler" ,(req,res) => {
   res.render("battler")
@@ -136,7 +150,11 @@ app.get("/pokecatcher", async (req, res) => {
   /* mvg joachim */
   res.render("pokecatcher")
 });
-
+app.post('/catcher', async (req,res) =>{
+  let pkmnName = req.body.NameOutputHidden;
+  AddPokemonToUser(loggedInUser, pkmnName);
+  res.render("pokecatcher");
+});
 /*------PokeDex------*/
 app.get("/pokedex", (req, res) => {
   res.render("pokedex")

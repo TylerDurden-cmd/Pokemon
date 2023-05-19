@@ -2,16 +2,28 @@
     <%-include("partials/navigation")-%>
 
     <main>
-        <section class="item-container2">
-            <section id="container-item-1"></section>
-            <section id="container-item-2"></section>
-            <section id="container-item-3"></section>
-            <section id="container-item-4"></section>
-            <section id="container-item-5"></section>
-            <section id="container-item-6"></section>
+        <section class="pokemon-container">
+          <article id="partner"><%= partner %></article>
+
+          <% for( let index = 0; index < pokemon.length; index++ ) { %>
+            <article id="pokemon-in-container">
+              <h1 id="Pokemon"><%= pokemon[index] %></h1>
+              <img id="PokemonImg" src="" alt="<%= pokemon[index] %>">
+              <form action="/partner" method="post">
+                <input type="hidden" id="NameOutputHidden" name="NameOutputHidden" value=""> 
+                <input type="submit" value="Set as partner">
+              </form>
+              <form action="/release" method="post">
+                <input type="hidden" id="NameOutputHidden" name="NameOutputHidden" value=""> 
+                <input type="submit" value="Release this Pokemon">
+              </form>
+            </article>
+          <% } %>    
+
         </section>
-        <script src="/assets/code/mypartner.js" defer></script>
-      </main>
-      
+
+    </main>
+    <script src="/assets/code/mypartner.js" defer></script>
+
     <%-include("partials/footer")-%>
 
