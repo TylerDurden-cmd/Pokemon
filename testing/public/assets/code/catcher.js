@@ -1,4 +1,3 @@
-import {connect, getPartner} from "../db.js";
 //Takes data from the ejs.
 let Img = document.getElementById("PokemonGeneratorImg")
 let Pokemon = document.getElementById("name")
@@ -17,13 +16,14 @@ let EigenPokemonAttackStat = document.getElementById("EigenPokemonAttackStat")
 let PokemonDefenceStat = document.getElementById("PokemonDefenceStats")
 let PokemonAttackStat = document.getElementById("PokemonAttackstat")
 let NameOutputHidden = document.getElementById("NameOutputHidden");
+let partner = document.getElementById("partnerName");
+let partnerImg = document.getElementById("partnerImg");
 /* ---Variable + Values Toepassen--- */
 
 counter.textContent = 3;
 let pokemonArray = [];
 
 /* -------Alle functies------- */
-connect();
 
 /* Functie Kleur button groen */
 const ColorGreen = () =>{
@@ -128,23 +128,30 @@ const SrcPictureFunction = async () =>{
       CaughtText.textContent = "";
       btnno.disabled = false
       /* de rest is eigenlijk code die dan word gereset omdat deze veranderd word */
+
       //set de value input met type='hidden' naar de naam vn de pokemon
       NameOutputHidden.value = Pokemon.textContent;
+      //img van de partner pokemon ophalen en setten 
+      let partnerUrl = await PokemonPictureFunction(partner.textContent);
+      partnerImg.src = partnerUrl;
 
   }catch(error){
     console.log(error)
   }
 }
 
+const getPartner = async() =>{
+
+}
+
 /* button voor Pokemon */
 btn.addEventListener("click",async()=>{
   /* counter start met aftellen bij een click van de button */
   counter.textContent--;
-getPartner();
   /* Moet vervangen worden met eigen pokemon uit databank */
-  const partner = await(await fetch(`https://pokeapi.co/api/v2/pokemon/${getPartner()}`)).json()
+  const partner = await(await fetch(`https://pokeapi.co/api/v2/pokemon/${partner.textContent}`)).json()
   let EigenPokemonAttack = partner.stats[1].base_stat;
-  let EigenPokemonSpAttack = partner.stats[2].base_stat;;
+  let EigenPokemonSpAttack = partner.stats[3].base_stat;;
   //let EigenPokemonDefense = 50;
   //let EigenPokemonSpDefense =50;
 

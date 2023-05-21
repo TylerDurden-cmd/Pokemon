@@ -7,10 +7,9 @@ let container5 = document.getElementById("container-item-5")
 let container6 = document.getElementById("container-item-6")
 */
 let NameOutputHidden = document.querySelectorAll("#NameOutputHidden");
-let Pokemon = document.querySelectorAll("#Pokemon");
+let PokemonCaught = document.querySelectorAll("#Pokemon");
 let Imgs = document.querySelectorAll("#PokemonImg");
 /* Variable */
-//let pokemonArray = [];
 
 /* Het plekje voor alle functies */
 /* Fetched de pokemon url voor de pokemon name  */
@@ -28,14 +27,15 @@ const PokemonFetcher = async () => {
 de functie geeft de sprite terug met de juiste pokemon parameter */
 const PokemonPictureFunction = async (Pokemonvariable) => {
     try{
-    const url = await fetch(
-      `https://pokeapi.co/api/v2/pokemon/${Pokemonvariable}`
-    );
-    const urlJson = await url.json();
-
-    /* de functie werkt met console.log(urlJson.sprites.back_default); */
-    return urlJson.sprites.other['official-artwork'].front_default;
-    }catch(error){console.log(error)}
+ 
+    let pokemonUrl = await fetch(`https://pokeapi.co/api/v2/pokemon/${Pokemonvariable}`).then(res => res.json());
+    return pokemonUrl.sprites.other['official-artwork'].front_default;
+    
+    }
+    catch(error)
+    {
+      console.log(error)
+    }
     
   };
   
@@ -60,10 +60,9 @@ const PokemonPictureFunction = async (Pokemonvariable) => {
 /* Zorgt ervoor dat de foto's met hun element worden geladen als foto met de juiste pokemon erbij */
 const SrcPictureFunction = async() =>{
     try{
-
       const SpecialUrlArray =[]
       for(let i = 0; i < 6; i++){
-          SpecialUrlArray[i] = await PokemonPictureFunction(Pokemon[index].textContent)
+          SpecialUrlArray[i] = await PokemonPictureFunction(PokemonCaught[i].textContent);
       }
 
       for (let index = 0; index < Imgs.length; index++) {
@@ -72,7 +71,7 @@ const SrcPictureFunction = async() =>{
 
       //set de value input met type='hidden' naar de naam vn de pokemon
       for (let index = 0; index < NameOutputHidden.length; index++) {
-        NameOutputHidden[index].value = Pokemon[index].textContent;
+        NameOutputHidden[index].value = PokemonCaught[index].textContent;
       }
 
     }catch(error){

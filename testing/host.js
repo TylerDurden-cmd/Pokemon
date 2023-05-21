@@ -132,29 +132,59 @@ app.get("/mypartner", async (req, res) => {
 app.post('/partner', async (req,res) =>{
   let pkmnName = req.body.NameOutputHidden;
   setPartner(loggedInUser,pkmnName);
-  res.render('mypartner');
+  let pokemon = await getAllPokemonFromUser(loggedInUser);
+  let partner = await getPartner(loggedInUser);
+  res.redirect('mypartner', {pokemon: pokemon, partner: partner});
 });
 app.post('/release', async (req,res) =>{
   let pkmnName = req.body.NameOutputHidden;
   removePokemon(loggedInUser,pkmnName);
-  res.render('mypartner');
+  let pokemon = await getAllPokemonFromUser(loggedInUser);
+  let partner = await getPartner(loggedInUser);
+
+  res.redirect('mypartner');
 });
+
 /* ------Battler------- */
-app.get("/battler" ,(req,res) => {
-  res.render("battler")
+app.get("/battler" ,async (req,res) => {
+  let haspartner = await getPartner(loggedInUser); 
+  if ( haspartner == "") {
+    let partner = "pichu";
+    res.render("battler", {pokepartner: partner});
+  }
+  else{
+    let partner = await getPartner(loggedInUser);
+    res.render("battler", {pokepartner: partner});
+  }
 });
 
 /*------PokeCatcher------*/
 app.get("/pokecatcher", async (req, res) => {
-  /* verwijderd laat dit leeg bij conflict oplossen aub. */
-  /* mvg joachim */
-  res.render("pokecatcher")
+  let haspartner = await getPartner(loggedInUser); 
+  if ( haspartner == "") {
+    let partner = "pichu";
+    res.render("pokecatcher", {pokepartner: partner});
+  }
+  else{
+    let partner = await getPartner(loggedInUser);
+    res.render("pokecatcher", {pokepartner: partner});
+  }
+  
 });
 app.post('/catcher', async (req,res) =>{
   let pkmnName = req.body.NameOutputHidden;
   AddPokemonToUser(loggedInUser, pkmnName);
-  res.render("pokecatcher");
+  let haspartner = await getPartner(loggedInUser); 
+  if ( haspartner == "") {
+    let partner = "pichu";
+    res.redirect("pokecatcher");
+  }
+  else{
+    let partner = await getPartner(loggedInUser);
+    res.redirect("pokecatcher");
+  }
 });
+
 /*------PokeDex------*/
 app.get("/pokedex", (req, res) => {
   res.render("pokedex")
