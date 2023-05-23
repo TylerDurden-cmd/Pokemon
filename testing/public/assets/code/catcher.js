@@ -1,4 +1,3 @@
-//Joachim
 //Takes data from the ejs.
 let Img = document.getElementById("PokemonGeneratorImg")
 let Pokemon = document.getElementById("name")
@@ -12,13 +11,13 @@ let btnyes = document.getElementById("Yesbtn")
 let btnno = document.getElementById("Nobtn")
 let Procent = document.getElementById("procent")
 let RandomGetalVan0tot100 = document.getElementById("RandomGetalVan0tot100")
-let EigenPokemonDefenceStat = document.getElementById("EigenPokemonDefenceStat")
+let EigenPokemonSpAttackStat = document.getElementById("EigenPokemonSpAttackStat")
 let EigenPokemonAttackStat = document.getElementById("EigenPokemonAttackStat")
-let PokemonDefenceStat = document.getElementById("PokemonDefenceStats")
-let PokemonAttackStat = document.getElementById("PokemonAttackstat")
-
-
-
+let PokemonDefenseStat = document.getElementById("PokemonDefenseStat")
+let PokemonSpDefenseStat = document.getElementById("PokemonSpDefenseStat")
+let NameOutputHidden = document.getElementById("NameOutputHidden");
+let partnerName = document.getElementById("partnerName");
+let partnerImg = document.getElementById("partnerImg");
 /* ---Variable + Values Toepassen--- */
 
 counter.textContent = 3;
@@ -130,6 +129,10 @@ const SrcPictureFunction = async () =>{
       btnno.disabled = false
       /* de rest is eigenlijk code die dan word gereset omdat deze veranderd word */
 
+      
+      //img van de partner pokemon ophalen en setten 
+      let partnerUrl = await PokemonPictureFunction(partnerName.innerHTML);
+      partnerImg.src = partnerUrl;
 
   }catch(error){
     console.log(error)
@@ -139,11 +142,16 @@ const SrcPictureFunction = async () =>{
 /* button voor Pokemon */
 btn.addEventListener("click",async()=>{
   /* counter start met aftellen bij een click van de button */
+  //set de value input met type='hidden' naar de naam vn de pokemon
+  NameOutputHidden.value = Pokemon.textContent;
   counter.textContent--;
-  /* Moet vervangen worden met eigen pokemon uit databank */
-  let EigenPokemonAttack = 45;
-  let EigenPokemonDefence = 50;
+
+  const partner = await(await fetch(`https://pokeapi.co/api/v2/pokemon/${partnerName.innerHTML}`)).json()
+  let EigenPokemonAttack = partner.stats[1].base_stat;
+  let EigenPokemonSpAttack = partner.stats[3].base_stat;;
+
   /* fetch van pokemon met naam van pokemon die word aangemaakt in Src functie */
+<<<<<<< HEAD
   const take = await(await fetch(`https://pokeapi.co  /api/v2/pokemon/${Pokemon.textContent}`)).json()
   const PokemonDefenceStats = take.stats[2].base_stat
   const PokemonAttackStats = take.stats[1].base_stat
@@ -154,26 +162,44 @@ btn.addEventListener("click",async()=>{
   const Getal1tot100 = Math.floor(Math.random() * 100)
   /* formule is eigenlijk de kans dat jij die vangt op 100% bij de if statement word dan bekeken of je kans groter is dan
   het random getal dat word gegenereed op 100*/
+=======
+  const take = await(await fetch(`https://pokeapi.co/api/v2/pokemon/${Pokemon.textContent}`)).json()
+  const PokemonDefenseStats = take.stats[2].base_stat;
+  const PokemonSpDefenseStats = take.stats[4].base_stat;
+>>>>>>> 6b7009f2ac647563f326edb51da69144f4113778
 
+  /* hier word de catch rate berekend */
+  let Formule;
+  let wildDefenseSum = PokemonDefenseStats + PokemonSpDefenseStats;
+  let partnerAttackSum = EigenPokemonAttack + EigenPokemonSpAttack;
+  if (wildDefenseSum < partnerAttackSum) {
+    Formule = ((partnerAttackSum) - (wildDefenseSum));
+  }
+  else{
+    Formule = ((wildDefenseSum) - (partnerAttackSum)); 
+  }
+  
+  const Getal1totFormule = Math.floor(Math.random() * (Formule*2))
+  
   console.log(Formule)
-  console.log(Getal1tot100)
+  console.log(Getal1totFormule)
   Procent.innerHTML = ``
   Procent.innerHTML = `${Formule}`
   RandomGetalVan0tot100.innerHTML = ``
-  RandomGetalVan0tot100.innerHTML = `${Getal1tot100}`
-  EigenPokemonDefenceStat.innerHTML = ``
-  EigenPokemonDefenceStat.innerHTML = `${EigenPokemonDefence}` /* kleine aanpassing */
+  RandomGetalVan0tot100.innerHTML = `${Getal1totFormule}`
   EigenPokemonAttackStat.innerHTML = ``
   EigenPokemonAttackStat.innerHTML = `${EigenPokemonAttack}`
-  PokemonDefenceStat.innerHTML = ``
-  PokemonDefenceStat.innerHTML = `${PokemonDefenceStats}`
-  PokemonAttackStat.innerHTML = ``
-  PokemonAttackStat.innerHTML = `${PokemonAttackStats}`
+  EigenPokemonSpAttackStat.innerHTML = ``
+  EigenPokemonSpAttackStat.innerHTML = `${EigenPokemonSpAttack}` 
+  PokemonDefenseStat.innerHTML = ``
+  PokemonDefenseStat.innerHTML = `${PokemonDefenseStats}`
+  PokemonSpDefenseStat.innerHTML = ``
+  PokemonSpDefenseStat.innerHTML = `${PokemonSpDefenseStats}`
 
 
 
 
-  if(Formule >= Getal1tot100){
+  if(Formule <= Getal1totFormule){
     ColorGreen();
     btn.disabled = true
     PokemonCaughtContainer.style.visibility = "visible"
@@ -190,7 +216,6 @@ btn.addEventListener("click",async()=>{
     ColorRed();
   }
 })
-
 
 btnNext.addEventListener("click",SrcPictureFunction)
 SrcPictureFunction();

@@ -1,26 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Battler</title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
-
-<body>
-
-    <section id="PokemonArea">
-        <progress id="healthWild" value="100" max="100"></progress>
-        <section id="WildPokemonBattler"></section>
-        <p id="PokemonName-Battler"></p>
-        <section id="PokemonBattler"></section>
-        <p id="PokemonNameMyPartnerBattler"></p>
-        <progress id="health" value="100" max="100"></progress>
-        <input type="button" id="btnNext-Battler" value="Next Pokemon">
-
-    </section>
+<%-include("partials/header")-%>
+<%-include("partials/navigation")-%>
+<main>
+        <section id="PokemonNameBattler"></section>
+        <section id="PokemonRandomPicture"><!-- voorlopig random pokemon --></section>
 
     <aside id="AsideStats">
         <section id="OakBox">
@@ -41,10 +23,6 @@
         </section>
 
     </section>
-
-
-
-    <script src="assets/code/PokemonBattler.js"></script>
-</body>
-
-</html>
+    <script src="/assets/code/PokemonBattler.js" defer></script>
+</main>
+<%- include('partials/footer') %>

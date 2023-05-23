@@ -1,74 +1,50 @@
-<!DOCTYPE html>
-<html lang="nl_BE">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Comparer</title>
-    <link rel="stylesheet" href="/css/style.css">
-</head>
-<body>
-    <nav>
-        <%-include("partials/Navigation")-%>
-    </nav>
+<%-include("partials/header")-%>
+<%-include("partials/navigation")-%>
     <main>
         <section class="vergelijker">
-            <section class="dropdown">
+             <section class="Pokemon">
                 <select name="pokeleft" id="pokeleft">    
                     <option value="Default">Select Pokemon</option>
                     <% for(let i = 0; i < pokemonlength; i++){ %>
                       <option value="<%=pokemonarray[i]%>"><%=pokemonarray[i]%></option>
                     <% } %>
-                  </select>               
-            </section>
+                </select> 
 
-            <section class="pokemon">
-             <img class="imgvergelijk" src="/assets/images/compare_placeholder.png" alt="" srcset="">
-             
-            <section class="Left">
+                <img class="imgvergelijk" src="/assets/images/compare_placeholder.png" alt="" srcset=""> 
                 <h3 id="PokemonNaamLeft">naam</h3>
                 <p id="PokemonTypeLeft">type: </p>
                 <section class="LeftStats">
-                    <p>hp</p>
-                    <p>attack</p>
-                    <p>defense</p>
-                    <p>special-attack</p>
-                    <p>special-defense</p>
-                    <p>speed</p>
-                </section>                
-            </section>
-           </section>
-        <section class="dropdown">
-            <select name="pokeright" id="pokeright">
-                <option value="Default">Select Pokemon</option>
-                <% for(let i = 0; i < pokemonlength; i++){ %>
-                  <option value="<%=pokemonarray[i]%>"><%=pokemonarray[i]%></option>
-                <% } %>
-            </select>   
-        </section>
-        
-                <section class="pokemon">
-                <img class="imgvergelijk" src="/assets/images/compare_placeholder.png" alt="" srcset="">
-
-                 <section class="Right">
-                    <h3 id="PokemonNaamRight">naam</h3>
-                    <p id="PokemonTypeRight">type: </p>
-                    <section class="RightStats">
-                        <p>hp</p>
-                        <p>attack</p>
-                        <p>defense</p>
-                        <p>special-attack</p>
-                        <p>special-defense</p>
-                        <p>speed</p>
-                    </section>                
-                 </section>
+                    <span>hp</span><br>
+                    <span>attack</span><br>
+                    <span>defense</span><br>
+                    <span>special-attack</span><br>
+                    <span>special-defense</span><br>
+                    <span>speed</span>
                 </section>
-        </section>
-        <button class="comparebtn" type="submit">compare</button>
+             </section>
+   
+             <section class="Pokemon">
+                <select name="pokeright" id="pokeright">
+                    <option value="Default">Select Pokemon</option>
+                    <% for(let i = 0; i < pokemonlength; i++){ %>
+                      <option value="<%=pokemonarray[i]%>"><%=pokemonarray[i]%></option>
+                    <% } %>
+                </select>   
+
+                <img class="imgvergelijk" src="/assets/images/compare_placeholder.png" alt="" srcset="">
+                <h3 id="PokemonNaamRight">naam</h3>
+                <p id="PokemonTypeRight">type: </p>
+                <section class="RightStats">
+                    <span>hp</span><br>
+                    <span>attack</span><br>
+                    <span>defense</span><br>
+                    <span>special-attack</span><br>
+                    <span>special-defense</span><br>
+                    <span>speed</span>
+                </section>       
+             </section>
+            </section> 
+            <button class="comparebtn" type="submit">compare</button>      
     </main>
-    <footer>
-        <%-include("partials/footer")-%>
-    </footer>
     <script src="/assets/code/compare.js"></script>
-</body>
-</html>
+    <%-include("partials/footer")-%>

@@ -1,29 +1,29 @@
-<!DOCTYPE html>
-<html lang="nl_BE">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MyPartner</title>
-    <link rel="stylesheet" href="/css/style.css">
-</head>
-<body>
-    <nav>
-        <%-include("partials/Navigation")-%>
-    </nav>
+    <%-include("partials/header")-%>
+    <%-include("partials/navigation")-%>
+
     <main>
-        <section class="item-container2">
-            <section id="container-item-1"></section>
-            <section id="container-item-2"></section>
-            <section id="container-item-3"></section>
-            <section id="container-item-4"></section>
-            <section id="container-item-5"></section>
-            <section id="container-item-6"></section>
+        <section class="pokemon-container">
+          <article id="partner"><%= partner %></article>
+
+          <% for( let index = 0; index < pokemon.length; index++ ) { %>
+            <article id="pokemon-in-container">
+              <h1 id="PokemonCaught"><%= pokemon[index] %></h1>
+              <img id="PokemonImg" src="" alt="<%= pokemon[index] %>">
+              <form action="/partner" method="post">
+                <input type="hidden" id="NameOutputHidden" name="NameOutputHidden" value="<%= pokemon[index] %>"> 
+                <input type="submit" value="Set as partner">
+              </form>
+              <form action="/release" method="post">
+                <input type="hidden" id="NameOutputHidden" name="NameOutputHidden" value="<%= pokemon[index] %>"> 
+                <input type="submit" value="Release this Pokemon">
+              </form>
+            </article>
+          <% } %>    
+
         </section>
-        <script src="/assets/code/mypartner.js"></script>
-      </main>
-      <footer>
-        <%-include("partials/footer")-%>
-      </footer>
-</body>
-</html>
+
+    </main>
+    <script src="/assets/code/mypartner.js" defer></script>
+
+    <%-include("partials/footer")-%>
+
