@@ -134,13 +134,11 @@ app.post('/partner', async (req,res) =>{
   setPartner(loggedInUser,pkmnName);
   let pokemon = await getAllPokemonFromUser(loggedInUser);
   let partner = await getPartner(loggedInUser);
-  res.redirect('mypartner', {pokemon: pokemon, partner: partner});
+  res.redirect('mypartner');
 });
 app.post('/release', async (req,res) =>{
   let pkmnName = req.body.NameOutputHidden;
   removePokemon(loggedInUser,pkmnName);
-  let pokemon = await getAllPokemonFromUser(loggedInUser);
-  let partner = await getPartner(loggedInUser);
 
   res.redirect('mypartner');
 });
@@ -175,7 +173,7 @@ app.post('/catcher', async (req,res) =>{
   let pkmnName = req.body.NameOutputHidden;
   AddPokemonToUser(loggedInUser, pkmnName);
   let haspartner = await getPartner(loggedInUser); 
-  if ( haspartner == "") {
+  if ( haspartner == null) {
     let partner = "pichu";
     res.redirect("pokecatcher");
   }

@@ -39,6 +39,7 @@ const FindUserInMyPartner = async (username) =>{
 }
 const AddPokemonToUser = async (username, pokemon) =>{
   try {
+    
     if (await FindUserInMyPartner(username) != null) {
       client.db("Pichu").collection('MyPartner').updateOne({username: username}, {$push:{ pokemon: pokemon}});
     }
@@ -51,12 +52,11 @@ const AddPokemonToUser = async (username, pokemon) =>{
 }
 const getAllPokemonFromUser = async (username) =>{
   let user = await client.db("Pichu").collection('MyPartner').findOne({username: username});
-  let userPokemon; 
+  let userPokemon = []; 
   for (let index = 0; index < user.pokemon.length; index++) {
-    userPokemon
-    
+    userPokemon.push(user.pokemon[index])
   }
-  return user.pokemon; 
+  return userPokemon; 
 }
 const setPartner = async (username, pokemon) =>{
   try {
@@ -67,8 +67,8 @@ const setPartner = async (username, pokemon) =>{
 }
 const getPartner = async (username) =>{
   let user = await client.db("Pichu").collection('MyPartner').findOne({username: username}); 
-  if (user.partner == null) {
-    return null;
+  if (user == null) {
+    return "pichu";
   }
   else{
     return user.partner;

@@ -57,6 +57,13 @@ img {
 
 button {
   text-decoration: none;
+  display: block;
+  margin: 0 auto 20px auto;
+  padding: 10px;
+  font-size: 18px;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
 }
 
 .PichuPartners {
@@ -383,8 +390,8 @@ h4 {
   justify-content: center;
   align-items: center;
   height: 100%;
-  /*margin-bottom: 13rem;
-  margin-left: 45rem;*/
+  margin-bottom: 13rem;
+  margin-left: 45rem;
 
 }
 
@@ -396,16 +403,13 @@ h4 {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--color-wit);
-  display: flex;
   flex-direction: column;
-  justify-content: center;
+  background-color: var(--color-wit);  
   text-align: center;
   width: 20rem;
   border-style:outset;
   border-width: 10px;
-  padding: 4rem;
- 
+  padding: 4rem; 
   margin-top: 5%;
 }
 
@@ -417,8 +421,9 @@ h4 {
   height: 25%;
   border-radius: 50%;
   background-color: var(--color-wit);
-  position: relative;
+  position: absolute;
   overflow: hidden;
+
 }
 
 .PokemonGeneratorImg {
@@ -639,7 +644,7 @@ h1 {
   margin-top: 0px;
 }
 
-#guess,
+#guess
 button {
   display: block;
   margin: 0 auto 20px auto;
@@ -684,10 +689,6 @@ button {
       height: auto;
       width: 100%;
     }
-  }
-  
-  button {
-    text-decoration: none;
   }
   
   .PichuPartners {

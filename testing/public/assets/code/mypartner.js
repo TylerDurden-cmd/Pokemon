@@ -1,13 +1,5 @@
-/* Element 
-let container1 = document.getElementById("container-item-1")
-let container2 = document.getElementById("container-item-2")
-let container3 = document.getElementById("container-item-3")
-let container4 = document.getElementById("container-item-4")
-let container5 = document.getElementById("container-item-5")
-let container6 = document.getElementById("container-item-6")
-*/
 let NameOutputHidden = document.querySelectorAll("#NameOutputHidden");
-let PokemonCaught = document.querySelectorAll("#Pokemon");
+let PokemonCaught = document.querySelectorAll("#PokemonCaught");
 let Imgs = document.querySelectorAll("#PokemonImg");
 /* Variable */
 
@@ -27,7 +19,7 @@ const PokemonFetcher = async () => {
 de functie geeft de sprite terug met de juiste pokemon parameter */
 const PokemonPictureFunction = async (Pokemonvariable) => {
     try{
- 
+      
     let pokemonUrl = await fetch(`https://pokeapi.co/api/v2/pokemon/${Pokemonvariable}`).then(res => res.json());
     return pokemonUrl.sprites.other['official-artwork'].front_default;
     
@@ -38,40 +30,17 @@ const PokemonPictureFunction = async (Pokemonvariable) => {
     }
     
   };
-  
-  /* RandomPokemon Namen worden in deze functie gegenereerd */
-  const RandomPokemonGenerator = async () => {
-    try{
-    let data = await PokemonFetcher();
-    for (let i = 0; i < data.pokemon_entries.length; i++) {
-      pokemonArray[i] = data.pokemon_entries[i].pokemon_species.name;
-    }
-    const RandomPokemonindex = Math.floor(
-      Math.random() * data.pokemon_entries.length
-    );
-
-    /* console.log(pokemonArray[RandomPokemonindex]); */
-    return pokemonArray[RandomPokemonindex];
-}catch(error){
-    console.log(error)
-}
-  };
 
 /* Zorgt ervoor dat de foto's met hun element worden geladen als foto met de juiste pokemon erbij */
 const SrcPictureFunction = async() =>{
     try{
       const SpecialUrlArray =[]
-      for(let i = 0; i < 6; i++){
-          SpecialUrlArray[i] = await PokemonPictureFunction(PokemonCaught[i].textContent);
+      for(let i = 0; i < PokemonCaught.length; i++){
+          SpecialUrlArray[i] = await PokemonPictureFunction(PokemonCaught[i].innerHTML);
       }
 
-      for (let index = 0; index < Imgs.length; index++) {
+      for (let index = 0; index < PokemonCaught.length; index++) {
         Imgs[index].src = SpecialUrlArray[index];        
-      }
-
-      //set de value input met type='hidden' naar de naam vn de pokemon
-      for (let index = 0; index < NameOutputHidden.length; index++) {
-        NameOutputHidden[index].value = PokemonCaught[index].textContent;
       }
 
     }catch(error){

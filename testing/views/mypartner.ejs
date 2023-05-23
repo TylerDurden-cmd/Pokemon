@@ -7,14 +7,14 @@
 
           <% for( let index = 0; index < pokemon.length; index++ ) { %>
             <article id="pokemon-in-container">
-              <h1 id="Pokemon"><%= pokemon[index] %></h1>
+              <h1 id="PokemonCaught"><%= pokemon[index] %></h1>
               <img id="PokemonImg" src="" alt="<%= pokemon[index] %>">
               <form action="/partner" method="post">
-                <input type="hidden" id="NameOutputHidden" name="NameOutputHidden" value=""> 
+                <input type="hidden" id="NameOutputHidden" name="NameOutputHidden" value="<%= pokemon[index] %>"> 
                 <input type="submit" value="Set as partner">
               </form>
               <form action="/release" method="post">
-                <input type="hidden" id="NameOutputHidden" name="NameOutputHidden" value=""> 
+                <input type="hidden" id="NameOutputHidden" name="NameOutputHidden" value="<%= pokemon[index] %>"> 
                 <input type="submit" value="Release this Pokemon">
               </form>
             </article>
