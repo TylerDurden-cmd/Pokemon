@@ -144,7 +144,7 @@ btn.addEventListener("click",async()=>{
   let EigenPokemonAttack = 45;
   let EigenPokemonDefence = 50;
   /* fetch van pokemon met naam van pokemon die word aangemaakt in Src functie */
-  const take = await(await fetch(`https://pokeapi.co/api/v2/pokemon/${Pokemon.textContent}`)).json()
+  const take = await(await fetch(`https://pokeapi.co  /api/v2/pokemon/${Pokemon.textContent}`)).json()
   const PokemonDefenceStats = take.stats[2].base_stat
   const PokemonAttackStats = take.stats[1].base_stat
   /* const PokemonAttackStats = take.stats[1].base_stat */
