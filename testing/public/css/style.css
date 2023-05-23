@@ -136,6 +136,10 @@ button {
   text-align: center;
   position: relative;
 }
+.keuze > img{
+ width: 32rem;
+ height: 20rem;
+}
 
 .close {
   position: absolute;
