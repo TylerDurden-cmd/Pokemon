@@ -26,24 +26,24 @@ let pokemonArray = [];
 /* -------Alle functies------- */
 
 /* Functie Kleur button groen */
-const ColorGreen = () =>{
+const ColorGreen = () => {
   console.log("color Green")
-    pokebal.style.backgroundColor = "Green"
+  pokebal.style.backgroundColor = "Green"
 }
 
 /* Functie Kleur button rood */
-const ColorRed = () =>{
+const ColorRed = () => {
   console.log("color red")
-    pokebal.style.backgroundColor = "Red"
+  pokebal.style.backgroundColor = "Red"
 }
 
 /* Functie Kleur border groen word nu niet gebruikt maar kan toegepast worden*/
-const ColorborderGreen = () =>{
+const ColorborderGreen = () => {
   containerPokemon.style.borderColor = "Green"
 }
 
 /* Functie Kleur border groen word nu niet gebruikt maar kan toegepast worden*/
-const ColorborderRed = () =>{
+const ColorborderRed = () => {
   containerPokemon.style.borderColor = "Red"
 }
 
@@ -61,19 +61,19 @@ deze word dan terug gereturned met de functie en de voledige url van deze pokemo
 /* Het plekje voor alle Belangrijke functies */
 /* Haalt url pokedex op voor de namen van pokemon */
 const PokemonFetcher = async () => {
-    try{
+  try {
     const pokemonurl = await fetch("https://pokeapi.co/api/v2/pokedex/1");
     const data = await pokemonurl.json();
     return data;
-}catch(error){
+  } catch (error) {
     console.log(error)
-}
-  };
-  
+  }
+};
+
 /* Functie die een parameter meeneemt in deze parameter zit de random pokemon naam 
 functie geeft een PokemonFoto weer met de juist pokemon */
 const PokemonPictureFunction = async (Pokemonvariable) => {
-    try{
+  try {
     const url = await fetch(
       `https://pokeapi.co/api/v2/pokemon/${Pokemonvariable}`
     );
@@ -81,14 +81,14 @@ const PokemonPictureFunction = async (Pokemonvariable) => {
 
     /* de functie werkt met console.log(urlJson.sprites.back_default); */
     return urlJson.sprites.other['official-artwork'].front_default;
-    }catch(error){console.log(error)}
-    
-  };
+  } catch (error) { console.log(error) }
 
-  /* Haalt een RandomPokemonNaam op zodat deze functie kan 
-  gebruikt worden als parameter bij functie PokePic */
-  const RandomPokemonGenerator = async () => {
-    try{
+};
+
+/* Haalt een RandomPokemonNaam op zodat deze functie kan 
+gebruikt worden als parameter bij functie PokePic */
+const RandomPokemonGenerator = async () => {
+  try {
     let data = await PokemonFetcher();
     for (let i = 0; i < data.pokemon_entries.length; i++) {
       pokemonArray[i] = data.pokemon_entries[i].pokemon_species.name;
@@ -99,59 +99,59 @@ const PokemonPictureFunction = async (Pokemonvariable) => {
 
     /* console.log(pokemonArray[RandomPokemonindex]); */
     return pokemonArray[RandomPokemonindex];
-}catch(error){
+  } catch (error) {
     console.log(error)
-}
-  };
+  }
+};
 
 /* Nieuwe Functie Herlaad de Pagina met een niewe foto door de functies PokemonPicture te gebruiken */
-const SrcPictureFunction = async () =>{
-  try{
+const SrcPictureFunction = async () => {
+  try {
     let RandomPokemonGen = await RandomPokemonGenerator();
     let SpecialArray = await PokemonPictureFunction(RandomPokemonGen)
     /* imgPokemon word aangemaakt als nieuw element van type img */
-      let imgPokemon = document.createElement("img")
-      /* dan word er een value in gestoken de speciale url  */
-      imgPokemon.setAttribute("src",SpecialArray);
-      /* IMG word leegemaakt deze is een section en veranderd in een img dit moet gedaan worden anders kan de imgpokemon 
-      er niet in geladen worden omdat het van type img is */
-      Img.innerHTML =""
-      /* met appendchild word de imgpokemon en zijn attribuut in de section gestoken en veranderd deze naar een img
-      bron = StackOverFlow */
-      Img.appendChild(imgPokemon);
-      Pokemon.innerHTML = ""
-      Pokemon.innerHTML = `${RandomPokemonGen}`
-      pokebal.style.backgroundColor = ""
-      btn.disabled = false
-      counter.textContent = 3;
-      PokemonCaughtContainer.style.visibility = "collapse"
-      CaughtText.textContent = "";
-      btnno.disabled = false
-      /* de rest is eigenlijk code die dan word gereset omdat deze veranderd word */
+    let imgPokemon = document.createElement("img")
+    /* dan word er een value in gestoken de speciale url  */
+    imgPokemon.setAttribute("src", SpecialArray);
+    /* IMG word leegemaakt deze is een section en veranderd in een img dit moet gedaan worden anders kan de imgpokemon 
+    er niet in geladen worden omdat het van type img is */
+    Img.innerHTML = ""
+    /* met appendchild word de imgpokemon en zijn attribuut in de section gestoken en veranderd deze naar een img
+    bron = StackOverFlow */
+    Img.appendChild(imgPokemon);
+    Pokemon.innerHTML = ""
+    Pokemon.innerHTML = `${RandomPokemonGen}`
+    pokebal.style.backgroundColor = ""
+    btn.disabled = false
+    counter.textContent = 3;
+    PokemonCaughtContainer.style.visibility = "collapse"
+    CaughtText.textContent = "";
+    btnno.disabled = false
+    /* de rest is eigenlijk code die dan word gereset omdat deze veranderd word */
 
-      
-      //img van de partner pokemon ophalen en setten 
-      let partnerUrl = await PokemonPictureFunction(partnerName.innerHTML);
-      partnerImg.src = partnerUrl;
 
-  }catch(error){
+    //img van de partner pokemon ophalen en setten 
+    let partnerUrl = await PokemonPictureFunction(partnerName.innerHTML);
+    partnerImg.src = partnerUrl;
+
+  } catch (error) {
     console.log(error)
   }
 }
 
 /* button voor Pokemon */
-btn.addEventListener("click",async()=>{
+btn.addEventListener("click", async () => {
   /* counter start met aftellen bij een click van de button */
   //set de value input met type='hidden' naar de naam vn de pokemon
   NameOutputHidden.value = Pokemon.textContent;
   counter.textContent--;
 
-  const partner = await(await fetch(`https://pokeapi.co/api/v2/pokemon/${partnerName.innerHTML}`)).json()
+  const partner = await (await fetch(`https://pokeapi.co/api/v2/pokemon/${partnerName.innerHTML}`)).json()
   let EigenPokemonAttack = partner.stats[1].base_stat;
   let EigenPokemonSpAttack = partner.stats[3].base_stat;;
 
   /* fetch van pokemon met naam van pokemon die word aangemaakt in Src functie */
-  const take = await(await fetch(`https://pokeapi.co/api/v2/pokemon/${Pokemon.textContent}`)).json()
+  const take = await (await fetch(`https://pokeapi.co/api/v2/pokemon/${Pokemon.textContent}`)).json()
   const PokemonDefenseStats = take.stats[2].base_stat;
   const PokemonSpDefenseStats = take.stats[4].base_stat;
 
@@ -162,12 +162,12 @@ btn.addEventListener("click",async()=>{
   if (wildDefenseSum < partnerAttackSum) {
     Formule = ((partnerAttackSum) - (wildDefenseSum));
   }
-  else{
-    Formule = ((wildDefenseSum) - (partnerAttackSum)); 
+  else {
+    Formule = ((wildDefenseSum) - (partnerAttackSum));
   }
-  
-  const Getal1totFormule = Math.floor(Math.random() * (Formule*2))
-  
+
+  const Getal1totFormule = Math.floor(Math.random() * (Formule * 2))
+
   console.log(Formule)
   console.log(Getal1totFormule)
   Procent.innerHTML = ``
@@ -177,7 +177,7 @@ btn.addEventListener("click",async()=>{
   EigenPokemonAttackStat.innerHTML = ``
   EigenPokemonAttackStat.innerHTML = `${EigenPokemonAttack}`
   EigenPokemonSpAttackStat.innerHTML = ``
-  EigenPokemonSpAttackStat.innerHTML = `${EigenPokemonSpAttack}` 
+  EigenPokemonSpAttackStat.innerHTML = `${EigenPokemonSpAttack}`
   PokemonDefenseStat.innerHTML = ``
   PokemonDefenseStat.innerHTML = `${PokemonDefenseStats}`
   PokemonSpDefenseStat.innerHTML = ``
@@ -186,25 +186,25 @@ btn.addEventListener("click",async()=>{
 
 
 
-  if(Formule <= Getal1totFormule){
+  if (Formule <= Getal1totFormule) {
     ColorGreen();
     btn.disabled = true
     PokemonCaughtContainer.style.visibility = "visible"
     CaughtText.textContent = `je hebt ${Pokemon.textContent} gevangen`
-    btnyes.addEventListener("click",()=>{
+    btnyes.addEventListener("click", () => {
       CaughtText.textContent = `${Pokemon.textContent} is nu van jouw Click Op Next Pokemon Voor verder te gaan `
       btnno.disabled = true
     })
-    btnno.addEventListener("click",SrcPictureFunction)
-  }else{
-    if(counter.textContent == 0){
+    btnno.addEventListener("click", SrcPictureFunction)
+  } else {
+    if (counter.textContent == 0) {
       btn.disabled = true
     }
     ColorRed();
   }
 })
 
-btnNext.addEventListener("click",SrcPictureFunction)
+btnNext.addEventListener("click", SrcPictureFunction)
 SrcPictureFunction();
 
 /* Als je een pokemon vangt kan je deze bijhouden dan moet je op yes drukken anders no en dan krijg je een nieuwe pokemon te zien

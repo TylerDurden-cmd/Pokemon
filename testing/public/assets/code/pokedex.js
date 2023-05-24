@@ -2,23 +2,25 @@ const searchInput = document.getElementById('search-input');
 const pokemonInfo = document.getElementById('pokemon-info');
 const pokemonList = document.getElementById('pokemon-list');
 
+let useitemglo = "";
+
 searchInput.addEventListener('input', () => {
   const pokemonName = searchInput.value.toLowerCase();
 
   if (pokemonName.length >= 3) {
-  fetch(`https://pokeapi.co/api/v2/pokemon?limit=1118`)
-    .then(response => response.json())
-    .then(data => {
-      const filteredPokemon = data.results.filter(pokemon => pokemon.name.startsWith(pokemonName));
-      const options = filteredPokemon.map(pokemon => `
+    fetch(`https://pokeapi.co/api/v2/pokemon?limit=1118`)
+      .then(response => response.json())
+      .then(data => {
+        const filteredPokemon = data.results.filter(pokemon => pokemon.name.startsWith(pokemonName));
+        const options = filteredPokemon.map(pokemon => `
         <option value="${pokemon.name}">
           ${pokemon.name}
           <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.url.split('/').slice(-2, -1)}.png" alt="${pokemon.name}">
         </option>
       `).join('');
 
-      pokemonList.innerHTML = options;
-    });
+        pokemonList.innerHTML = options;
+      });
   }
 });
 
@@ -28,9 +30,30 @@ searchInput.addEventListener('change', () => {
   fetchPokemonData(pokemonName);
 });
 
-function fetchPokemonData(pokemonName) {
-  pokemonInfo.innerHTML = 'Laden...';
+const useitem = async (pokemonName) => {
+  try {
+    useitemglo = ``;
+    const u = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`)
+    const uj = await u.json();
+    console.log(uj.id)
+    const useitem = await fetch(`https://pokeapi.co/api/v2/evolution-chain/${uj.id}`)
+    const useitemj = await useitem.json();
+    console.log(useitemj)
+    const useItemitem = useitemj.chain.evolves_to[0].evolution_details[0].item.name;
+    if (useItemitem == null) {
+      `no use item`
+    } else {
+      useitemglo = useItemitem;
+    }
 
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+const fetchPokemonData = async (pokemonName) => {
+  pokemonInfo.innerHTML = 'Laden...';
+  await useitem(pokemonName);
   fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`)
     .then(response => response.json())
     .then(data => {
@@ -40,8 +63,8 @@ function fetchPokemonData(pokemonName) {
         <p id="ik">Type: ${data.types.map(type => type.type.name).join(', ')} </p>
         <p>Height: ${data.height / 10} m </p>
         <p>Weight: ${data.weight / 10} kg </p>
+        <p>use-Item: ${useitemglo}<p>
       `;
-
       fetch(data.species.url)
         .then(response => response.json())
         .then(speciesData => {
@@ -73,7 +96,7 @@ function getEvolutions(chain) {
   const evolutions = [];
 
   if (chain.species) {
-    
+
     evolutions.push({
       name: chain.species.name,
       image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${chain.species.url.split('/').slice(-2, -1)}.png`,

@@ -1,15 +1,15 @@
-<%-include("partials/header")-%>
-<%-include("partials/navigation")-%>
-    <main>
-        <section class="container">
-            <h1>Pokedex</h1>
-            <article class="search-container">
-            <p for="search-input">Search</p>
-            <input type="text" id="search-input" list="pokemon-list" />
-            <datalist id="pokemon-list"></datalist>
-            </article>
-            <article id="pokemon-info"></article>
-        </section>
+<%- include("partials/header")%> <%- include("partials/navigation")%>
+        <main>
+            <section class="container">
+                <h1>Pokedex</h1>
+                <article class="search-container">
+                    <p for="search-input">Search</p>
+                    <input type="text" id="search-input" list="pokemon-list" />
+                    <datalist id="pokemon-list"></datalist>
+                </article>
+                <article id="pokemon-info"></article>
+            </section>
+            </section>
             <script src="/assets/code/pokedex.js"></script>
-    </main>
-        <%-include("partials/footer")-%>
+        </main>
+        <%- include('partials/footer')%>
