@@ -91,7 +91,7 @@ const PokemonSprite = async () => {
     let pic = document.createElement("img")
     pic.setAttribute("src", RandomPicturePokemon);
     RandomPokemonPicture.innerHTML = "";
-    RandomPokemonPicture.appendChild(pic).style.width = "15rem"
+    RandomPokemonPicture.appendChild(pic).style.height = "15rem"
     PokemonNameBattler.innerHTML = RandomGen;
     WildPokemonName = RandomGen;
     console.log(RandomGen)

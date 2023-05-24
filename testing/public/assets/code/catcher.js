@@ -151,22 +151,9 @@ btn.addEventListener("click",async()=>{
   let EigenPokemonSpAttack = partner.stats[3].base_stat;;
 
   /* fetch van pokemon met naam van pokemon die word aangemaakt in Src functie */
-<<<<<<< HEAD
-  const take = await(await fetch(`https://pokeapi.co  /api/v2/pokemon/${Pokemon.textContent}`)).json()
-  const PokemonDefenceStats = take.stats[2].base_stat
-  const PokemonAttackStats = take.stats[1].base_stat
-  /* const PokemonAttackStats = take.stats[1].base_stat */
-  /* heir word stat van defence van pokemon gepakt */
-  console.log(PokemonDefenceStats)
-  const Formule = (((EigenPokemonAttack + EigenPokemonDefence ) - ( PokemonDefenceStats))/EigenPokemonAttack)*100;
-  const Getal1tot100 = Math.floor(Math.random() * 100)
-  /* formule is eigenlijk de kans dat jij die vangt op 100% bij de if statement word dan bekeken of je kans groter is dan
-  het random getal dat word gegenereed op 100*/
-=======
   const take = await(await fetch(`https://pokeapi.co/api/v2/pokemon/${Pokemon.textContent}`)).json()
   const PokemonDefenseStats = take.stats[2].base_stat;
   const PokemonSpDefenseStats = take.stats[4].base_stat;
->>>>>>> 6b7009f2ac647563f326edb51da69144f4113778
 
   /* hier word de catch rate berekend */
   let Formule;

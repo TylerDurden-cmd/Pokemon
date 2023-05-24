@@ -1,28 +1,40 @@
-<%-include("partials/header")-%>
-<%-include("partials/navigation")-%>
-<main>
-        <section id="PokemonNameBattler"></section>
-        <section id="PokemonRandomPicture"><!-- voorlopig random pokemon --></section>
+<%- include('partials/header')%>
+    <%- include('partials/navigation')%>
 
-    <aside id="AsideStats">
-        <section id="OakBox">
-            <h3 id="won">
-            </h3>
-            <h3 id="lost">
-            </h3>
-            <h3 id="draw">
-            </h3>
-        </section>
-        <img src="Assets/images/ProfOakpix.png" alt="">
-    </aside>
+        <main>
+            <section id="PokemonArea">
+                <progress id="healthWild" value="100" max="100"></progress>
+                <section id="WildPokemonBattler"></section>
+                <p id="PokemonName-Battler"></p>
+                <section id="PokemonBattler"></section>
+                <p id="PokemonNameMyPartnerBattler"></p>
+                <progress id="health" value="100" max="100"></progress>
+                <input type="button" id="btnNext-Battler" value="Next Pokemon">
 
-    <section id="container-box-Battler">
-        <h3 id="textBattler">pick your next move:</h3>
-        <section id="boxbuttons-Battler">
-            <input type="button" id="Attack" value="Attack" width="20px"></input>
-        </section>
+            </section>
 
-    </section>
-    <script src="/assets/code/PokemonBattler.js" defer></script>
-</main>
-<%- include('partials/footer') %>
+            <aside id="AsideStats">
+                <section id="OakBox">
+                    <h3 id="won">
+                    </h3>
+                    <h3 id="lost">
+                    </h3>
+                    <h3 id="draw">
+                    </h3>
+                </section>
+                <img src="Assets/images/ProfOakpix.png" alt="">
+            </aside>
+
+            <section id="container-box-Battler">
+                <h3 id="textBattler">pick your next move:</h3>
+                <section id="boxbuttons-Battler">
+                    <input type="button" id="Attack" value="Attack" width="20px"></input>
+                </section>
+
+            </section>
+
+
+
+            <script src="assets/code/PokemonBattler.js"></script>
+        </main>
+        <%- include('partials/footer') %>
