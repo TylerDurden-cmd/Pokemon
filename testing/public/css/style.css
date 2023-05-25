@@ -524,13 +524,33 @@ h5 {
 }
 /*--- Mypartner ---*/
 .pokemon-container{
+margin-left: 10rem;
 display: flex;
 flex-direction: row;
-align-items: flex-end;
+overflow: auto;
+width: 85%;
+justify-content: center;
+flex-wrap: wrap;
+margin-bottom: 5rem;
 }
 #PokemonImg{
- 
+  background-color: white;
+  border-style: outset;
+  border-width: 10px;
+  width: 85%;
+  height: auto;
+  text-align: center;
 }
+#partner{
+  display: flex;
+  font-weight: bolder;
+  margin-right: 98rem;
+  margin-top: 1rem;
+  
+}
+
+
+
 /*--- Pokedex ---*/
 /* Basisstijl voor de hele pagina */
 body {

@@ -2,18 +2,18 @@
     <%-include("partials/navigation")-%>
 
     <main>
+      <article id="partner"><%= partner %></article>
         <section class="pokemon-container">
-          <article id="partner"><%= partner %></article>
-
+         
           <% for( let index = 0; index < pokemon.length; index++ ) { %>
             <article id="pokemon-in-container">
               <h1 id="PokemonCaught"><%= pokemon[index] %></h1>
               <img id="PokemonImg" src="" alt="<%= pokemon[index] %>">
-              <form action="/partner" method="post">
+              <form class= "inputpartner"action="/partner" method="post">
                 <input type="hidden" id="NameOutputHidden" name="NameOutputHidden" value="<%= pokemon[index] %>"> 
                 <input type="submit" value="Set as partner">
               </form>
-              <form action="/release" method="post">
+              <form class= "inputpartner" action="/release" method="post">
                 <input type="hidden" id="NameOutputHidden" name="NameOutputHidden" value="<%= pokemon[index] %>"> 
                 <input type="submit" value="Release this Pokemon">
               </form>
