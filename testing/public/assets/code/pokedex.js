@@ -63,7 +63,6 @@ const fetchPokemonData = async (pokemonName) => {
         <p id="ik">Type: ${data.types.map(type => type.type.name).join(', ')} </p>
         <p>Height: ${data.height / 10} m </p>
         <p>Weight: ${data.weight / 10} kg </p>
-        <p>use-Item: ${useitemglo}<p>
       `;
       fetch(data.species.url)
         .then(response => response.json())

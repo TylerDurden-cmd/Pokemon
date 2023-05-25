@@ -22,6 +22,7 @@ body {
   background-image: url("/assets/images/bg.png");
   font-family: sans-serif;
   display: grid;
+  min-height: 100vh;
   grid-template-areas:
     "nav    nav     nav     nav  "
     "header header  header  header "
@@ -42,6 +43,7 @@ main {
 
 footer {
   grid-area: footer;
+  margin-top: auto;
   background-color: var(--links);
   color: var(--color-zwart);
   text-align: center;
@@ -171,6 +173,7 @@ button {
 /*---Nav---*/
 nav {
   grid-area: nav;
+  margin-bottom: auto;
   justify-content: space-between;
   border-bottom: 0.4rem solid black;
   background-image: url("/assets/images/bg_pokedex.png");
@@ -747,9 +750,14 @@ main {
 }
 
 /* Battler */
-
-#textBattler {
-  margin-right: 50px
+#Attack {
+  border-radius: 12px;
+  font-size: 16px;
+  margin: auto;
+  transition: 0.2s;
+  width: 150px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 #container-box-Battler {
@@ -759,9 +767,11 @@ main {
   padding-right: 50px;
   padding-top: 20px;
   padding-bottom: 20px;
-  margin-left: 40%;
+  margin-left: 25%;
   border-radius: 10px;
   margin-top: 30px;
+  margin-bottom: 50px;
+  
 }
 
 #boxbuttons-Battler {
@@ -773,7 +783,7 @@ main {
   visibility: hidden;
   position: absolute;
   margin-top: -2%;
-  margin-left: 70%;
+  margin-left: -70%;
 }
 
 #PokemonArea {
