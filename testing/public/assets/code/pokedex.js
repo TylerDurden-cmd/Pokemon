@@ -2,8 +2,6 @@ const searchInput = document.getElementById('search-input');
 const pokemonInfo = document.getElementById('pokemon-info');
 const pokemonList = document.getElementById('pokemon-list');
 
-let useitemglo = "";
-
 searchInput.addEventListener('input', () => {
   const pokemonName = searchInput.value.toLowerCase();
 
@@ -30,27 +28,6 @@ searchInput.addEventListener('change', () => {
   fetchPokemonData(pokemonName);
 });
 
-const useitem = async (pokemonName) => {
-  try {
-    useitemglo = ``;
-    const u = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`)
-    const uj = await u.json();
-    console.log(uj.id)
-    const useitem = await fetch(`https://pokeapi.co/api/v2/evolution-chain/${uj.id}`)
-    const useitemj = await useitem.json();
-    console.log(useitemj)
-    const useItemitem = useitemj.chain.evolves_to[0].evolution_details[0].item.name;
-    if (useItemitem == null) {
-      `no use item`
-    } else {
-      useitemglo = useItemitem;
-    }
-
-  } catch (error) {
-    console.error(error)
-  }
-}
-
 const fetchPokemonData = async (pokemonName) => {
   pokemonInfo.innerHTML = 'Laden...';
   await useitem(pokemonName);
@@ -63,7 +40,6 @@ const fetchPokemonData = async (pokemonName) => {
         <p id="ik">Type: ${data.types.map(type => type.type.name).join(', ')} </p>
         <p>Height: ${data.height / 10} m </p>
         <p>Weight: ${data.weight / 10} kg </p>
-        <p>use-Item: ${useitemglo}<p>
       `;
       fetch(data.species.url)
         .then(response => response.json())
