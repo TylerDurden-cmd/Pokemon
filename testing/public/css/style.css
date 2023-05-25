@@ -25,9 +25,9 @@ body {
   grid-template-areas:
     "nav    nav     nav     nav  "
     "header header  header  header "
-    "main   main    main    aside "
+    "main   main    main    main "
     "footer footer  footer  footer ";
-  margin: auto;
+    margin: auto;
 }
 
 main {
@@ -42,7 +42,6 @@ main {
 
 footer {
   grid-area: footer;
-
   background-color: var(--links);
   color: var(--color-zwart);
   text-align: center;
@@ -114,7 +113,7 @@ button {
 }
 
 /*---Popup venster---*/
-.popup {
+.popup, .popupAcces {
   display: none;
   position: fixed;
   z-index: 1;
@@ -138,8 +137,8 @@ button {
 }
 
 .keuze>img {
-  width: 32rem;
-  height: 20rem;
+  width: 325px;
+  height: 325px;
 }
 
 .close {
@@ -156,7 +155,7 @@ button {
   color: black;
 }
 
-#Error {
+.Error {
   height: 100px;
   width: 100px;
   margin-bottom: 85px;
@@ -164,7 +163,7 @@ button {
 
 }
 
-#Oak {
+.Oak {
   height: 175px;
   width: 175px;
 }
@@ -210,6 +209,15 @@ nav>ul>li>img {
   height: 100px;
 }
 
+/*---Register---*/
+#RegisterForm, #LoginForm {
+  border-radius: 50px;
+  border-style: solid;
+  background-image: url("/assets/images/bg_pokedex.png");
+  margin-bottom: 50px;
+}
+
+
 /*---Login---*/
 input[name=fname],
 input[name=lname],
@@ -235,6 +243,7 @@ input[name=username] {
   border-radius: 4px;
   cursor: pointer;
   width: 100%;
+  margin-bottom: 25px;
 }
 
 .cancelbtn {
@@ -496,11 +505,6 @@ h5 {
 
 /*--- Pokedex ---*/
 /* Basisstijl voor de hele pagina */
-body {
-  font-family: Arial, sans-serif;
-}
-
-
 .evoimg {
   display: flex;
   flex-direction: row;
@@ -657,7 +661,7 @@ h1 {
   margin-top: 0px;
 }
 
-#guess button {
+#guess, button {
   display: block;
   margin: 0 auto 20px auto;
   padding: 10px;
@@ -689,106 +693,11 @@ h1 {
   }
 }
 
-main {
-  grid-area: main;
-}
-
-
-
-
 @media screen and (max-width: 768px) {
   img {
     height: auto;
     width: 100%;
   }
-}
-
-.PichuPartners {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
-  justify-content: center;
-  align-content: center;
-  text-align: center;
-  width: 90%;
-  max-width: 1200px;
-  margin: auto;
-  padding: 1.25rem;
-  font-size: 1.5rem;
-}
-
-#title {
-  font-family: "Pokemon Hollow";
-  font-size: 4.0625rem;
-  margin: 0;
-}
-
-.Menu {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-content: space-evenly;
-  width: 90%;
-  max-width: 1200px;
-  text-align: center;
-  padding: 1.25rem;
-  margin: auto;
-}
-
-.links {
-  border-radius: 12px;
-  font-size: 1rem;
-  margin: auto;
-  transition: 0.2s;
-  width: 9.375rem;
-  margin-top: 1.25rem;
-  margin-bottom: 1.25rem;
-}
-
-.links>a {
-  text-decoration: none;
-}
-
-.popup {
-  display: none;
-  position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0, 0, 0, 0.4);
-}
-
-.popup-content {
-  background-image: url(/assets/images/bgpopup.png);
-  margin: 10% auto;
-  padding: 1.25rem;
-  border: 1px solid #888;
-  width: 80%;
-  max-width: 600px;
-  text-align: center;
-  position: relative;
-}
-
-.close {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  font-size: 28px;
-  font-weight: bold;
-  color: #888;
-  cursor: pointer;
-}
-
-.close:hover {
-  color: black;
-}
-
-#Error {
-  height: 100px;
 }
 
 /* Battler */
