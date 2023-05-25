@@ -15,29 +15,40 @@
     </nav>
     <main>
         <section>
-        <article class="PichuPartners"> <h1>Pokemon</h1> <img src="/assets/images/Pichu partners.gif"> <br> <button class="links" type="button" onclick="openPopup()"> <a href="#">Select</a> </button> </article>
+        <article class="PichuPartners"> <h1>Pokemon</h1> <img src="/assets/images/Pichu partners.gif"> <br> <button class="links" type="button" onclick="openPopupLogin()"> <a href="#">Select</a> </button> </article>
         </section>
         <section class="Menu">
-            <article class="keuze"> <h1>Fifa</h1> <img src="assets/images/pexels-pixabay-46798.jpg"> <br> <button class="links" type="button" onclick="openPopup()"> <a href="#">Select</a> </button> </article>
-            <article class="keuze"> <h1>Magic The Gathering</h1> <img src="assets/images/magic_0.jpg"> <br> <button class="links" type="button" onclick="openPopup()"> <a href="#">Select</a> </button> </article>
-            <article class="keuze"> <h1>Nationale Bank België</h1> <img src="assets/images/Logo-NBB.jpg"> <br> <button class="links" type="button" onclick="openPopup()"> <a href="#">Select</a> </button> </article>
-            <article class="keuze"> <h1>The Lord Of The Rings</h1> <img src="assets/images/lotr.jpg"> <br> <button class="links" type="button" onclick="openPopup()"> <a href="#">Select</a> </button> </article>
-            <article class="keuze"> <h1>Fortnite</h1> <img src="assets/images/fortnite.jpg"> <br> <button class="links" type="button" onclick="openPopup()"> <a href="#">Select</a> </button> </article>
-            <article class="keuze"> <h1>Lego Masters</h1> <img src="assets/images/Lego.jpg"> <br> <button class="links" type="button" onclick="openPopup()"> <a href="#">Select</a> </button> </article>
+            <article class="keuze"> <h1>Fifa</h1> <img src="assets/images/pexels-pixabay-46798.jpg"> <br> <button class="links" type="button" onclick="openPopupAcces()"> <a href="#">Select</a> </button> </article>
+            <article class="keuze"> <h1>Magic The Gathering</h1> <img src="assets/images/magic_0.jpg"> <br> <button class="links" type="button" onclick="openPopupAcces()"> <a href="#">Select</a> </button> </article>
+            <article class="keuze"> <h1>Nationale Bank België</h1> <img src="assets/images/Logo-NBB.jpg"> <br> <button class="links" type="button" onclick="openPopupAcces()"> <a href="#">Select</a> </button> </article>
+            <article class="keuze"> <h1>The Lord Of The Rings</h1> <img src="assets/images/lotr.jpg"> <br> <button class="links" type="button" onclick="openPopupAcces()"> <a href="#">Select</a> </button> </article>
+            <article class="keuze"> <h1>Fortnite</h1> <img src="assets/images/fortnite.jpg"> <br> <button class="links" type="button" onclick="openPopupAcces()"> <a href="#">Select</a> </button> </article>
+            <article class="keuze"> <h1>Lego Masters</h1> <img src="assets/images/Lego.jpg"> <br> <button class="links" type="button" onclick="openPopupAcces()"> <a href="#">Select</a> </button> </article>
         </section>
-        <section id="popup" class="popup">
+
+        <section class="popup">
             <article class="popup-content">
-                <span class="close" onclick="closePopup()">&times;</span>
-                <img id="Error" src="assets/images/foutmelding.png">
-                <img id="Oak" src="assets/images/profoak.png">
+                <span class="close" onclick="closePopupLogin()">&times;</span>
+                <img class="Error" src="assets/images/foutmelding.png">
+                <img class="Oak" src="assets/images/profoak.png">
                 <p>You need to be logged in to view this project.</p>
                 <button class="links" type="button"><a href="login">Login</a> </button>
             </article>
-        </section>  
+        </section>
+
+        <section class="popupAcces">
+            <article class="popup-content">
+                <span class="close" onclick="closePopupAcces()">&times;</span>
+                <img class="Error" src="assets/images/foutmelding.png">
+                <img class="Oak" src="assets/images/profoak.png">
+                <p>You don't have acces to view this project!</p>
+                <button class="links" type="button"><a href="landingpage">Close</a></button>
+
+            </article>
+        </section>
     </main>
     <script src="/assets/code/popup.js" defer></script>
-    <footer>
+
         <%-include('./partials/footer');%>
-    </footer>
 </body>
 </html>
