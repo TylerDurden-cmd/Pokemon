@@ -1,7 +1,15 @@
-const openPopup = () => {
-    document.getElementById("popup").style.display = "block";
+const openPopupLogin = () => {
+    document.querySelector(".popup").style.display = "block";
   };
   
-  const closePopup = () => {
-    document.getElementById("popup").style.display = "none";
+  const closePopupLogin = () => {
+    document.querySelector(".popup").style.display = "none";
   };
+
+  const openPopupAcces = () => {
+    document.querySelector(".popupAcces").style.display = "block";
+  };
+
+  const closePopupAcces = () => {
+    document.querySelector(".popupAcces").style.display = "none"
+  }
