@@ -53,7 +53,11 @@ const AddPokemonToUser = async (username, pokemon) =>{
 const getAllPokemonFromUser = async (username) =>{
   let user = await client.db("Pichu").collection('MyPartner').findOne({username: username});
   let userPokemon = []; 
+  let nullString = "you haven't caught any pokemon";
   for (let index = 0; index < user.pokemon.length; index++) {
+    if (!user.pokemon[index]) {
+      return nullString;
+    }
     userPokemon.push(user.pokemon[index])
   }
   return userPokemon; 

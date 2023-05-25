@@ -22,7 +22,6 @@ let draw = document.getElementById("draw")
 /* Globale Variable  */
 let pokemonArray = [];
 /* verander deze naam voor een andere my partner pokemon alles veranderd automatisch ook stats*/
-let EigenPokemon = "charizard";
 let WildPokemonName = '';
 let defaultValueMaxHealth;
 
@@ -84,7 +83,7 @@ const name = async () => {
 
 /* PokemonSprite */
 /* Functie voor het uitprinten van de foto's */
-const PokemonSprite = async () => {
+const WildPokemonSprite = async () => {
   try {
     let RandomGen = await RandomPokemonGenerator()
     let RandomPicturePokemon = await PokemonPictureFunction(RandomGen)
@@ -94,7 +93,7 @@ const PokemonSprite = async () => {
     RandomPokemonPicture.appendChild(pic).style.height = "15rem"
     PokemonNameBattler.innerHTML = RandomGen;
     WildPokemonName = RandomGen;
-    console.log(RandomGen)
+    console.log(RandomGen.name)
     return RandomGen.name;
   } catch (error) {
     console.error(error)
@@ -112,12 +111,11 @@ const EigenPokemonSprite = async (PokemonVar) => {
 /* deze functie geeft de my partner sprite hier is geen fanart van daarom gebruiken we de pixel versie */
 
 const PokemonBackimg = async () => {
-  let PokemonSprite = await EigenPokemonSprite(EigenPokemon);
+  let PokemonSprite = await EigenPokemonSprite(PokemonNameMyPartner.innerHTML);
   let pic = document.createElement("img");
   pic.setAttribute("src", PokemonSprite);
   EigenPokemonBack.innerHTML = "";
   EigenPokemonBack.appendChild(pic).style.width = "15rem"
-  PokemonNameMyPartner.innerHTML = `${EigenPokemon}`
 };
 
 /* WildPokemonHealth spreekt voor zich zelf Wild is de RandomPokemon Waar we tegen vechten */
@@ -127,7 +125,7 @@ const WildPokemonHealth = async () => {
     console.log(url)
     let urljson = await url.json();
     let healthWild = await urljson.stats[0].base_stat;
-    console.log(healthWild)
+    console.log(`wild base hp: ${healthWild}`)
     defaultValueMaxHealth = healthWild;
     return healthWild;
 
@@ -140,12 +138,12 @@ const WildPokemonHealth = async () => {
 /* Onze health stat van de mypartner pokemon */
 const PokemonHealth = async () => {
   try {
-    let url = await fetch(`https://pokeapi.co/api/v2/pokemon/${EigenPokemon}`)
+    let url = await fetch(`https://pokeapi.co/api/v2/pokemon/${PokemonNameMyPartner.innerHTML}`)
     console.log(url)
     let urljson = await url.json();
-    let healthWild = await urljson.stats[0].base_stat;
-    console.log(healthWild)
-    return healthWild;
+    let health = await urljson.stats[0].base_stat;
+    console.log(`partner base hp: ${health}`)
+    return health;
 
   } catch (error) {
     console.error(error)
@@ -154,27 +152,70 @@ const PokemonHealth = async () => {
 }
 
 /* the defence stat van de mypartner */
-const PokemonDefence = async () => {
-  let url = await fetch(`https://pokeapi.co/api/v2/pokemon/${EigenPokemon}`)
+const PokemonDefence = async (PokemonName, isSpecial) => {
+  let url = await fetch(`https://pokeapi.co/api/v2/pokemon/${PokemonName}`)
   let urlJson = await url.json();
-  let Defence = await urlJson.stats[2].base_stat;
-  return Defence;
+  let Defense = await urlJson.stats[2].base_stat;
+  let spDefense = await urlJson.stats[4].base_stat;
+  if (isSpecial) {
+    return spDefense
+  }
+  else{
+    return Defense
+  }
 }
 
-/* de pokemonDefenceWild Stat van de random pokemon */
-const PokemonDefenceWild = async () => {
-  let url = await fetch(`https://pokeapi.co/api/v2/pokemon/${WildPokemonName}`)
-  let urlJson = await url.json();
-  let Defence = await urlJson.stats[2].base_stat;
-  return Defence;
+/* steeks in een aparte functie omdat ik dit makkelijker vond voor bv de functie soms niet te callen 
+  dit kan ook zonder de functie door de code in de attack knop rechtstreeks te steken maar laat het zo */
+const ComeBack = async () => {
+  let urlWild = await fetch(`https://pokeapi.co/api/v2/pokemon/${WildPokemonName}`)
+  let urljsonWild = await urlWild.json();
+  let Df
+  let AttackDamageWild;
+  let attack = await urljsonWild.stats[1].base_stat;
+  let spAttack = await urljsonWild.stats[3].base_stat;
+  if (attack > spAttack) {
+    AttackDamageWild = attack;
+    Df = await PokemonDefence(PokemonNameMyPartner.innerHTML, false);
+  }
+  else{
+    AttackDamageWild = spAttack;
+    Df = await PokemonDefence(PokemonNameMyPartner.innerHTML, true);
+  }
+
+  let EigenPokemonHealth = await PokemonHealth();
+  valueHealth.max = await EigenPokemonHealth
+  let eigenHealthSubs = valueHealth.value -= await AttackDamageWild;
+  valueHealth.value = eigenHealthSubs += Df;
+  console.log(`wild atk: ${AttackDamageWild}`)
+  console.log(`partner def: ${Df}`)
+  console.log(`partner current hp: ${valueHealth.value}`)
+
+  /* de filter voor wat professor oak moet zeggen aan de hand van de resultaat van de battle */
+  if (valueHealth.value <= 0 && valueHealthWild.value <= 0) {
+    AsideStats.style.visibility = "visible"
+    Attack.disabled = true
+    draw.innerHTML = `And its a draw!`
+  }
+  else if (valueHealth.value <= 0) {
+    AsideStats.style.visibility = "visible"
+    Attack.disabled = true
+    lost.innerHTML = `It seems like ${PokemonNameMyPartner.innerHTML} is not strong enough to take on ${WildPokemonName}`
+
+  }
+  else if (valueHealthWild.value <= 0) {
+    AsideStats.style.visibility = "visible"
+    Attack.disabled = true
+    won.innerHTML = `Well done! you have won the battle against ${WildPokemonName}`
+
+  }
 }
 
 /* dit is onze next pokemon button hier word alles dan ook terug gereset */
-
 btnNext.addEventListener("click", () => {
-  PokemonSprite();
+  WildPokemonSprite();
   valueHealthWild.value = 300;
-  console.log(valueHealthWild.value)
+  console.log(`wild total hp: ${valueHealthWild.value}`)
   valueHealth.value = 300;
   AsideStats.style.visibility = "hidden"
   Attack.disabled = false
@@ -186,53 +227,29 @@ btnNext.addEventListener("click", () => {
 
 /* en de attack knop voor de pokemon aan te vallen */
 Attack.addEventListener("click", async () => {
-  let url = await fetch(`https://pokeapi.co/api/v2/pokemon/${EigenPokemon}`)
+  let url = await fetch(`https://pokeapi.co/api/v2/pokemon/${PokemonNameMyPartner.innerHTML}`)
   let urljson = await url.json();
-  let AttackDamage = await urljson.stats[1].base_stat;
-  let health = await WildPokemonHealth();
-  console.log(AttackDamage)
-  console.log(health)
-  valueHealthWild.max = await health;
-  let HealthSUBS = valueHealthWild.value -= await AttackDamage;
-  let PokemonWildDf = await PokemonDefence() / 2;
-  valueHealthWild.value = HealthSUBS += PokemonWildDf;
-  console.log(PokemonWildDf)
-  console.log(valueHealthWild.value)
-  /* steeks in een aparte functie omdat ik dit makkelijker vond voor bv de functie soms niet te callen 
-  dit kan ook zonder de functie door de code in de attack knop rechtstreeks te steken maar laat het zo */
-  const ComeBack = async () => {
-    let Df = await PokemonDefenceWild() / 2;
-    let urlWild = await fetch(`https://pokeapi.co/api/v2/pokemon/${WildPokemonName}`)
-    let urljsonWild = await urlWild.json();
-    let AttackDamageWild = await urljsonWild.stats[1].base_stat;
-    let EigenPokemonHealth = await PokemonHealth();
-    valueHealth.max = await EigenPokemonHealth
-    let eigenHealthSubs = valueHealth.value -= await AttackDamageWild;
-    valueHealth.value = eigenHealthSubs += Df;
-    console.log(AttackDamageWild)
-    console.log(Df)
-    console.log(valueHealth.value)
-
-    /* de filter voor wat professor oak moet zeggen aan de hand van de resultaat van de battle */
-    if (valueHealth.value <= 0 && valueHealthWild.value <= 0) {
-      AsideStats.style.visibility = "visible"
-      Attack.disabled = true
-      draw.innerHTML = `And its a draw!`
-    }
-    else if (valueHealth.value <= 0) {
-      AsideStats.style.visibility = "visible"
-      Attack.disabled = true
-      lost.innerHTML = `It seems like ${EigenPokemon} is not strong enough to take on ${WildPokemonName}`
-
-    }
-    else if (valueHealthWild.value <= 0) {
-      AsideStats.style.visibility = "visible"
-      Attack.disabled = true
-      won.innerHTML = `Well done! you have won the battle against ${WildPokemonName}`
-
-    }
+  let AttackDamage;
+  let PokemonWildDf;
+  let attack = await urljson.stats[1].base_stat;
+  let spAttack = await urljson.stats[3].base_stat;
+  if (attack > spAttack) {
+    AttackDamage = attack;
+    PokemonWildDf = await PokemonDefence(WildPokemonName,false);
+  }
+  else{
+    AttackDamage = spAttack;
+    PokemonWildDf = await PokemonDefence(WildPokemonName,true);
   }
 
+  let health = await WildPokemonHealth();
+  console.log(`partner atk: ${AttackDamage}`)
+  console.log(`wild total hp: ${health}`)
+  valueHealthWild.max = await health;
+  let HealthSUBS = valueHealthWild.value -= await AttackDamage;
+  valueHealthWild.value = HealthSUBS += PokemonWildDf;
+  console.log(`wild def: ${PokemonWildDf}`)
+  console.log(`current wild hp: ${valueHealthWild.value}`)
 
   ComeBack();
 })
@@ -241,7 +258,7 @@ Attack.addEventListener("click", async () => {
 
 PokemonBackimg();
 const PokemonCall = async () => {
-  await PokemonSprite();
+  await WildPokemonSprite();
   await WildPokemonHealth();
 }
 PokemonCall();
