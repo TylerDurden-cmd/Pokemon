@@ -5,25 +5,20 @@
         </ul>
     </nav>
     <main>
-        <h2>Register Form</h2>
+        <h2>Registration Form</h2>
     
-    <form action="/register" method="post">
+    <form action="/register" method="post" id="RegisterForm">
       
       <section class="container">
-        <label for="fname"><b>Firstname</b></label>
-        <input type="text" placeholder="Enter Firstname" name="fname" required>
+        <input type="text" placeholder="Firstname" name="fname" required>
 
-        <label for="lname"><b>Lastname</b></label>
-        <input type="text" placeholder="Enter Lastname" name="lname" required>
+        <input type="text" placeholder="Lastname" name="lname" required>
 
-        <label for="uname"><b>Username</b></label>
-        <input type="text" min="3" placeholder="Enter Username" name="name" required>
+        <input type="text" min="3" placeholder="Username" name="name" required>
 
-        <label for="email"><b>Email</b></label>
-        <input type="email" placeholder="Enter Email" name="mail" required>
+        <input type="email" placeholder="Email" name="mail" required>
     
-        <label for="psw"><b>Password</b></label>
-        <input type="password" minlength="8" placeholder="Enter Password" name="psw" required>
+        <input type="password" minlength="8" placeholder="Password" name="psw" required>
             
         <button class="loginbtn"type="submit">Register</button>
       </section>
