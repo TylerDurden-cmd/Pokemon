@@ -170,18 +170,7 @@ btn.addEventListener("click", async () => {
 
   console.log(Formule)
   console.log(Getal1totFormule)
-  Procent.innerHTML = ``
-  Procent.innerHTML = `${Formule}`
-  RandomGetalVan0tot100.innerHTML = ``
-  RandomGetalVan0tot100.innerHTML = `${Getal1totFormule}`
-  EigenPokemonAttackStat.innerHTML = ``
-  EigenPokemonAttackStat.innerHTML = `${EigenPokemonAttack}`
-  EigenPokemonSpAttackStat.innerHTML = ``
-  EigenPokemonSpAttackStat.innerHTML = `${EigenPokemonSpAttack}`
-  PokemonDefenseStat.innerHTML = ``
-  PokemonDefenseStat.innerHTML = `${PokemonDefenseStats}`
-  PokemonSpDefenseStat.innerHTML = ``
-  PokemonSpDefenseStat.innerHTML = `${PokemonSpDefenseStats}`
+  
 
 
 
