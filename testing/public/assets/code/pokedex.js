@@ -30,7 +30,6 @@ searchInput.addEventListener('change', () => {
 
 const fetchPokemonData = async (pokemonName) => {
   pokemonInfo.innerHTML = 'Laden...';
-  await useitem(pokemonName);
   fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`)
     .then(response => response.json())
     .then(data => {

@@ -5,8 +5,6 @@ import crypto from "crypto";
 import { connect, AddUser, FindUserbyUsername, AddPokemonToUser, getAllPokemonFromUser, setPartner, getPartner, removePokemon } from "./db.js";
 import cookieParser from "cookie-parser";
 
-/* let req.cookies.username = ' '; */
-
 
 //Het plekje voor alle functies
 const PokemonFetcher = async () => {
@@ -88,7 +86,7 @@ app.post("/login", async (req, res) => {
     //als beide hashes gelijk zijn dan is het wachtwoord correct
     if (hashFromDB == hashFromLogin) {
       res.cookie('username', `${username}`, { httpOnly: true })
-      /* req.cookies.username = username; */
+      
       res.redirect('/index');
     }
     else {
