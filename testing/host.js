@@ -3,8 +3,10 @@ import ejs from "ejs";
 import fetch from "node-fetch";
 import crypto from "crypto";
 import { connect, AddUser, FindUserbyUsername, AddPokemonToUser, getAllPokemonFromUser, setPartner, getPartner, removePokemon } from "./db.js";
+import cookieParser from "cookie-parser";
 
-let loggedInUser = " ";
+/* let req.cookies.username = ' '; */
+
 
 //Het plekje voor alle functies
 const PokemonFetcher = async () => {
@@ -37,6 +39,7 @@ app.use(express.json({ limit: `1mb` }));
 app.use(express.urlencoded({ extended: true }))
 app.use(express.static("public"));
 app.use("/images", express.static("images"));
+app.use(cookieParser())
 
 /*------Landingpage------*/
 app.get("/", (req, res) => {
@@ -84,7 +87,8 @@ app.post("/login", async (req, res) => {
     const hashFromLogin = derivedKey.toString('hex');
     //als beide hashes gelijk zijn dan is het wachtwoord correct
     if (hashFromDB == hashFromLogin) {
-      loggedInUser = username;
+      res.cookie('username', `${username}`, { httpOnly: true })
+      /* req.cookies.username = username; */
       res.redirect('/index');
     }
     else {
@@ -126,60 +130,60 @@ app.get("/contact", (req, res) => {
 
 /*------MyPartner------*/
 app.get("/mypartner", async (req, res) => {
-  let pokemon = await getAllPokemonFromUser(loggedInUser);
-  let partner = await getPartner(loggedInUser);
+  let pokemon = await getAllPokemonFromUser(req.cookies.username);
+  let partner = await getPartner(req.cookies.username);
   res.render("mypartner", { pokemon: pokemon, partner: partner });
 });
 app.post('/partner', async (req, res) => {
   let pkmnName = req.body.NameOutputHidden;
-  setPartner(loggedInUser, pkmnName);
-  let pokemon = await getAllPokemonFromUser(loggedInUser);
-  let partner = await getPartner(loggedInUser);
+  setPartner(req.cookies.username, pkmnName);
+  let pokemon = await getAllPokemonFromUser(req.cookies.username);
+  let partner = await getPartner(req.cookies.username);
   res.redirect('mypartner');
 });
 app.post('/release', async (req, res) => {
   let pkmnName = req.body.NameOutputHidden;
-  removePokemon(loggedInUser, pkmnName);
+  removePokemon(req.cookies.username, pkmnName);
 
   res.redirect('mypartner');
 });
 
 /* ------Battler------- */
 app.get("/battler", async (req, res) => {
-  let haspartner = await getPartner(loggedInUser);
+  let haspartner = await getPartner(req.cookies.username);
   if (haspartner == "") {
     let partner = "pichu";
     res.render("battler", { pokepartner: partner });
   }
   else {
-    let partner = await getPartner(loggedInUser);
+    let partner = await getPartner(req.cookies.username);
     res.render("battler", { pokepartner: partner });
   }
 });
 
 /*------PokeCatcher------*/
 app.get("/pokecatcher", async (req, res) => {
-  let haspartner = await getPartner(loggedInUser);
+  let haspartner = await getPartner(req.cookies.username);
   if (haspartner == "") {
     let partner = "pichu";
     res.render("pokecatcher", { pokepartner: partner });
   }
   else {
-    let partner = await getPartner(loggedInUser);
+    let partner = await getPartner(req.cookies.username);
     res.render("pokecatcher", { pokepartner: partner });
   }
 
 });
 app.post('/catcher', async (req, res) => {
   let pkmnName = req.body.NameOutputHidden;
-  AddPokemonToUser(loggedInUser, pkmnName);
-  let haspartner = await getPartner(loggedInUser);
+  AddPokemonToUser(req.cookies.username, pkmnName);
+  let haspartner = await getPartner(req.cookies.username);
   if (haspartner == null) {
     let partner = "pichu";
     res.redirect("pokecatcher");
   }
   else {
-    let partner = await getPartner(loggedInUser);
+    let partner = await getPartner(req.cookies.username);
     res.redirect("pokecatcher");
   }
 });
