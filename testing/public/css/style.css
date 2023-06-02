@@ -277,7 +277,7 @@ Button:hover {
 }
 
 .container {
-  width: 50%;
+  
   margin-left: 30px;
 }
 
@@ -544,6 +544,7 @@ width: 85%;
 justify-content: center;
 flex-wrap: wrap;
 margin-bottom: 5rem;
+text-transform: capitalize;
 }
 #PokemonImg{
   background-color: white;
@@ -555,10 +556,19 @@ margin-bottom: 5rem;
 }
 #partner{
   display: flex;
+  flex-direction: column;
   font-weight: bolder;
   margin-right: 98rem;
   margin-top: 1rem;
-  
+  margin-left: 1rem;
+  text-transform: capitalize;
+}
+#partner-text > h1{
+  margin-right: 10px
+}
+#partner-text{
+  display: flex;
+  flex-direction: row;
 }
 
 

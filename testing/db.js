@@ -41,6 +41,7 @@ const AddPokemonToUser = async (username, pokemon) =>{
   try {
     
     if (await FindUserInMyPartner(username) != null) {
+      //als je al pokemon hebt en dus al in de myPartner database zit wordt de array geupdate, anders wordt er een array aangemaakt
       client.db("Pichu").collection('MyPartner').updateOne({username: username}, {$push:{ pokemon: pokemon}});
     }
     else{
@@ -55,6 +56,7 @@ const getAllPokemonFromUser = async (username) =>{
   let userPokemon = []; 
   let nullString = "you haven't caught any pokemon";
   for (let index = 0; index < user.pokemon.length; index++) {
+    //als je geen pokemon hebt wordt er een string gereturned
     if (!user.pokemon[index]) {
       return nullString;
     }
@@ -71,7 +73,8 @@ const setPartner = async (username, pokemon) =>{
 }
 const getPartner = async (username) =>{
   let user = await client.db("Pichu").collection('MyPartner').findOne({username: username}); 
-  if (user == null) {
+  //als partner leeg is wordt pichu gereturned
+  if (user.partner == "" || user.partner == null) {
     return "pichu";
   }
   else{

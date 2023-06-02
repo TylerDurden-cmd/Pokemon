@@ -135,55 +135,36 @@ app.get("/mypartner", async (req, res) => {
 app.post('/partner', async (req, res) => {
   let pkmnName = req.body.NameOutputHidden;
   setPartner(req.cookies.username, pkmnName);
-  let pokemon = await getAllPokemonFromUser(req.cookies.username);
-  let partner = await getPartner(req.cookies.username);
   res.redirect('mypartner');
 });
 app.post('/release', async (req, res) => {
   let pkmnName = req.body.NameOutputHidden;
-  removePokemon(req.cookies.username, pkmnName);
+  let partner = await getPartner(req.cookies.username);
 
+  if (pkmnName === partner) {
+    setPartner(req.cookies.username, "")
+  }
+  removePokemon(req.cookies.username, pkmnName);
+ 
   res.redirect('mypartner');
 });
 
 /* ------Battler------- */
 app.get("/battler", async (req, res) => {
-  let haspartner = await getPartner(req.cookies.username);
-  if (haspartner == "") {
-    let partner = "pichu";
-    res.render("battler", { pokepartner: partner });
-  }
-  else {
-    let partner = await getPartner(req.cookies.username);
-    res.render("battler", { pokepartner: partner });
-  }
+   let partner = await getPartner(req.cookies.username);
+   res.render("battler", { pokepartner: partner });  
 });
 
 /*------PokeCatcher------*/
 app.get("/pokecatcher", async (req, res) => {
-  let haspartner = await getPartner(req.cookies.username);
-  if (haspartner == "") {
-    let partner = "pichu";
-    res.render("pokecatcher", { pokepartner: partner });
-  }
-  else {
     let partner = await getPartner(req.cookies.username);
     res.render("pokecatcher", { pokepartner: partner });
-  }
-
 });
 app.post('/catcher', async (req, res) => {
   let pkmnName = req.body.NameOutputHidden;
   AddPokemonToUser(req.cookies.username, pkmnName);
-  let haspartner = await getPartner(req.cookies.username);
-  if (haspartner == null) {
-    let partner = "pichu";
-    res.redirect("pokecatcher");
-  }
-  else {
-    let partner = await getPartner(req.cookies.username);
-    res.redirect("pokecatcher");
-  }
+
+  res.redirect("pokecatcher");
 });
 
 /*------PokeDex------*/
