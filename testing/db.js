@@ -89,4 +89,14 @@ const removePokemon = async (username, pokemon) => {
   }
 }
 
-export { connect, AddUser, FindUserbyUsername, AddPokemonToUser, getAllPokemonFromUser, setPartner, getPartner, removePokemon };
+/* comment functie */
+
+const Comments = async (Username, Comment) => {
+  try {
+    const dbComment = await client.db("Pichu").collection("Comments");
+    dbComment.insertOne({ Username, Comment })
+  } catch (e) { console.error(e) }
+
+}
+
+export { connect, AddUser, FindUserbyUsername, AddPokemonToUser, getAllPokemonFromUser, setPartner, getPartner, removePokemon, Comments };

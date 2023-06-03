@@ -2,7 +2,7 @@ import express from "express";
 import ejs from "ejs";
 import fetch from "node-fetch";
 import crypto from "crypto";
-import { connect, AddUser, FindUserbyUsername, AddPokemonToUser, getAllPokemonFromUser, setPartner, getPartner, removePokemon } from "./db.js";
+import { connect, AddUser, FindUserbyUsername, AddPokemonToUser, getAllPokemonFromUser, setPartner, getPartner, removePokemon, Comments } from "./db.js";
 import cookieParser from "cookie-parser";
 
 
@@ -126,8 +126,12 @@ app.get("/contact", (req, res) => {
   res.render("contact")
 });
 
-app.post("/contact", (req, res) => {
+app.post("/contact", async (req, res) => {
   res.redirect("contact")
+  const firstname = await req.body.firstname
+  const subject = await req.body.subject;
+
+  await Comments(firstname, subject)
 })
 
 /*------MyPartner------*/
@@ -149,20 +153,20 @@ app.post('/release', async (req, res) => {
     setPartner(req.cookies.username, "")
   }
   removePokemon(req.cookies.username, pkmnName);
- 
+
   res.redirect('mypartner');
 });
 
 /* ------Battler------- */
 app.get("/battler", async (req, res) => {
-   let partner = await getPartner(req.cookies.username);
-   res.render("battler", { pokepartner: partner });  
+  let partner = await getPartner(req.cookies.username);
+  res.render("battler", { pokepartner: partner });
 });
 
 /*------PokeCatcher------*/
 app.get("/pokecatcher", async (req, res) => {
-    let partner = await getPartner(req.cookies.username);
-    res.render("pokecatcher", { pokepartner: partner });
+  let partner = await getPartner(req.cookies.username);
+  res.render("pokecatcher", { pokepartner: partner });
 });
 app.post('/catcher', async (req, res) => {
   let pkmnName = req.body.NameOutputHidden;
