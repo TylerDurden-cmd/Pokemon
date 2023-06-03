@@ -13,7 +13,7 @@ searchInput.addEventListener('input', () => {
         const options = filteredPokemon.map(pokemon => `
         <option value="${pokemon.name}">
           ${pokemon.name}
-          <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.url.split('/').slice(-2, -1)}.png" alt="${pokemon.name}">
+          <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.url.split('/').slice(-2, -1)}.png" alt="${pokemon.name}">
         </option>
       `).join('');
 
@@ -35,7 +35,7 @@ const fetchPokemonData = async (pokemonName) => {
     .then(data => {
       pokemonInfo.innerHTML = `
         <h2>${data.name}</h2>
-        <img src="${data.sprites.front_default}" alt="${data.name}"> 
+        <img src="${data.sprites.other['official-artwork'].front_default}" alt="${data.name}"> 
         <p id="ik">Type: ${data.types.map(type => type.type.name).join(', ')} </p>
         <p>Height: ${data.height / 10} m </p>
         <p>Weight: ${data.weight / 10} kg </p>
@@ -74,7 +74,7 @@ function getEvolutions(chain) {
 
     evolutions.push({
       name: chain.species.name,
-      image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${chain.species.url.split('/').slice(-2, -1)}.png`,
+      image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${chain.species.url.split('/').slice(-2, -1)}.png`,
       method: chain.evolution_details.map(detail => detail.trigger.name)
     });
 

@@ -2,7 +2,14 @@
     <%-include("partials/navigation")-%>
 
     <main>
-      <article id="partner">current partner: <%= partner %></article>
+        <article id="partner">
+          <section id="partner-text">
+            <h1>Partner: </h1>
+            <h1 id="PokemonCaught"><%= partner %></h1>
+          </section>
+          <img id=PokemonImg src="" alt="<%= partner %>">
+        </article>
+
         <section class="pokemon-container">
          
           <% for( let index = 0; index < pokemon.length; index++ ) { %>
