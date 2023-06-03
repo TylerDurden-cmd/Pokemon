@@ -1,4 +1,4 @@
-import {MongoClient} from "mongodb"
+import { MongoClient } from "mongodb"
 //Pichu Partners Database
 const uri = "mongodb+srv://s145053:nkeI6RQVBJYBgg41@pichupartners.ah3odo1.mongodb.net/?retryWrites=true&w=majority";
 const client = new MongoClient(uri);
@@ -23,36 +23,36 @@ const connect = async () => {
   }
 }
 
-const AddUser = async (firstname, lastname, username, mail, hashedPassword, salt ) =>{
-    try{
-        client.db("Pichu").collection('Users').insertOne({ firstname, lastname, username, mail, password: hashedPassword, salt });
-    }
-    catch (error){
-        console.error(error)
-    }   
-}
-const FindUserbyUsername = async (username) =>{
-    return await client.db("Pichu").collection('Users').findOne({username: username}); 
-}
-const FindUserInMyPartner = async (username) =>{
-  return await client.db("Pichu").collection('MyPartner').findOne({username: username}); 
-}
-const AddPokemonToUser = async (username, pokemon) =>{
+const AddUser = async (firstname, lastname, username, mail, hashedPassword, salt) => {
   try {
-    
+    client.db("Pichu").collection('Users').insertOne({ firstname, lastname, username, mail, password: hashedPassword, salt });
+  }
+  catch (error) {
+    console.error(error)
+  }
+}
+const FindUserbyUsername = async (username) => {
+  return await client.db("Pichu").collection('Users').findOne({ username: username });
+}
+const FindUserInMyPartner = async (username) => {
+  return await client.db("Pichu").collection('MyPartner').findOne({ username: username });
+}
+const AddPokemonToUser = async (username, pokemon) => {
+  try {
+
     if (await FindUserInMyPartner(username) != null) {
-      client.db("Pichu").collection('MyPartner').updateOne({username: username}, {$push:{ pokemon: pokemon}});
+      client.db("Pichu").collection('MyPartner').updateOne({ username: username }, { $push: { pokemon: pokemon } });
     }
-    else{
-      client.db("Pichu").collection('MyPartner').insertOne({username: username, pokemon: [pokemon], partner: ""});
+    else {
+      client.db("Pichu").collection('MyPartner').insertOne({ username: username, pokemon: [pokemon], partner: "" });
     }
   } catch (error) {
     console.error(error);
   }
 }
-const getAllPokemonFromUser = async (username) =>{
-  let user = await client.db("Pichu").collection('MyPartner').findOne({username: username});
-  let userPokemon = []; 
+const getAllPokemonFromUser = async (username) => {
+  let user = await client.db("Pichu").collection('MyPartner').findOne({ username: username });
+  let userPokemon = [];
   let nullString = "you haven't caught any pokemon";
   for (let index = 0; index < user.pokemon.length; index++) {
     if (!user.pokemon[index]) {
@@ -60,30 +60,30 @@ const getAllPokemonFromUser = async (username) =>{
     }
     userPokemon.push(user.pokemon[index])
   }
-  return userPokemon; 
+  return userPokemon;
 }
-const setPartner = async (username, pokemon) =>{
+const setPartner = async (username, pokemon) => {
   try {
-    client.db("Pichu").collection('MyPartner').updateOne({username: username}, {$set:{ partner: pokemon}});
+    client.db("Pichu").collection('MyPartner').updateOne({ username: username }, { $set: { partner: pokemon } });
   } catch (error) {
     console.error(error);
   }
 }
-const getPartner = async (username) =>{
-  let user = await client.db("Pichu").collection('MyPartner').findOne({username: username}); 
+const getPartner = async (username) => {
+  let user = await client.db("Pichu").collection('MyPartner').findOne({ username: username });
   if (user == null) {
     return "pichu";
   }
-  else{
+  else {
     return user.partner;
   }
 }
-const removePokemon = async (username, pokemon) =>{
+const removePokemon = async (username, pokemon) => {
   try {
-    client.db("Pichu").collection('MyPartner').updateOne({username: username} ,{ $pull: {pokemon:{ $in: [pokemon]}}});
+    client.db("Pichu").collection('MyPartner').updateOne({ username: username }, { $pull: { pokemon: { $in: [pokemon] } } });
   } catch (error) {
     console.error(error);
   }
 }
 
-export{connect, AddUser, FindUserbyUsername, AddPokemonToUser, getAllPokemonFromUser, setPartner, getPartner, removePokemon};
+export { connect, AddUser, FindUserbyUsername, AddPokemonToUser, getAllPokemonFromUser, setPartner, getPartner, removePokemon };
