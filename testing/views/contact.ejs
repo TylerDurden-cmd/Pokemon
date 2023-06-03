@@ -1,26 +1,27 @@
-<%-include("partials/header")-%>
-<%-include("partials/navigation")-%>
+<%- include("partials/header")-%>
+  <%- include("partials/navigation")-%>
     <main>
-        <h4>Contact Form</h4>
-        <section class="contactform">
-          <form action="/action_page.php">
-            <label for="fname">First name</label>
-            <input type="text" id="fname" name="firstname" placeholder="..." required>
-        
-            <label for="lname">Last name</label>
-            <input type="text" id="lname" name="lastname" placeholder="..." required>
-        
-            <label for="subject">Question ?</label>
-            <textarea id="subject" name="subject" placeholder="Write something..." style="height:200px" required></textarea>
-      
-            <label for="contact">Who do you want to contact ?</label>
-            <select id="contact">
-              <option value="Developer">Developer</option>
-              <option value="Owner">Owner</option>
-            </select>
-            
-            <input type="submit" value="Send">
+      <h4>Contact Form</h4>
+      <section class="contactform">
+        <form action="/contact" method="post">
+          <label for="fname">First name</label>
+          <input type="text" id="fname" name="firstname" placeholder="..." required>
+
+          <label for="lname">Last name</label>
+          <input type="text" id="lname" name="lastname" placeholder="..." required>
+
+          <label for="subject">Question ?</label>
+          <textarea id="subject" name="subject" placeholder="Write something..." style="height:200px"
+            required></textarea>
+
+          <label for="contact">Who do you want to contact ?</label>
+          <select id="contact">
+            <option value="Developer">Developer</option>
+            <option value="Owner">Owner</option>
+          </select>
+
+          <input type="submit" value="Send">
           <form>
-        </section>
+      </section>
     </main>
-    <%-include("partials/footer")-%>
+    <%- include("partials/footer")-%>

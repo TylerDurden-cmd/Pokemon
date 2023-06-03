@@ -85,8 +85,8 @@ app.post("/login", async (req, res) => {
     const hashFromLogin = derivedKey.toString('hex');
     //als beide hashes gelijk zijn dan is het wachtwoord correct
     if (hashFromDB == hashFromLogin) {
-      res.cookie('username', `${username}`, { httpOnly: true })
-      
+      res.cookie('username', `${username}`, { httpOnly: true, secure: true })
+
       res.redirect('/index');
     }
     else {
@@ -125,6 +125,10 @@ app.post('/register', (req, res) => {
 app.get("/contact", (req, res) => {
   res.render("contact")
 });
+
+app.post("/contact", (req, res) => {
+  res.redirect("contact")
+})
 
 /*------MyPartner------*/
 app.get("/mypartner", async (req, res) => {
