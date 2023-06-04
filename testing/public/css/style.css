@@ -277,8 +277,11 @@ Button:hover {
 }
 
 .container {
-  
+  width:50%;
   margin-left: 30px;
+  max-width: 30em;
+  margin: 50px auto;
+  text-align: center;
 }
 
 #loginh2 {
@@ -700,7 +703,7 @@ text-transform: capitalize;
 }
 
 /*--- Who's That Pokemon? --- */
-.container {
+.container-who {
   max-width: 500px;
   margin: 50px auto;
   text-align: center;
