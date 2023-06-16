@@ -26,6 +26,7 @@ const connect = async () => {
 const AddUser = async (firstname, lastname, username, mail, hashedPassword, salt) => {
   try {
     client.db("Pichu").collection('Users').insertOne({ firstname, lastname, username, mail, password: hashedPassword, salt });
+    client.db("Pichu").collection('MyPartner').insertOne({ username: username, pokemon: [], partner: "" });
   }
   catch (error) {
     console.error(error)
@@ -55,11 +56,12 @@ const getAllPokemonFromUser = async (username) => {
   let user = await client.db("Pichu").collection('MyPartner').findOne({ username: username });
   let userPokemon = [];
   let nullString = "you haven't caught any pokemon";
+  if (!user.pokemon) {
+    return nullString;
+  }
   for (let index = 0; index < user.pokemon.length; index++) {
     //als je geen pokemon hebt wordt er een string gereturned
-    if (!user.pokemon[index]) {
-      return nullString;
-    }
+   
     userPokemon.push(user.pokemon[index])
   }
   return userPokemon;
